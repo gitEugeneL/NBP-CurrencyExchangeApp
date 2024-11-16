@@ -8,7 +8,9 @@ using Server.Security.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<IPasswordService, PasswordService>();
+builder.Services
+    .AddScoped<ITokenService, TokenService>()
+    .AddScoped<IPasswordService, PasswordService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

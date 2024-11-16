@@ -15,17 +15,19 @@ public class Register : ICarterModule
     public void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapPost("/api/auth/register", async (RegisterRequest request, ISender sender) =>
-        {
-            var command = new Command(
-                Email: request.Email.Trim().ToLower(), 
-                Password: request.Password.Trim(), 
-                LastName: request.LastName.Trim().ToLower(), 
-                FirstName: request.FirstName.Trim().ToLower()
-            );
-            return await sender.Send(command);
-            
-        })
-        .WithTags("Authentication");
+            {
+                var command = new Command(
+                    Email: request.Email.Trim().ToLower(),
+                    Password: request.Password.Trim(),
+                    LastName: request.LastName.Trim().ToLower(),
+                    FirstName: request.FirstName.Trim().ToLower()
+                );
+                return await sender.Send(command);
+            })
+            .WithTags("Authentication")
+            .Produces<UserResponse>(StatusCodes.Status201Created)
+            .Produces(StatusCodes.Status400BadRequest)
+            .Produces(StatusCodes.Status409Conflict);
     }
 
     public sealed record Command(

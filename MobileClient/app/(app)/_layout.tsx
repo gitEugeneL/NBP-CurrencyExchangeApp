@@ -1,12 +1,15 @@
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { Drawer } from 'expo-router/drawer';
+import React from 'react';
+import { Redirect } from 'expo-router';
 
 export default function MainLayout() {
-  return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <Drawer>
-        <Drawer.Screen name="index" options={{ title: 'Home Page' }} />
-      </Drawer>
-    </GestureHandlerRootView>
-  );
+  //todo accessToken validation
+  return <Redirect href="/auth/login" />;
+
+  // return (
+  //   <GestureHandlerRootView style={{ flex: 1 }}>
+  //     <Drawer>
+  //       <Drawer.Screen name="index" options={{ title: 'Home Page' }} />
+  //     </Drawer>
+  //   </GestureHandlerRootView>
+  // );
 }

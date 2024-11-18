@@ -5,8 +5,13 @@ import { Gaps } from '../../UI/styles';
 import React from 'react';
 import LoginForm from '../../modules/LoginForm/LoginForm';
 import Button from '../../UI/Button/Button';
+import { router } from 'expo-router';
 
 export default function LoginPage() {
+  const handleRedirect = () => {
+    router.push('/auth/registration');
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.titleBlock}>
@@ -14,7 +19,7 @@ export default function LoginPage() {
         <Title title="Log in" />
       </View>
       <LoginForm />
-      <Button name="Create account" appearance="secondary" />
+      <Button name="Create account" appearance="secondary" onPress={handleRedirect} />
     </View>
   );
 }

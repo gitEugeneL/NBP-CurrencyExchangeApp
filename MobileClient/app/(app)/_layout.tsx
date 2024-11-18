@@ -24,7 +24,7 @@ export default function MainLayout() {
   // return (
   //   <GestureHandlerRootView style={{ flex: 1 }}>
   //     <Drawer>
-  //       <Drawer.Screen name="index" options={{ title: 'Home Page' }} />
+  //       <Drawer.Screen name="login" options={{ title: 'Home Page' }} />
   //     </Drawer>
   //   </GestureHandlerRootView>
   // );

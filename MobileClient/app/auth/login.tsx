@@ -1,8 +1,9 @@
 import { StyleSheet, View } from 'react-native';
-import LoginForm from '../../modules/LoginForm/LoginForm';
 import Title from '../../UI/Title/Title';
-import { Logo } from '../../assets/Logo';
+import { Logo } from '../../assets/elements/Logo';
 import { Gaps } from '../../UI/styles';
+import React from 'react';
+import LoginForm from '../../modules/LoginForm/LoginForm';
 import Button from '../../UI/Button/Button';
 
 export default function LoginPage() {
@@ -28,6 +29,6 @@ const styles = StyleSheet.create({
 
   titleBlock: {
     alignItems: 'center',
-    gap: 80,
+    gap: Gaps.gap40,
   },
 });

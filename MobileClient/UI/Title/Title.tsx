@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { TitleProps } from './Title.props';
-import { Colors, FontSize } from '../styles';
+import { Colors, Fonts, FontSize } from '../styles';
 
 export default function Title({ title, description = undefined }: TitleProps) {
   return (
@@ -23,5 +23,6 @@ const styles = StyleSheet.create({
   description: {
     color: Colors.gray,
     fontSize: FontSize.size16,
+    fontFamily: Fonts.regular,
   },
 });

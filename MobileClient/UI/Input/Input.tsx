@@ -1,6 +1,6 @@
 import { StyleSheet, TextInput, View } from 'react-native';
 import { InputProps } from './Input.props';
-import { Colors, FontSize, Radius } from '../styles';
+import { Colors, Fonts, FontSize, Radius } from '../styles';
 
 export default function Input({ ...props }: InputProps) {
   return (
@@ -18,5 +18,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     fontSize: FontSize.size16,
     borderRadius: Radius.radius10,
+    fontFamily: Fonts.regular,
   },
 });

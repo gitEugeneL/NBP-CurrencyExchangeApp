@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
-import { Colors, FontSize, Radius } from '../styles';
+import { Colors, Fonts, FontSize, Radius } from '../styles';
 
 export default function Button({
   name,
@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
+    fontFamily: Fonts.regular,
     fontSize: FontSize.size18,
     color: Colors.white,
   },

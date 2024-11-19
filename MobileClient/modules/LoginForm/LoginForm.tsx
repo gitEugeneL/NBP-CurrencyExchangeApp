@@ -5,8 +5,14 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import PasswordInput from '../../components/PasswordInput/PasswordInput';
 import { LoginFormSchema, LoginFormValidationSchema } from './LoginForm.schemes';
+import { useAtom } from 'jotai';
+import { LoginAtom } from './state/login.state';
+import { LoginRequest } from './state/login.models';
+import Notification from '../../UI/Notification/Notification';
 
 export default function LoginForm() {
+  const [state, login] = useAtom(LoginAtom);
+
   const {
     control,
     handleSubmit,
@@ -15,30 +21,43 @@ export default function LoginForm() {
     resolver: yupResolver(LoginFormValidationSchema),
   });
 
-  const formSubmit = (data: LoginFormSchema) => {
-    console.log(data);
+  const formSubmit = async (data: LoginFormSchema) => {
+    const loginRequest: LoginRequest = {
+      email: data.email,
+      password: data.password,
+    };
+    login(loginRequest);
   };
 
   return (
-    <View>
-      <CustomInput
-        label="Login"
-        name="email"
-        placeholder="Enter your email"
-        errors={errors}
-        control={control}
-      />
+    <>
+      <Notification notificationError={state.error} />
 
-      <PasswordInput
-        label="Password"
-        name="password"
-        placeholder="Enter your password"
-        errors={errors}
-        control={control}
-      />
+      <View>
+        <CustomInput
+          label="Login"
+          name="email"
+          placeholder="Enter your email"
+          errors={errors}
+          control={control}
+        />
 
-      <Button style={styles.button} name="Login" onPress={handleSubmit(formSubmit)} />
-    </View>
+        <PasswordInput
+          label="Password"
+          name="password"
+          placeholder="Enter your password"
+          errors={errors}
+          control={control}
+        />
+
+        <Button
+          style={styles.button}
+          name="Login"
+          onPress={handleSubmit(formSubmit)}
+          isLoading={state.isLoading}
+        />
+      </View>
+    </>
   );
 }
 

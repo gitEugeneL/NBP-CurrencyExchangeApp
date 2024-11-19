@@ -30,6 +30,19 @@ builder.Services
 /*** Carter configuration ***/
 builder.Services.AddCarter();
 
+/*** CORS configurations ***/
+builder.Services.AddCors(options =>
+{
+     options.AddPolicy("mobileApp", policyBuilder =>
+     {
+
+         policyBuilder.AllowAnyOrigin();
+         policyBuilder.AllowAnyHeader();
+         policyBuilder.AllowAnyMethod();
+         // policyBuilder.AllowCredentials();
+     });
+});
+
 var app = builder.Build();
 
 /*** Seed develop database data ***/
@@ -49,5 +62,7 @@ if (app.Environment.IsDevelopment())
 app.MapCarter();
 
 app.UseHttpsRedirection();
+
+app.UseCors("mobileApp");
 
 app.Run();

@@ -1,10 +1,10 @@
 import { View } from 'react-native';
 import Button from '../../UI/Button/Button';
-import { LogoutAtom } from '../../store/auth.state';
 import { useSetAtom } from 'jotai';
+import { logoutAtom } from '../../store/auth.state';
 
 export default function IndexPage() {
-  const logout = useSetAtom(LogoutAtom);
+  const logout = useSetAtom(logoutAtom);
 
   const testLogout = () => {
     console.log('test logout');

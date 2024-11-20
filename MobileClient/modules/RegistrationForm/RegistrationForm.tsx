@@ -8,13 +8,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import PasswordInput from '../../components/PasswordInput/PasswordInput';
 import Button from '../../UI/Button/Button';
 import { StyleSheet, View } from 'react-native';
-import { CreateUserAtom } from '../../store/user.state';
-import { RegistrationRequest } from '../../store/models/register.models';
+import { RegistrationRequest } from '../../store/models/registration.models';
 import { useAtom } from 'jotai';
 import Notification from '../../UI/Notification/Notification';
+import { registrationAtom } from '../../store/registration.state';
+import { useEffect } from 'react';
+import { router } from 'expo-router';
 
 export default function RegistrationForm() {
-  const [state, createUser] = useAtom(CreateUserAtom);
+  const [state, registration] = useAtom(registrationAtom);
 
   const {
     control,
@@ -25,13 +27,19 @@ export default function RegistrationForm() {
   });
 
   const formSubmit = (data: RegistrationFormSchema) => {
-    const registrationRequest: RegistrationRequest = {
+    const request: RegistrationRequest = {
       email: data.email,
       password: data.password,
       username: data.username,
     };
-    createUser(registrationRequest);
+    registration(request);
   };
+
+  useEffect(() => {
+    if (!state.isLoading && !state.error && state.userId) {
+      router.push('/auth/success');
+    }
+  }, [state.isLoading, state.error, state.userId]);
 
   return (
     <>

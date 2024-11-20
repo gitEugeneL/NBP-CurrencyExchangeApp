@@ -17,6 +17,7 @@ export default function AuthLayout() {
       >
         <Stack.Screen name="login" options={{ title: 'Login' }} />
         <Stack.Screen name="registration" options={{ title: 'Register' }} />
+        <Stack.Screen name="success" options={{ title: 'Success' }} />
       </Stack>
     </SafeAreaProvider>
   );

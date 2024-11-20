@@ -1,9 +1,19 @@
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import Button from '../../UI/Button/Button';
+import { LogoutAtom } from '../../store/auth.state';
+import { useSetAtom } from 'jotai';
 
 export default function IndexPage() {
+  const logout = useSetAtom(LogoutAtom);
+
+  const testLogout = () => {
+    console.log('test logout');
+    logout();
+  };
+
   return (
     <View>
-      <Text>Index page</Text>
+      <Button name={'test logout'} onPress={testLogout} />
     </View>
   );
 }

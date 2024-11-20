@@ -6,12 +6,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import PasswordInput from '../../components/PasswordInput/PasswordInput';
 import { LoginFormSchema, LoginFormValidationSchema } from './LoginForm.schemes';
 import { useAtom } from 'jotai';
-import { LoginAtom } from '../../store/login.state';
-import { LoginRequest } from '../../store/models/login.models';
+import { LoginRequest } from '../../store/models/auth.models';
 import Notification from '../../UI/Notification/Notification';
+import { useEffect } from 'react';
+import { router } from 'expo-router';
+import { loginAtom } from '../../store/auth.state';
 
 export default function LoginForm() {
-  const [state, login] = useAtom(LoginAtom);
+  const [state, login] = useAtom(loginAtom);
 
   const {
     control,
@@ -28,6 +30,12 @@ export default function LoginForm() {
     };
     login(loginRequest);
   };
+
+  useEffect(() => {
+    if (state.accessToken && state.expiresDate) {
+      router.replace('/(app)');
+    }
+  }, [state.accessToken]);
 
   return (
     <>

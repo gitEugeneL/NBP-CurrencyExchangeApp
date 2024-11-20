@@ -14,7 +14,7 @@ public class TokenService(IConfiguration configuration) : ITokenService
         {
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new(ClaimTypes.Email, user.Email),
-            new(ClaimTypes.Name, user.LastName),
+            new(ClaimTypes.Name, user.Username),
         };
 
         var settings = configuration.GetSection("Authentication:Key").Value!;

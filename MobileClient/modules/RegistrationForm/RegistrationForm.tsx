@@ -8,8 +8,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import PasswordInput from '../../components/PasswordInput/PasswordInput';
 import Button from '../../UI/Button/Button';
 import { StyleSheet, View } from 'react-native';
+import { CreateUserAtom } from '../../store/user.state';
+import { RegistrationRequest } from '../../store/models/register.models';
+import { useAtom } from 'jotai';
+import Notification from '../../UI/Notification/Notification';
 
 export default function RegistrationForm() {
+  const [state, createUser] = useAtom(CreateUserAtom);
+
   const {
     control,
     handleSubmit,
@@ -19,45 +25,54 @@ export default function RegistrationForm() {
   });
 
   const formSubmit = (data: RegistrationFormSchema) => {
-    console.log(data.email);
+    const registrationRequest: RegistrationRequest = {
+      email: data.email,
+      password: data.password,
+      username: data.username,
+    };
+    createUser(registrationRequest);
   };
 
   return (
-    <View>
-      <CustomInput
-        label="Name"
-        name="name"
-        placeholder="Enter your name"
-        control={control}
-        errors={errors}
-      />
+    <>
+      <Notification notificationError={state.error} />
 
-      <CustomInput
-        label="Email"
-        name="email"
-        placeholder="Enter your email"
-        control={control}
-        errors={errors}
-      />
+      <View>
+        <CustomInput
+          label="Username"
+          name="username"
+          placeholder="Enter your name"
+          control={control}
+          errors={errors}
+        />
 
-      <PasswordInput
-        label="Password"
-        name="password"
-        placeholder="Your strong password"
-        control={control}
-        errors={errors}
-      />
+        <CustomInput
+          label="Email"
+          name="email"
+          placeholder="Enter your email"
+          control={control}
+          errors={errors}
+        />
 
-      <PasswordInput
-        label="Confirm password"
-        name="confirmPassword"
-        placeholder="Confirm your password"
-        control={control}
-        errors={errors}
-      />
+        <PasswordInput
+          label="Password"
+          name="password"
+          placeholder="Your strong password"
+          control={control}
+          errors={errors}
+        />
 
-      <Button style={styles.button} name="Registration" onPress={handleSubmit(formSubmit)} />
-    </View>
+        <PasswordInput
+          label="Confirm password"
+          name="confirmPassword"
+          placeholder="Confirm your password"
+          control={control}
+          errors={errors}
+        />
+
+        <Button style={styles.button} name="Registration" onPress={handleSubmit(formSubmit)} />
+      </View>
+    </>
   );
 }
 

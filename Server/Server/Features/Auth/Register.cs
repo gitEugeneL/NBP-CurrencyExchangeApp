@@ -19,8 +19,7 @@ public class Register : ICarterModule
                 var command = new Command(
                     Email: request.Email.Trim().ToLower(),
                     Password: request.Password.Trim(),
-                    LastName: request.LastName.Trim().ToLower(),
-                    FirstName: request.FirstName.Trim().ToLower()
+                    Username: request.Username.Trim().ToLower()
                 );
                 return await sender.Send(command);
             })
@@ -33,8 +32,7 @@ public class Register : ICarterModule
     public sealed record Command(
         string Email,
         string Password,
-        string FirstName,
-        string LastName) : IRequest<IResult>;
+        string Username) : IRequest<IResult>;
 
     public sealed class Validator : AbstractValidator<Command>
     {
@@ -49,13 +47,9 @@ public class Register : ICarterModule
                 .MinimumLength(8)
                 .MaximumLength(20)
                 .Matches(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$")
-                .WithMessage("The password must contain at least one letter, one special character, and one digit");
+                .WithMessage("The password must be strong");
 
-            RuleFor(command => command.FirstName)
-                .NotEmpty()
-                .MaximumLength(150);
-
-            RuleFor(command => command.LastName)
+            RuleFor(command => command.Username)
                 .NotEmpty()
                 .MaximumLength(150);
         }
@@ -81,8 +75,7 @@ public class Register : ICarterModule
                 Email = command.Email,
                 PasswordHash = hash,
                 PasswordSalt = salt,
-                FirstName = command.FirstName,
-                LastName = command.LastName
+                Username = command.Username
             };
             await dbContext.Users.AddAsync(user, ct);
             await dbContext.SaveChangesAsync(ct);

@@ -6,8 +6,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import PasswordInput from '../../components/PasswordInput/PasswordInput';
 import { LoginFormSchema, LoginFormValidationSchema } from './LoginForm.schemes';
 import { useAtom } from 'jotai';
-import { LoginAtom } from './state/login.state';
-import { LoginRequest } from './state/login.models';
+import { LoginAtom } from '../../store/login.state';
+import { LoginRequest } from '../../store/models/login.models';
 import Notification from '../../UI/Notification/Notification';
 
 export default function LoginForm() {

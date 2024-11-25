@@ -8,10 +8,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import PasswordInput from '../../components/PasswordInput/PasswordInput';
 import Button from '../../UI/Button/Button';
 import { StyleSheet, View } from 'react-native';
-import { RegistrationRequest } from '../../store/models/registration.models';
+import { RegistrationRequest } from '../../store/registration/registration.models';
 import { useAtom } from 'jotai';
 import Notification from '../../UI/Notification/Notification';
-import { registrationAtom } from '../../store/registration.state';
+import { registrationAtom } from '../../store/registration/registration.state';
 import { useEffect } from 'react';
 import { router } from 'expo-router';
 

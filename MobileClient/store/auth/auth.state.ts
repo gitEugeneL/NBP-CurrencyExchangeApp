@@ -1,9 +1,9 @@
 import { atomWithStorage, createJSONStorage } from 'jotai/utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { atom } from 'jotai';
-import { LoginRequest, LoginResponse } from './models/auth.models';
+import { LoginRequest, LoginResponse } from './auth.models';
 import axios, { AxiosError } from 'axios';
-import { API } from './api/api';
+import { authApi } from './auth.api';
 
 export interface StateScheme {
   accessToken: string | null;
@@ -36,7 +36,7 @@ export const loginAtom = atom(
     });
 
     try {
-      const { data } = await axios.post<LoginResponse>(API.auth.login, loginRequest);
+      const { data } = await axios.post<LoginResponse>(authApi.login, loginRequest);
       set(authState, {
         accessToken: data.accessToken,
         expiresDate: data.expiredDate,

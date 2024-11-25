@@ -1,8 +1,13 @@
 using System.Reflection;
+using System.Security.Claims;
+using System.Text;
 using Carter;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Server.Data.Persistence;
+using Server.Helpers;
 using Server.Security;
 using Server.Security.Interfaces;
 
@@ -42,6 +47,29 @@ builder.Services.AddCors(options =>
          // policyBuilder.AllowCredentials();
      });
 });
+
+/*** JWT  auth configuration ***/
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+                .GetBytes(builder.Configuration.GetSection("Authentication:Key").Value!)),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+        };
+    });
+
+/*** Auth policies ***/
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy(AppConstants.BaseAuthPolicy, policy =>
+        policy
+            .RequireClaim(ClaimTypes.Email)
+            .RequireClaim(ClaimTypes.NameIdentifier));
+
 
 var app = builder.Build();
 

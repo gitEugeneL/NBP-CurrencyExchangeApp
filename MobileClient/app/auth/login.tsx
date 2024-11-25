@@ -7,7 +7,7 @@ import LoginForm from '../../modules/LoginForm/LoginForm';
 import Button from '../../UI/Button/Button';
 import { router } from 'expo-router';
 import { useSetAtom } from 'jotai';
-import { resetRegistrationAtom } from '../../store/registration.state';
+import { resetRegistrationAtom } from '../../store/registration/registration.state';
 
 export default function LoginPage() {
   const resetRegistrationProcess = useSetAtom(resetRegistrationAtom);

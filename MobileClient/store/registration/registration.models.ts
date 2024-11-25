@@ -6,6 +6,4 @@ export interface RegistrationRequest {
 
 export interface RegistrationResponse {
   userId: string;
-  email: string;
-  username: string;
 }

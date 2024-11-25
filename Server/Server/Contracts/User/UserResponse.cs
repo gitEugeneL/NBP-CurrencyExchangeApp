@@ -1,8 +1,6 @@
-using Server.Domain.Entities;
+namespace Server.Contracts.User;
 
-namespace Server.Contracts.Auth;
-
-public sealed class UserResponse(User user)
+public sealed class UserResponse(Domain.Entities.User user)
 {
     public Guid UserId { get; init; } = user.Id;
     public string Email { get; init; } = user.Email;

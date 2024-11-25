@@ -1,10 +1,12 @@
 export const Colors = {
   primary: '#6533C0',
   primaryHover: '#42217DFF',
+  link: '#A274F7',
   red: '#CC384E',
   white: '#FFF',
   gray: '#A5A8B5',
   black: '#18181E',
+  blackBlue: '#22232F',
   violetDark: '#2B2A3AFF',
   transparent: 'transparent',
 };

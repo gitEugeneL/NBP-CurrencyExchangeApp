@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
-import { RegistrationRequest, RegistrationResponse } from './models/registration.models';
+import { RegistrationRequest, RegistrationResponse } from './registration.models';
 import axios, { AxiosError } from 'axios';
-import { API } from './api/api';
+import { registrationApi } from './registration.api';
 
 export interface StateScheme {
   userId: string | null;
@@ -29,7 +29,7 @@ export const registrationAtom = atom(
 
     try {
       const { data } = await axios.post<RegistrationResponse>(
-        API.auth.registration,
+        registrationApi.registration,
         registrationRequest,
       );
       set(registrationState, {

@@ -4,6 +4,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Server.Contracts.Auth;
+using Server.Contracts.User;
 using Server.Data.Persistence;
 using Server.Domain.Entities;
 using Server.Security.Interfaces;
@@ -80,7 +81,7 @@ public class Register : ICarterModule
             await dbContext.Users.AddAsync(user, ct);
             await dbContext.SaveChangesAsync(ct);
             
-            return TypedResults.Created(user.Id.ToString(), new UserResponse(user));
+            return TypedResults.Created(user.Id.ToString(), new RegisterResponse(user.Id));
         }
     }
 }

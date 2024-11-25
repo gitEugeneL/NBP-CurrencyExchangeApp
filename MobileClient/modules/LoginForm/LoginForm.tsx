@@ -6,11 +6,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import PasswordInput from '../../components/PasswordInput/PasswordInput';
 import { LoginFormSchema, LoginFormValidationSchema } from './LoginForm.schemes';
 import { useAtom } from 'jotai';
-import { LoginRequest } from '../../store/models/auth.models';
+import { LoginRequest } from '../../store/auth/auth.models';
 import Notification from '../../UI/Notification/Notification';
 import { useEffect } from 'react';
 import { router } from 'expo-router';
-import { loginAtom } from '../../store/auth.state';
+import { loginAtom } from '../../store/auth/auth.state';
 
 export default function LoginForm() {
   const [state, login] = useAtom(loginAtom);

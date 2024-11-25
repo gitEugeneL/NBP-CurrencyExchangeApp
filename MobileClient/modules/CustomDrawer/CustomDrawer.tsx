@@ -1,15 +1,16 @@
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import { StyleSheet, View } from 'react-native';
-import CustomLink from '../../UI/CustomLink/CustomLink';
 import { useAtom, useSetAtom } from 'jotai';
 import { logoutAtom } from '../../store/auth/auth.state';
 import { CustomDrawerProps } from './CustomDrawer.props';
 import { Colors, Gaps } from '../../UI/styles';
-import CloseButton from './components/CloseButton/CloseButton';
-import { CompactLogo } from '../../assets/elements/CompactLogo';
 import { getUserInfoAtom } from '../../store/user/user.state';
 import { useEffect } from 'react';
+import CloseButton from './components/CloseButton/CloseButton';
 import UserBlock from './components/UserBlock/UserBlock';
+import { drawerMenu } from './DrawerMenu';
+import MenuItem from './components/MenuItem/MenuItem';
+import CustomLink from '../../UI/CustomLink/CustomLink';
 
 export default function CustomDrawer({ ...props }: CustomDrawerProps) {
   const logout = useSetAtom(logoutAtom);
@@ -28,10 +29,13 @@ export default function CustomDrawer({ ...props }: CustomDrawerProps) {
       <View style={styles.wrapper}>
         <CloseButton navigation={props.navigation} />
         {user.username && user.email && <UserBlock username={user.username} email={user.email} />}
+
+        {drawerMenu.map((item) => (
+          <MenuItem key={item.path} drawer={props} {...item} />
+        ))}
       </View>
       <View style={styles.footer}>
         <CustomLink name="Logout" href={'/auth/login'} onPress={handleLogout} />
-        <CompactLogo />
       </View>
     </DrawerContentScrollView>
   );
@@ -50,6 +54,6 @@ const styles = StyleSheet.create({
   footer: {
     gap: Gaps.gap20,
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 20,
   },
 });

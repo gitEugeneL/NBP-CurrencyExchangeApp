@@ -5,10 +5,10 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { authState, logoutAtom } from '../../store/auth/auth.state';
 import { Drawer } from 'expo-router/drawer';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import CustomDrawer from '../../modules/CustomDrawer/CustomDrawer';
 import { Colors, Fonts, FontSize } from '../../UI/styles';
-import MenuButton from '../../modules/CustomDrawer/components/MenuButton/MenuButton';
+import HeaderButton from '../../modules/CustomDrawer/components/HeaderButton/HeaderButton';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -42,6 +42,10 @@ export default function MainLayout() {
       <Drawer
         drawerContent={(props) => <CustomDrawer {...props} />}
         screenOptions={({ navigation }) => ({
+          drawerStyle: {
+            width: Dimensions.get('window').width,
+          },
+
           headerStyle: {
             backgroundColor: Colors.blackBlue,
             shadowColor: Colors.blackBlue,
@@ -60,7 +64,7 @@ export default function MainLayout() {
 
           headerTitleAlign: 'center',
 
-          headerLeft: () => <MenuButton navigation={navigation} />,
+          headerLeft: () => <HeaderButton navigation={navigation} />,
         })}
       >
         <Drawer.Screen name="index" options={{ title: 'Home Page' }} />

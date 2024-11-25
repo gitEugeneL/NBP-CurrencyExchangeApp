@@ -1,10 +1,10 @@
-import { MenuButtonProps } from './MenuButton.props';
+import { HeaderProps } from './Header.props';
 import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { ItemIcon } from './icons/ItemIcon';
 import { Colors } from '../../../../UI/styles';
 
-export default function MenuButton({ navigation, ...props }: MenuButtonProps) {
+export default function HeaderButton({ navigation, ...props }: HeaderProps) {
   const [clicked, setClicked] = useState<boolean>(false);
 
   return (

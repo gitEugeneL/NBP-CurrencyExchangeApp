@@ -22,7 +22,7 @@ export default function MenuItem({ drawer, text, path, icon, ...props }: MenuIte
           backgroundColor: clicked || isActive ? Colors.violetDark : Colors.black,
         }}
       >
-        {icon}
+        <View style={styles.icon}>{icon}</View>
         <Text style={styles.text}>{text}</Text>
       </View>
     </Pressable>
@@ -42,9 +42,16 @@ const styles = StyleSheet.create({
     borderRightWidth: 5,
   },
 
+  icon: {
+    position: 'absolute',
+    top: 21,
+    left: 60,
+  },
+
   text: {
+    marginLeft: 90,
     color: Colors.white,
-    fontSize: FontSize.size20,
+    fontSize: FontSize.size18,
     fontFamily: Fonts.regular,
   },
 });

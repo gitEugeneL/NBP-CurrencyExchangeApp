@@ -13,11 +13,11 @@ export default function Button({
   name,
   isLoading = false,
   appearance = 'primary',
+  size = 'normal',
   ...props
 }: ButtonProps) {
   const animatedValue = new Animated.Value(100);
 
-  // Интерполяция цвета для анимации
   const animatedColor = animatedValue.interpolate({
     inputRange: [0, 100],
     outputRange:
@@ -49,6 +49,7 @@ export default function Button({
       <Animated.View
         style={[
           styles.button,
+          size === 'small' ? styles.small : null,
           appearance === 'primary' ? styles.primaryButton : styles.secondaryButton,
           { backgroundColor: animatedColor },
         ]}
@@ -67,6 +68,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 60,
     borderRadius: Radius.radius10,
+  },
+
+  small: {
+    height: 40,
   },
 
   primaryButton: {

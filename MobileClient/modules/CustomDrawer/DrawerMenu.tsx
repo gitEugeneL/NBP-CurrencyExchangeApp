@@ -1,6 +1,6 @@
-import { ProfileIcon } from './icons/ProfileIcon';
+import { WalletIcon } from './icons/WalletIcon';
 
 export const drawerMenu = [
-  { text: 'Home', icon: <ProfileIcon />, path: 'index' },
+  { text: 'My Wallets', icon: <WalletIcon />, path: 'index' },
   // another items ....
 ];

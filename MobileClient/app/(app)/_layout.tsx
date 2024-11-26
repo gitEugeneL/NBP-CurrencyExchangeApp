@@ -67,7 +67,7 @@ export default function MainLayout() {
           headerLeft: () => <HeaderButton navigation={navigation} />,
         })}
       >
-        <Drawer.Screen name="index" options={{ title: 'Home Page' }} />
+        <Drawer.Screen name="index" options={{ title: 'My Wallets' }} />
       </Drawer>
     </GestureHandlerRootView>
   );

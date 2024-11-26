@@ -7,8 +7,8 @@ export default function UserBlock({ username, email }: UserBlockProps) {
     <View style={styles.container}>
       <Image source={require('../../../../assets/images/profile.png')} />
       <View style={styles.wrapper}>
-        <Text style={styles.text}>{username}</Text>
-        <Text style={styles.text}>{email}</Text>
+        <Text style={styles.name}>{username}</Text>
+        <Text style={styles.email}>{email}</Text>
       </View>
     </View>
   );
@@ -24,12 +24,18 @@ const styles = StyleSheet.create({
 
   wrapper: {
     alignItems: 'center',
-    gap: 0,
+    gap: Gaps.gap5,
   },
 
-  text: {
+  name: {
     fontSize: FontSize.size18,
     fontFamily: Fonts.regular,
     color: Colors.white,
+  },
+
+  email: {
+    fontSize: FontSize.size16,
+    fontFamily: Fonts.regular,
+    color: Colors.gray,
   },
 });

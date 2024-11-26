@@ -12,6 +12,7 @@ export const Colors = {
 };
 
 export const Gaps = {
+  gap5: 5,
   gap10: 10,
   gap16: 16,
   gap20: 20,
@@ -23,6 +24,7 @@ export const Gaps = {
 export const Radius = {
   radius10: 10,
   radius16: 16,
+  radius20: 20,
 };
 
 export const Fonts = {
@@ -31,6 +33,7 @@ export const Fonts = {
 };
 
 export const FontSize = {
+  size10: 10,
   size12: 12,
   size14: 14,
   size16: 16,

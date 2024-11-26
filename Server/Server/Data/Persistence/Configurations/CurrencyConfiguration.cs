@@ -14,6 +14,9 @@ public class CurrencyConfiguration : IEntityTypeConfiguration<Currency>
         builder.HasIndex(currency => currency.ShortName)
             .IsUnique();
         
+        builder.HasIndex(currency => currency.Country)
+            .IsUnique();
+        
         builder.Property(currency => currency.Name)
             .HasMaxLength(50)
             .IsRequired();
@@ -21,9 +24,17 @@ public class CurrencyConfiguration : IEntityTypeConfiguration<Currency>
         builder.Property(currency => currency.ShortName)
             .HasMaxLength(5)
             .IsRequired();
+        
+        builder.Property(currency => currency.Country)
+            .HasMaxLength(20)
+            .IsRequired();
 
+        builder.Property(currency => currency.Symbol)
+            .HasMaxLength(5)
+            .IsRequired();
+        
         builder.Property(currency => currency.Ratio)
             .IsRequired()
-            .HasPrecision(5);
+            .HasPrecision(2);
     }
 }

@@ -54,7 +54,9 @@ export default function Button({
           { backgroundColor: animatedColor },
         ]}
       >
-        {!isLoading && <Text style={styles.text}>{name}</Text>}
+        {!isLoading && (
+          <Text style={[styles.text, size === 'small' ? styles.smallText : null]}>{name}</Text>
+        )}
 
         {isLoading && <ActivityIndicator size="large" color={Colors.white} />}
       </Animated.View>
@@ -88,5 +90,9 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.regular,
     fontSize: FontSize.size18,
     color: Colors.white,
+  },
+
+  smallText: {
+    fontSize: FontSize.size16,
   },
 });

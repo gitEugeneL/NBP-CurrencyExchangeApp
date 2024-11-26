@@ -20,8 +20,8 @@ export default function WalletCard() {
         </View>
       </View>
       <View style={styles.buttonBlock}>
-        <Button style={styles.btn} name="Buy" appearance="secondary" size="small" />
-        <Button style={styles.btn} name="Sell" appearance="secondary" size="small" />
+        <Button style={styles.btn} name="Put money" appearance="secondary" size="small" />
+        <Button style={styles.btn} name="Withdraw" appearance="secondary" size="small" />
       </View>
     </View>
   );

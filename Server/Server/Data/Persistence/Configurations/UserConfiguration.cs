@@ -24,8 +24,5 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(user => user.PasswordSalt)
             .IsRequired();
-        
-        builder.Property(user => user.ModifiedOn)
-            .HasDefaultValueSql("CURRENT_TIMESTAMP");
     }
 }

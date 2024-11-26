@@ -7,6 +7,8 @@ namespace Server.Data.Persistence;
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public required DbSet<User> Users { get; init; }
+    public required DbSet<Currency> Currencies { get; init; }
+    public required DbSet<Wallet> Wallets { get; init; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

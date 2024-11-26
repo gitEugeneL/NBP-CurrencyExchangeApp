@@ -4,7 +4,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Server.Contracts.Auth;
-using Server.Contracts.User;
+using Server.Contracts.Users;
 using Server.Data.Persistence;
 using Server.Domain.Entities;
 using Server.Security.Interfaces;

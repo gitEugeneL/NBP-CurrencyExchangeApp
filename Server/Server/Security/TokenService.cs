@@ -36,14 +36,5 @@ public class TokenService(IConfiguration configuration) : ITokenService
         
         return Tuple.Create(handler.WriteToken(token), expiresDate);
     }
-
-    public Guid ReadUserIdFromToken(HttpContext httpContext)
-    {
-        return Guid.Parse(
-            httpContext
-            .User
-            .FindFirstValue(ClaimTypes.NameIdentifier)!
-        );
-    }
 }
   

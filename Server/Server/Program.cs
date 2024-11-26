@@ -15,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddScoped<ITokenService, TokenService>()
+    .AddScoped<IUserService, UserService>()
     .AddScoped<IPasswordService, PasswordService>();
 
 builder.Services.AddEndpointsApiExplorer();

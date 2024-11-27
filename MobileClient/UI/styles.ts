@@ -1,6 +1,7 @@
 export const Colors = {
   primary: '#6533C0',
   primaryHover: '#42217DFF',
+  modal: 'rgba(43,42,58,0.9)',
   link: '#A274F7',
   red: '#CC384E',
   white: '#FFF',

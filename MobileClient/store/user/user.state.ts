@@ -26,7 +26,6 @@ export const getUserInfoAtom = atom(
   },
 
   async (get, set) => {
-    const { accessToken } = await get(authState);
     set(userState, {
       userId: null,
       username: null,
@@ -36,6 +35,7 @@ export const getUserInfoAtom = atom(
     });
 
     try {
+      const { accessToken } = await get(authState);
       const { data } = await axios.get<UserResponse>(userApi.getUserInfo, {
         headers: {
           Authorization: `Bearer ${accessToken}`,

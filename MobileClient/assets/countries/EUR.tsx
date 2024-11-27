@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, { Path, Rect } from 'react-native-svg';
 
-export const EU = () => (
+export const EUR = () => (
   <Svg width={57} height={57} fill="none">
     <Rect width={57} height={57} fill="#039" rx={15} />
     <Path fill="#FC0" d="m28.548 12-.764 2.351 1.175.382L28.548 12Z" />

@@ -12,6 +12,6 @@ public sealed class CurrencyResponse(Currency currency)
     
     // todo
     // add exchange rates with NBP data
-    public double BuyingRate { get; init; } = -1;
-    public double SellingRate { get; init; } = -1;
+    public decimal BuyingRate { get; init; } = -1;
+    public decimal SellingRate { get; init; } = -1;
 }

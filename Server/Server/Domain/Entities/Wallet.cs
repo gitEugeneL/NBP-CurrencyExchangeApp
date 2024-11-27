@@ -4,7 +4,7 @@ namespace Server.Domain.Entities;
 
 public class Wallet : BaseEntity
 {
-    public required double Value { get; set; } 
+    public required decimal Value { get; set; } 
     
     /** Relations **/
     public Guid UserId { get; init; }

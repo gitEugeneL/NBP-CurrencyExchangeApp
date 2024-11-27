@@ -68,7 +68,7 @@ export default function WalletCard({
       <View style={styles.buttonBlock}>
         {isCreated && (
           <>
-            <Button style={styles.btn} name="Put money" size="small" />
+            <Button style={styles.btn} name="Add money" size="small" />
             <Button style={styles.btn} name="Withdraw" size="small" />
           </>
         )}

@@ -21,6 +21,7 @@ public class CreateUserWallet : ICarterModule
                         CurrentUserId: userService.ReadUserIdFromToken(httpContext),
                         CurrencyId: request.CurrencyId
                     );
+                    return await sender.Send(command);
                 })
             .RequireAuthorization(AppConstants.BaseAuthPolicy)
             .Produces<WalletResponse>(StatusCodes.Status201Created)
@@ -64,6 +65,8 @@ public class CreateUserWallet : ICarterModule
                 User = user,
                 Currency = currency
             };
+            await dbContext.Wallets.AddAsync(wallet, ct);
+            await dbContext.SaveChangesAsync(ct);
             
             return TypedResults.Created(wallet.Id.ToString(), new WalletResponse(wallet));
         }

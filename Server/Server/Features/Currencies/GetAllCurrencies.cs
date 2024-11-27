@@ -31,12 +31,13 @@ public class GetAllCurrencies : ICarterModule
             // todo
             // check and NBP rate and add
 
-            var currencies = await dbContext
+            var currenciesResponse = await dbContext
                 .Currencies
                 .AsNoTracking()
+                .Select(c => new CurrencyResponse(c))
                 .ToListAsync(ct);
             
-            return TypedResults.Ok(currencies);
+            return TypedResults.Ok(currenciesResponse);
         }
     }
 }

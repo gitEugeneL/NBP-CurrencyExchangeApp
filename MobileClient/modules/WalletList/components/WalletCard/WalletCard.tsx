@@ -10,8 +10,8 @@ import {
 } from '../../../../store/wallet/wallet.models';
 import { useSetAtom } from 'jotai';
 import { createUserWalletAtom, walletOperationAtom } from '../../../../store/wallet/wallet.state';
-import AddMoney from './UI/AddMoney/AddMoney';
 import MoneyLogo from '../../../../UI/MoneyLogo/MoneyLogo';
+import MoneyOperationModal from './UI/MoneyOperationModal/MoneyOperationModal';
 
 export default function WalletCard({
   isCreated,
@@ -24,15 +24,25 @@ export default function WalletCard({
   walletId,
 }: WalletCardProps) {
   const createUserWallet = useSetAtom(createUserWalletAtom);
-  const walletoperations = useSetAtom(walletOperationAtom);
+  const walletOperation = useSetAtom(walletOperationAtom);
 
   const [isConfirmModalVisible, setConfirmModalVisible] = useState<boolean>(false);
-  const [isAddMoneyModalVisible, setAddMoneyModalVisible] = useState<boolean>(false);
+  const [isMoneyModalVisible, setMoneyModalVisible] = useState<boolean>(false);
+  const [isWithdraw, setWithdraw] = useState<boolean>(false);
 
   const handleCreateButton = () => setConfirmModalVisible(true);
-  const handleAddMoneyButton = () => setAddMoneyModalVisible(true);
   const handleCloseBtnConfirmModal = () => setConfirmModalVisible(false);
-  const handleCloseBtnAddMoneyModal = () => setAddMoneyModalVisible(false);
+  const handleCloseBtnMoneyModal = () => setMoneyModalVisible(false);
+
+  const handleAddMoneyButton = () => {
+    setWithdraw(false);
+    setMoneyModalVisible(true);
+  };
+
+  const handleWithdrawButton = () => {
+    setWithdraw(true);
+    setMoneyModalVisible(true);
+  };
 
   const handleConfirmModal = () => {
     const request: CreateWalletRequest = {
@@ -42,14 +52,14 @@ export default function WalletCard({
     setConfirmModalVisible(false);
   };
 
-  const handleAddMoneyModal = (amount: number) => {
+  const handleMoneyOperation = (amount: number, isWithdraw: boolean) => {
     const request: WalletOperationsRequest = {
       walletId: walletId,
       amount: amount,
-      isWithdraw: false,
+      isWithdraw: isWithdraw,
     };
-    walletoperations(request);
-    setAddMoneyModalVisible(false);
+    walletOperation(request);
+    setMoneyModalVisible(false);
   };
 
   return (
@@ -74,24 +84,29 @@ export default function WalletCard({
       <View style={styles.buttonBlock}>
         {isCreated && (
           <>
-            <>
-              <Button
-                style={styles.btn}
-                onPressOut={handleAddMoneyButton}
-                name="Add money"
-                size="small"
-              />
-              <AddMoney
-                value={value}
-                symbol={symbol}
-                shortName={shortName}
-                isVisible={isAddMoneyModalVisible}
-                onClose={handleCloseBtnAddMoneyModal}
-                onAddMoney={handleAddMoneyModal}
-              />
-            </>
+            <Button
+              style={styles.btn}
+              onPressOut={handleAddMoneyButton}
+              name="Add money"
+              size="small"
+            />
 
-            <Button style={styles.btn} name="Withdraw" size="small" />
+            <Button
+              style={styles.btn}
+              onPressOut={handleWithdrawButton}
+              name="Withdraw"
+              size="small"
+            />
+
+            <MoneyOperationModal
+              isWithdraw={isWithdraw}
+              value={value}
+              symbol={symbol}
+              shortName={shortName}
+              isVisible={isMoneyModalVisible}
+              onClose={handleCloseBtnMoneyModal}
+              operation={handleMoneyOperation}
+            />
           </>
         )}
         {!isCreated && (

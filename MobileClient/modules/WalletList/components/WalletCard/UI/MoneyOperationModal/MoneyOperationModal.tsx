@@ -1,38 +1,44 @@
-import { Modal, StyleSheet, View } from 'react-native';
-import { BlurView } from 'expo-blur';
-import React from 'react';
-import { Colors, Gaps, Radius } from '../../../../../../UI/styles';
-import { AddMoneyProps } from './AddMoney.props';
-import Button from '../../../../../../UI/Button/Button';
-import MoneyInput from '../../../../../../components/MoneyInput/MoneyInput';
+import {
+  MoneyOperationSchema,
+  MoneyOperationValidationSchema,
+} from './MoneyOperationModal.schemes';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { AddMoneySchema, AddMoneyValidationSchema } from './AddMoney.schemes';
+import { MoneyOperationModalProps } from './MoneyOperationModal.props';
+import { Modal, StyleSheet, Text, View } from 'react-native';
+import { BlurView } from 'expo-blur';
+import MoneyInput from '../../../../../../components/MoneyInput/MoneyInput';
+import Button from '../../../../../../UI/Button/Button';
+import React from 'react';
+import { Colors, Fonts, FontSize, Gaps, Radius } from '../../../../../../UI/styles';
 
-export default function AddMoney({
+export default function MoneyOperationModal({
+  isWithdraw,
   value,
   shortName,
   symbol,
   isVisible,
   onClose,
-  onAddMoney,
-}: AddMoneyProps) {
+  operation,
+}: MoneyOperationModalProps) {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<AddMoneySchema>({
-    resolver: yupResolver(AddMoneyValidationSchema),
+  } = useForm<MoneyOperationSchema>({
+    resolver: yupResolver(MoneyOperationValidationSchema(isWithdraw ? value : null)),
   });
 
-  const formSubmit = (data: AddMoneySchema) => {
-    onAddMoney(data.amount);
+  const formSubmit = (data: MoneyOperationSchema) => {
+    operation(data.amount, isWithdraw);
   };
 
   return (
     <Modal transparent={true} animationType="fade" visible={isVisible} onRequestClose={onClose}>
       <BlurView intensity={10} style={styles.blurContainer}>
         <View style={styles.modalContainer}>
+          <Text style={styles.title}>{isWithdraw ? 'Withdraw' : 'Add money'}</Text>
+
           <View>
             <MoneyInput
               label={`Personal: ${symbol} ${value}`}
@@ -41,7 +47,7 @@ export default function AddMoney({
               control={control}
               keyboardType="numeric"
               errors={errors}
-              placeholder="0.00"
+              placeholder={isWithdraw ? value : '0.00'}
             />
           </View>
 
@@ -55,7 +61,7 @@ export default function AddMoney({
             />
             <Button
               style={styles.button}
-              name="Add money"
+              name={isWithdraw ? 'Withdraw' : 'Add money'}
               size="small"
               onPress={handleSubmit(formSubmit)}
             />
@@ -90,5 +96,12 @@ const styles = StyleSheet.create({
 
   button: {
     flex: 1,
+  },
+
+  title: {
+    fontFamily: Fonts.semiBold,
+    color: Colors.white,
+    fontSize: FontSize.size20,
+    marginBottom: 20,
   },
 });

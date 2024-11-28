@@ -4,9 +4,12 @@ import Button from '../../../../UI/Button/Button';
 import { WalletCardProps } from './WalletCard.props';
 import ConfirmCreate from './UI/ConfirmModal/ConfirmCreate';
 import { useState } from 'react';
-import { AddMoneyRequest, CreateWalletRequest } from '../../../../store/wallet/wallet.models';
+import {
+  CreateWalletRequest,
+  WalletOperationsRequest,
+} from '../../../../store/wallet/wallet.models';
 import { useSetAtom } from 'jotai';
-import { addMoneyAtom, createUserWalletAtom } from '../../../../store/wallet/wallet.state';
+import { createUserWalletAtom, walletOperationAtom } from '../../../../store/wallet/wallet.state';
 import AddMoney from './UI/AddMoney/AddMoney';
 import MoneyLogo from '../../../../UI/MoneyLogo/MoneyLogo';
 
@@ -21,7 +24,7 @@ export default function WalletCard({
   walletId,
 }: WalletCardProps) {
   const createUserWallet = useSetAtom(createUserWalletAtom);
-  const addMoney = useSetAtom(addMoneyAtom);
+  const walletoperations = useSetAtom(walletOperationAtom);
 
   const [isConfirmModalVisible, setConfirmModalVisible] = useState<boolean>(false);
   const [isAddMoneyModalVisible, setAddMoneyModalVisible] = useState<boolean>(false);
@@ -40,11 +43,12 @@ export default function WalletCard({
   };
 
   const handleAddMoneyModal = (amount: number) => {
-    const request: AddMoneyRequest = {
+    const request: WalletOperationsRequest = {
       walletId: walletId,
       amount: amount,
+      isWithdraw: false,
     };
-    addMoney(request);
+    walletoperations(request);
     setAddMoneyModalVisible(false);
   };
 

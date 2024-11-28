@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { AddMoneyRequest, CreateWalletRequest, WalletResponse } from './wallet.models';
+import { CreateWalletRequest, WalletOperationsRequest, WalletResponse } from './wallet.models';
 import axios, { AxiosError } from 'axios';
 import { authState } from '../auth/auth.state';
 import { walletApi } from './wallet.api';
@@ -92,12 +92,12 @@ export const createUserWalletAtom = atom(
   },
 );
 
-export const addMoneyAtom = atom(
+export const walletOperationAtom = atom(
   async (get) => {
     return get(walletState);
   },
 
-  async (get, set, addMoneyRequest: AddMoneyRequest) => {
+  async (get, set, walletOperationsRequest: WalletOperationsRequest) => {
     set(walletState, (prevState) => ({
       ...prevState,
       isLoading: true,
@@ -105,11 +105,15 @@ export const addMoneyAtom = atom(
     }));
     try {
       const { accessToken } = await get(authState);
-      const { data } = await axios.post<WalletResponse>(walletApi.addMoney, addMoneyRequest, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
+      const { data } = await axios.put<WalletResponse>(
+        walletApi.walletOperations,
+        walletOperationsRequest,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
         },
-      });
+      );
       set(walletState, (prevState) => ({
         ...prevState,
         wallets: [...prevState.wallets, data],

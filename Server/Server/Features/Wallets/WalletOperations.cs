@@ -10,29 +10,32 @@ using Server.Security.Interfaces;
 
 namespace Server.Features.Wallets;
 
-public class AddMoney : ICarterModule
+public class WalletOperations : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/api/wallets/add-money",
-                async (AddMoneyRequest request, HttpContext httpContext, IUserService userService, ISender sender) =>
+        app.MapPut("/api/wallets/money",
+                async (WalletOperationsRequest request, HttpContext httpContext, IUserService userService, ISender sender) =>
                 {
                     var command = new Command(
                         CurrentUserId: userService.ReadUserIdFromToken(httpContext),
                         WalletId: request.WalletId,
-                        Amount: request.Amount
+                        Amount: request.Amount,
+                        IsWithdraw: request.IsWithdraw
                     );
                     return await sender.Send(command);
                 })
             .RequireAuthorization(AppConstants.BaseAuthPolicy)
             .Produces<WalletResponse>(StatusCodes.Status200OK)
-            .Produces(StatusCodes.Status404NotFound);
+            .Produces(StatusCodes.Status404NotFound)
+            .Produces(StatusCodes.Status409Conflict);
     }
-
+    
     public sealed record Command(
         Guid CurrentUserId,
         Guid WalletId,
-        decimal Amount) : IRequest<IResult>;
+        decimal Amount,
+        bool IsWithdraw = false) : IRequest<IResult>;
     
     public sealed class Validator : AbstractValidator<Command>
     {
@@ -68,7 +71,17 @@ public class AddMoney : ICarterModule
             if (wallet is null)
                 return TypedResults.NotFound("Wallet not found");
 
-            wallet.Value += command.Amount;
+            switch (command.IsWithdraw)
+            {
+                case true when command.Amount > wallet.Value:
+                    return TypedResults.Conflict("Amount is greater than the current wallet");
+                case true:
+                    wallet.Value -= command.Amount;
+                    break;
+                case false:
+                    wallet.Value += command.Amount;
+                    break;
+            }
             
             dbContext.Update(wallet);
             await dbContext.SaveChangesAsync(ct);

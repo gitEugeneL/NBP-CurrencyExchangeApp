@@ -10,7 +10,8 @@ export interface CreateWalletRequest {
   currencyId: string;
 }
 
-export interface AddMoneyRequest {
+export interface WalletOperationsRequest {
   walletId: string;
   amount: number;
+  isWithdraw: boolean;
 }

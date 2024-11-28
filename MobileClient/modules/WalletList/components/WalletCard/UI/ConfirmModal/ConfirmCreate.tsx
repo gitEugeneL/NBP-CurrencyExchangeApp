@@ -1,11 +1,11 @@
 import React from 'react';
 import { Modal, StyleSheet, Text, View } from 'react-native';
 import { BlurView } from 'expo-blur';
-import { ConfirmModalProps } from './ConfirmModal.props';
-import { Colors, Fonts, FontSize, Gaps, Radius } from '../../../../UI/styles';
-import Button from '../../../../UI/Button/Button';
+import { ConfirmCreateProps } from './ConfirmCreate.props';
+import { Colors, Fonts, FontSize, Gaps, Radius } from '../../../../../../UI/styles';
+import Button from '../../../../../../UI/Button/Button';
 
-export default function ConfirmModal({ name, isVisible, onConfirm, onClose }: ConfirmModalProps) {
+export default function ConfirmCreate({ name, isVisible, onConfirm, onClose }: ConfirmCreateProps) {
   return (
     <Modal transparent={true} animationType="fade" visible={isVisible} onRequestClose={onClose}>
       <BlurView intensity={10} style={styles.blurContainer}>

@@ -1,4 +1,4 @@
-export interface ConfirmModalProps {
+export interface ConfirmCreateProps {
   isVisible: boolean;
   name: string;
   onClose: () => void;

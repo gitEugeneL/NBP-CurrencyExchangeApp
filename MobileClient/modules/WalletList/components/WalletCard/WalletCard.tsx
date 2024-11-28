@@ -1,18 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { Colors, Fonts, FontSize, Gaps, Radius } from '../../UI/styles';
-import Button from '../../UI/Button/Button';
+import { Colors, Fonts, FontSize, Gaps, Radius } from '../../../../UI/styles';
+import Button from '../../../../UI/Button/Button';
 import { WalletCardProps } from './WalletCard.props';
-import { PLN } from '../../assets/countries/PLN';
-import { EUR } from '../../assets/countries/EUR';
-import { CHF } from '../../assets/countries/CHF';
-import { USD } from '../../assets/countries/USD';
-import { CAD } from '../../assets/countries/CAD';
-import { GBR } from '../../assets/countries/GBR';
-import ConfirmModal from './UI/ConfirmModal/ConfirmModal';
+import ConfirmCreate from './UI/ConfirmModal/ConfirmCreate';
 import { useState } from 'react';
-import { CreateWalletRequest } from '../../store/wallet/wallet.models';
+import { AddMoneyRequest, CreateWalletRequest } from '../../../../store/wallet/wallet.models';
 import { useSetAtom } from 'jotai';
-import { createUserWalletAtom } from '../../store/wallet/wallet.state';
+import { addMoneyAtom, createUserWalletAtom } from '../../../../store/wallet/wallet.state';
+import AddMoney from './UI/AddMoney/AddMoney';
+import MoneyLogo from '../../../../UI/MoneyLogo/MoneyLogo';
 
 export default function WalletCard({
   isCreated,
@@ -22,34 +18,40 @@ export default function WalletCard({
   value,
   symbol,
   currencyId,
+  walletId,
 }: WalletCardProps) {
   const createUserWallet = useSetAtom(createUserWalletAtom);
-  const [isModalVisible, setModalVisible] = useState<boolean>(false);
+  const addMoney = useSetAtom(addMoneyAtom);
 
-  const handleCreateButton = () => {
-    setModalVisible(true);
-  };
-  const handleCloseModal = () => {
-    setModalVisible(false);
-  };
+  const [isConfirmModalVisible, setConfirmModalVisible] = useState<boolean>(false);
+  const [isAddMoneyModalVisible, setAddMoneyModalVisible] = useState<boolean>(false);
+
+  const handleCreateButton = () => setConfirmModalVisible(true);
+  const handleAddMoneyButton = () => setAddMoneyModalVisible(true);
+  const handleCloseBtnConfirmModal = () => setConfirmModalVisible(false);
+  const handleCloseBtnAddMoneyModal = () => setAddMoneyModalVisible(false);
 
   const handleConfirmModal = () => {
     const request: CreateWalletRequest = {
       currencyId: currencyId,
     };
     createUserWallet(request);
-    setModalVisible(false);
+    setConfirmModalVisible(false);
+  };
+
+  const handleAddMoneyModal = (amount: number) => {
+    const request: AddMoneyRequest = {
+      walletId: walletId,
+      amount: amount,
+    };
+    addMoney(request);
+    setAddMoneyModalVisible(false);
   };
 
   return (
     <View style={[styles.card, isCreated ? styles.withWallet : styles.withoutWallet]}>
       <View style={styles.container}>
-        {shortName === 'PLN' && <PLN />}
-        {shortName === 'EUR' && <EUR />}
-        {shortName === 'CHF' && <CHF />}
-        {shortName === 'USD' && <USD />}
-        {shortName === 'CAD' && <CAD />}
-        {shortName === 'GBR' && <GBR />}
+        <MoneyLogo shortName={shortName} />
 
         <View style={styles.wrapper}>
           <View style={styles.fistBlock}>
@@ -68,7 +70,23 @@ export default function WalletCard({
       <View style={styles.buttonBlock}>
         {isCreated && (
           <>
-            <Button style={styles.btn} name="Add money" size="small" />
+            <>
+              <Button
+                style={styles.btn}
+                onPressOut={handleAddMoneyButton}
+                name="Add money"
+                size="small"
+              />
+              <AddMoney
+                value={value}
+                symbol={symbol}
+                shortName={shortName}
+                isVisible={isAddMoneyModalVisible}
+                onClose={handleCloseBtnAddMoneyModal}
+                onAddMoney={handleAddMoneyModal}
+              />
+            </>
+
             <Button style={styles.btn} name="Withdraw" size="small" />
           </>
         )}
@@ -82,10 +100,10 @@ export default function WalletCard({
               size="small"
             />
 
-            <ConfirmModal
+            <ConfirmCreate
               name={shortName}
-              isVisible={isModalVisible}
-              onClose={handleCloseModal}
+              isVisible={isConfirmModalVisible}
+              onClose={handleCloseBtnConfirmModal}
               onConfirm={handleConfirmModal}
             />
           </>

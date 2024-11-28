@@ -9,3 +9,8 @@ export interface WalletResponse {
 export interface CreateWalletRequest {
   currencyId: string;
 }
+
+export interface AddMoneyRequest {
+  walletId: string;
+  amount: number;
+}

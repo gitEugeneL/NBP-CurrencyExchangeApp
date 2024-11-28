@@ -71,9 +71,9 @@ export default function RegistrationForm() {
         />
 
         <PasswordInput
-          label="Confirm password"
+          label="ConfirmCreate password"
           name="confirmPassword"
-          placeholder="Confirm your password"
+          placeholder="ConfirmCreate your password"
           control={control}
           errors={errors}
         />

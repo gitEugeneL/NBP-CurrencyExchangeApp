@@ -6,4 +6,5 @@ export interface WalletCardProps {
   symbol: string;
   value: string;
   currencyId: string;
+  walletId: string;
 }

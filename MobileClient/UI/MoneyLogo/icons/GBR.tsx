@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Svg, { ClipPath, Defs, G, Path, Rect } from 'react-native-svg';
 
-export const GBR = () => (
-  <Svg width={57} height={57} fill="none">
+export const GBR = ({ width = 57, height = 57 }: { width?: number; height?: number }) => (
+  <Svg width={width} height={height} viewBox="0 0 57 57" fill="none">
     <G clipPath="url(#a)">
       <Path fill="#012169" d="M0 0h57v57H0V0Z" />
       <Path

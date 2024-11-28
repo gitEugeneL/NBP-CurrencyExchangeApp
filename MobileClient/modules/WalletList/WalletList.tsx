@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { currencyState, getAllCurrenciesAtom } from '../../store/currency/currency.state';
 import { getUserWalletsAtom, walletState } from '../../store/wallet/wallet.state';
 import { useAtomValue, useSetAtom } from 'jotai';
-import WalletCard from '../../components/WalletCard/WalletCard';
+import WalletCard from './components/WalletCard/WalletCard';
 import { WalletResponse } from '../../store/wallet/wallet.models';
 import Loading from '../../UI/Loading/Loading';
 
@@ -53,7 +53,8 @@ export default function WalletList() {
           country={currency.country}
           symbol={currency.symbol}
           currencyId={currency.currencyId}
-          value={walletMap[currency.shortName]?.value?.toString() || '-'}
+          walletId={walletMap[currency.shortName]?.walletId || ''}
+          value={walletMap[currency.shortName]?.value?.toString() || ''}
         />
       ))}
     </ScrollView>

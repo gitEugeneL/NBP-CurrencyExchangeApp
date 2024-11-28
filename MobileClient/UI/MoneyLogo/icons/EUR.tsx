@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Svg, { Path, Rect } from 'react-native-svg';
 
-export const EUR = () => (
-  <Svg width={57} height={57} fill="none">
+export const EUR = ({ width = 57, height = 57 }: { width?: number; height?: number }) => (
+  <Svg width={width} height={height} viewBox="0 0 57 57" fill="none">
     <Rect width={57} height={57} fill="#039" rx={15} />
     <Path fill="#FC0" d="m28.548 12-.764 2.351 1.175.382L28.548 12Z" />
     <Path fill="#FC0" d="m28.548 12 .764 2.351-1.176.382.412-2.733Z" />

@@ -67,6 +67,13 @@ export default function MainLayout() {
             headerTitle: () => <Text style={styles.headerTitle}>{routes.wallets.name}</Text>,
           }}
         />
+
+        <Drawer.Screen
+          name={routes.tracker.path}
+          options={{
+            headerTitle: () => <Text style={styles.headerTitle}>{routes.tracker.name}</Text>,
+          }}
+        />
       </Drawer>
     </GestureHandlerRootView>
   );

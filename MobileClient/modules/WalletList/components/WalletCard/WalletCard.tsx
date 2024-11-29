@@ -134,7 +134,7 @@ export default function WalletCard({
 
 const styles = StyleSheet.create({
   card: {
-    marginHorizontal: 25,
+    marginHorizontal: 20,
     marginVertical: 15,
     padding: 15,
     borderRadius: Radius.radius20,

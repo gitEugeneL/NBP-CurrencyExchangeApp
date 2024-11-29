@@ -19,6 +19,7 @@ export const Gaps = {
   gap20: 20,
   gap30: 30,
   gap40: 40,
+  gap60: 60,
   gap80: 80,
 };
 

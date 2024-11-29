@@ -1,11 +1,11 @@
-import { PLN } from './icons/PLN';
 import { MoneyLogoProps } from './MoneyLogo.props';
 import React from 'react';
-import { CHF } from './icons/CHF';
-import { USD } from './icons/USD';
-import { CAD } from './icons/CAD';
-import { GBR } from './icons/GBR';
-import { EUR } from './icons/EUR';
+import { PLN } from '../../assets/countries/PLN';
+import { EUR } from '../../assets/countries/EUR';
+import { CHF } from '../../assets/countries/CHF';
+import { USD } from '../../assets/countries/USD';
+import { CAD } from '../../assets/countries/CAD';
+import { GBR } from '../../assets/countries/GBR';
 
 export default function MoneyLogo({ shortName, width = 57, height = 57 }: MoneyLogoProps) {
   return (

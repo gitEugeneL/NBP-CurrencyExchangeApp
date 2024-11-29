@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useState } from 'react';
 import { Colors, Fonts, FontSize, Gaps } from '../../../../UI/styles';
 
-export default function MenuItem({ drawer, text, path, icon, ...props }: MenuItemProps) {
+export default function MenuItem({ drawer, name, path, icon, ...props }: MenuItemProps) {
   const [clicked, setClicked] = useState<boolean>(false);
   const isActive = drawer.state.routes[drawer.state.index].name === path;
 
@@ -23,7 +23,7 @@ export default function MenuItem({ drawer, text, path, icon, ...props }: MenuIte
         }}
       >
         <View style={styles.icon}>{icon}</View>
-        <Text style={styles.text}>{text}</Text>
+        <Text style={styles.text}>{name}</Text>
       </View>
     </Pressable>
   );

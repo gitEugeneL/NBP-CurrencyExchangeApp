@@ -5,6 +5,6 @@ import { PressableProps } from 'react-native';
 export interface MenuItemProps extends PressableProps {
   drawer: DrawerContentComponentProps;
   icon: ReactNode;
-  text: string;
+  name: string;
   path: string;
 }

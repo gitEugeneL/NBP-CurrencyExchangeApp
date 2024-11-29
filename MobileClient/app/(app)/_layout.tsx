@@ -9,8 +9,15 @@ import { StatusBar, StyleSheet, Text } from 'react-native';
 import CustomDrawer from '../../modules/CustomDrawer/CustomDrawer';
 import { Colors, Fonts, FontSize } from '../../UI/styles';
 import HeaderButton from '../../modules/CustomDrawer/components/HeaderButton/HeaderButton';
+import { WalletIcon } from '../../assets/icons/WalletIcon';
+import { TrackerIcon } from '../../assets/icons/TrackerIcon';
 
 SplashScreen.preventAutoHideAsync();
+
+const routes = {
+  wallets: { name: 'My Wallets', path: 'index', icon: <WalletIcon /> },
+  tracker: { name: 'Tracker', path: 'tracker', icon: <TrackerIcon /> },
+};
 
 export default function MainLayout() {
   const { accessToken, expiresDate } = useAtomValue(authState);
@@ -43,7 +50,7 @@ export default function MainLayout() {
       <StatusBar barStyle="light-content" backgroundColor={Colors.blackBlue} />
 
       <Drawer
-        drawerContent={(props) => <CustomDrawer {...props} />}
+        drawerContent={(props) => <CustomDrawer {...props} routes={Object.values(routes)} />}
         screenOptions={({ navigation }) => ({
           headerStyle: {
             backgroundColor: Colors.blackBlue,
@@ -55,9 +62,9 @@ export default function MainLayout() {
         })}
       >
         <Drawer.Screen
-          name="index"
+          name={routes.wallets.path}
           options={{
-            headerTitle: () => <Text style={styles.headerTitle}>My Wallets</Text>,
+            headerTitle: () => <Text style={styles.headerTitle}>{routes.wallets.name}</Text>,
           }}
         />
       </Drawer>

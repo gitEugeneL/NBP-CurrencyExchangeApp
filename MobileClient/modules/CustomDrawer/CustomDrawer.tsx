@@ -8,11 +8,10 @@ import { getUserInfoAtom } from '../../store/user/user.state';
 import { useEffect } from 'react';
 import CloseButton from './components/CloseButton/CloseButton';
 import UserBlock from './components/UserBlock/UserBlock';
-import { drawerMenu } from './DrawerMenu';
-import MenuItem from './components/MenuItem/MenuItem';
 import CustomLink from '../../UI/CustomLink/CustomLink';
+import MenuItem from './components/MenuItem/MenuItem';
 
-export default function CustomDrawer({ ...props }: CustomDrawerProps) {
+export default function CustomDrawer({ routes, ...props }: CustomDrawerProps) {
   const logout = useSetAtom(logoutAtom);
   const [user, getUserInfo] = useAtom(getUserInfoAtom);
 
@@ -30,8 +29,14 @@ export default function CustomDrawer({ ...props }: CustomDrawerProps) {
         <CloseButton navigation={props.navigation} />
         {user.username && user.email && <UserBlock username={user.username} email={user.email} />}
 
-        {drawerMenu.map((item) => (
-          <MenuItem key={item.path} drawer={props} {...item} />
+        {routes.map((item) => (
+          <MenuItem
+            key={item.path}
+            drawer={props}
+            icon={item.icon}
+            name={item.name}
+            path={item.path}
+          />
         ))}
       </View>
       <View style={styles.footer}>
@@ -49,6 +54,7 @@ const styles = StyleSheet.create({
 
   wrapper: {
     flex: 1,
+    gap: Gaps.gap30,
   },
 
   footer: {

@@ -1,8 +1,8 @@
 using Refit;
-using Server.Contracts.Integrations.NbpApi.Contracts;
-using Server.Contracts.Integrations.NbpApi.Models;
+using Server.Integrations.NbpApi.Contracts;
+using Server.Integrations.NbpApi.Models;
 
-namespace Server.Contracts.Integrations;
+namespace Server.Integrations;
 
 public interface INbpEndpoints
 {

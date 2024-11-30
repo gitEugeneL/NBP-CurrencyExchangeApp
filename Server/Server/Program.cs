@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Refit;
-using Server.Contracts.Integrations;
 using Server.Data.Persistence;
 using Server.Helpers;
+using Server.Integrations;
 using Server.Security;
 using Server.Security.Interfaces;
 

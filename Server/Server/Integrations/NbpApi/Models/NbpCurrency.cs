@@ -1,4 +1,4 @@
-namespace Server.Contracts.Integrations.NbpApi.Models;
+namespace Server.Integrations.NbpApi.Models;
 
 public sealed class NbpCurrency
 {

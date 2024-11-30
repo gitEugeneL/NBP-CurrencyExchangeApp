@@ -1,4 +1,4 @@
-namespace Server.Contracts.Integrations.NbpApi.Contracts;
+namespace Server.Integrations.NbpApi.Contracts;
 
 public sealed class GetAllNbpCurrenciesResponse<T>
 {

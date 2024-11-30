@@ -2,10 +2,10 @@ using Carter;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Server.Contracts.Currencies;
-using Server.Contracts.Integrations;
 using Server.Data.Persistence;
 using Server.Domain.Entities;
 using Server.Helpers;
+using Server.Integrations;
 
 namespace Server.Features.Currencies;
 

@@ -6,6 +6,8 @@ using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Refit;
+using Server.Contracts.Integrations;
 using Server.Data.Persistence;
 using Server.Helpers;
 using Server.Security;
@@ -16,6 +18,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
     .AddScoped<ITokenService, TokenService>()
     .AddScoped<IUserService, UserService>()
+    .AddScoped<INpbService, NpbService>()
     .AddScoped<IPasswordService, PasswordService>();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -71,6 +74,9 @@ builder.Services.AddAuthorizationBuilder()
             .RequireClaim(ClaimTypes.Email)
             .RequireClaim(ClaimTypes.NameIdentifier));
 
+/*** Nbp integration ***/
+builder.Services.AddRefitClient<INbpEndpoints>().ConfigureHttpClient((sp, httpClient) =>
+    httpClient.BaseAddress = new Uri(builder.Configuration.GetSection("NBPIntegration").Value!));
 
 var app = builder.Build();
 

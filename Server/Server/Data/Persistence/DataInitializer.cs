@@ -18,11 +18,11 @@ public static class DataInitializer
         var currencies = new[]
         {
             new Currency { Name = "Zloty", ShortName = "PLN", Country = "Poland", Symbol = "zł", Ratio = 0 },
-            new Currency { Name = "Euro", ShortName = "EUR", Country = "European Union", Symbol = "€", Ratio = 0.05 },
-            new Currency { Name = "Dollar USA", ShortName = "USD", Country = "USA", Symbol = "$", Ratio = 0.07 },
-            new Currency { Name = "Pound Sterling", ShortName = "GBR", Country = "United Kingdom", Symbol = "\u00a3", Ratio = 0.05 },
-            new Currency { Name = "Franc", ShortName = "CHF", Country = "Switzerland", Symbol = "\u20a3", Ratio = 0.1 },
-            new Currency { Name = "Dollar", ShortName = "CAD", Country = "Canada", Symbol = "$", Ratio = 0.1 }
+            new Currency { Name = "Euro", ShortName = "EUR", Country = "European Union", Symbol = "€", Ratio = (decimal)0.02 },
+            new Currency { Name = "Dollar USA", ShortName = "USD", Country = "USA", Symbol = "$", Ratio = (decimal)0.02 },
+            new Currency { Name = "Pound Sterling", ShortName = "GBP", Country = "United Kingdom", Symbol = "\u00a3", Ratio = (decimal)0.03 },
+            new Currency { Name = "Franc", ShortName = "CHF", Country = "Switzerland", Symbol = "\u20a3", Ratio = (decimal)0.03 },
+            new Currency { Name = "Dollar", ShortName = "CAD", Country = "Canada", Symbol = "$", Ratio = (decimal)0.03 }
         };
         
         context.Currencies.AddRange(currencies);

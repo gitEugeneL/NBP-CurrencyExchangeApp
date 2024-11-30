@@ -9,9 +9,21 @@ public sealed class CurrencyResponse(Currency currency)
     public string ShortName { get; init; } = currency.ShortName;
     public string Country { get; init; } = currency.Country;
     public string Symbol { get; init; } = currency.Symbol;
-    
-    // todo
-    // add exchange rates with NBP data
-    public decimal BuyingRate { get; init; } = -1;
-    public decimal SellingRate { get; init; } = -1;
+    public decimal? BuyRate { get; init; }
+    public decimal? SellRate { get; init; }
+    public decimal? NbpRate { get; init; }
+    public DateOnly? DateRate { get; init; }
+
+    public CurrencyResponse(
+        Currency currency, 
+        decimal? buyRate = null, 
+        decimal? sellRate = null, 
+        decimal? nbpRate = null, 
+        DateOnly? dateRate = null) : this(currency)
+    {
+        BuyRate = buyRate;
+        SellRate = sellRate;
+        NbpRate = nbpRate;
+        DateRate = dateRate;
+    }
 }

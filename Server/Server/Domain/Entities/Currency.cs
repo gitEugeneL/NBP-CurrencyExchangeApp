@@ -8,7 +8,7 @@ public class Currency : BaseEntity
     public required string ShortName { get; init; }
     public required string Country { get; init; }
     public required string Symbol { get; init; }
-    public required double Ratio { get; init; }
+    public required decimal Ratio { get; init; }
     
     /*** Relations ***/
     public List<Wallet> Wallets { get; init; } = [];

@@ -4,6 +4,13 @@ export interface CurrencyResponse {
   shortName: string;
   country: string;
   symbol: string;
-  //todo
-  // add exchange rates
+  buyRate: number | null;
+  sellRate: number | null;
+  nbpRate: number | null;
+  dateRate: Date;
+}
+
+export interface CurrencyParams {
+  withRate: boolean;
+  currencyDate: string | null;
 }

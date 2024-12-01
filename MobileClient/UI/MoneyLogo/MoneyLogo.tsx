@@ -15,7 +15,7 @@ export default function MoneyLogo({ shortName, width = 57, height = 57 }: MoneyL
       {shortName === 'CHF' && <CHF width={width} height={height} />}
       {shortName === 'USD' && <USD width={width} height={height} />}
       {shortName === 'CAD' && <CAD width={width} height={height} />}
-      {shortName === 'GBR' && <GBR width={width} height={height} />}
+      {shortName === 'GBP' && <GBR width={width} height={height} />}
     </>
   );
 }

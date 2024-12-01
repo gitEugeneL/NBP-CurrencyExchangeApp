@@ -1,17 +1,50 @@
 import { StyleSheet, Text, View } from 'react-native';
-import Button from '../../../../UI/Button/Button';
 import { Colors, Fonts, FontSize, Gaps, Radius } from '../../../../UI/styles';
+import { DatePickerProps } from './DatePicker.props';
+import React, { useState } from 'react';
+import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
+import Button from '../../../../UI/Button/Button';
+import { dateToFormat } from '../../../../helpers/dateHelpers';
 
-export default function DatePicker() {
+export default function DatePicker({ date, setDate, loadWithDate }: DatePickerProps) {
+  const [show, setShow] = useState<boolean>(false);
+
+  const showDatePicker = () => {
+    setShow(true);
+  };
+
+  const handleDatePicker = (event: DateTimePickerEvent, selectedDate?: Date) => {
+    if (event.type === 'set') {
+      const currentDate = selectedDate || date;
+      loadWithDate(currentDate);
+      setDate(currentDate);
+      setShow(false);
+    } else if (event.type === 'dismissed') {
+      setShow(false);
+    }
+  };
+
   return (
-    <View style={style.card}>
-      <View style={style.dateBlock}>
-        <Text style={style.date}>01-01-2024</Text>
+    <>
+      <View style={style.card}>
+        <View style={style.dateBlock}>
+          <Text style={style.dateText}>{dateToFormat(date)}</Text>
+        </View>
+        <View style={style.buttonBlock}>
+          <Button name="Change" size="small" onPress={showDatePicker} />
+        </View>
       </View>
-      <View style={style.buttonBlock}>
-        <Button name="Change" size="small" />
-      </View>
-    </View>
+
+      {show && (
+        <DateTimePicker
+          value={date}
+          mode="date"
+          display="default"
+          onChange={handleDatePicker}
+          maximumDate={new Date()}
+        />
+      )}
+    </>
   );
 }
 
@@ -37,7 +70,7 @@ const style = StyleSheet.create({
     flex: 1,
   },
 
-  date: {
+  dateText: {
     fontFamily: Fonts.semiBold,
     fontSize: FontSize.size16,
     color: Colors.white,

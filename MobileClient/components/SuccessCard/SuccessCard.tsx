@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { SuccessIcon } from './icons/SuccessIcon';
+import { SuccessIcon } from '../../assets/icons/SuccessIcon';
 import Button from '../../UI/Button/Button';
 import { router } from 'expo-router';
 import { Colors, Fonts, FontSize, Gaps } from '../../UI/styles';

@@ -78,7 +78,19 @@ public class Register : ICarterModule
                 PasswordSalt = salt,
                 Username = command.Username
             };
-            await dbContext.Users.AddAsync(user, ct);
+
+            var currency = await dbContext
+                .Currencies
+                .SingleAsync(c => c.ShortName == "PLN", ct);
+            
+            var mainWallet = new Wallet
+            {
+                Value = 0,
+                User = user,
+                Currency = currency
+            };
+            
+            await dbContext.Wallets.AddAsync(mainWallet, ct);
             await dbContext.SaveChangesAsync(ct);
             
             return TypedResults.Created(user.Id.ToString(), new RegisterResponse(user.Id));

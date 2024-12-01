@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { CurrencyResponse } from './currency.models';
+import { CurrencyParams, CurrencyResponse } from './currency.models';
 import axios, { AxiosError } from 'axios';
 import { authState } from '../auth/auth.state';
 import { currencyApi } from './currency.api';
@@ -20,7 +20,7 @@ export const getAllCurrenciesAtom = atom(
   async (get) => {
     return get(currencyState);
   },
-  async (get, set) => {
+  async (get, set, requestParams: CurrencyParams) => {
     set(currencyState, {
       currencies: [],
       isLoading: true,
@@ -29,6 +29,9 @@ export const getAllCurrenciesAtom = atom(
     try {
       const { accessToken } = await get(authState);
       const { data } = await axios.get<CurrencyResponse[]>(currencyApi.getAllCurrencies, {
+        params: {
+          ...requestParams,
+        },
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

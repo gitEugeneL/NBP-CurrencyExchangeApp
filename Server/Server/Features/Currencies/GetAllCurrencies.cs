@@ -41,6 +41,8 @@ public class GetAllCurrencies : ICarterModule
                 .AsNoTracking()
                 .ToListAsync(ct);
     
+            var rateDate = query.CurrencyDate ?? DateOnly.FromDateTime(DateTime.Now);
+            
             if (query.WithRate)
             {
                 var nbpResponse = query.CurrencyDate.HasValue
@@ -56,8 +58,6 @@ public class GetAllCurrencies : ICarterModule
                 
                         if (currentRate == null) 
                             return null;
-
-                        var rateDate = query.CurrencyDate ?? DateOnly.FromDateTime(DateTime.Now);
                        
                         var midRate = (decimal)currentRate.Mid;
                         
@@ -83,11 +83,11 @@ public class GetAllCurrencies : ICarterModule
                 return TypedResults.Ok(result);
             }
 
-            var defaultResponse = currencies
+            var defaultResult = currencies
                 .Select(c => new CurrencyResponse(c))
                 .ToList();
             
-            return TypedResults.Ok(defaultResponse);
+            return TypedResults.Ok(defaultResult);
         }
 
     }

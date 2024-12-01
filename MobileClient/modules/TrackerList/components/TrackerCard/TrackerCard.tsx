@@ -2,32 +2,44 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Colors, Fonts, FontSize, Gaps, Radius } from '../../../../UI/styles';
 import React from 'react';
 import MoneyLogo from '../../../../UI/MoneyLogo/MoneyLogo';
+import { TrackerCardProps } from './TrackerCard.props';
+import { isToday } from '../../../../helpers/dateHelpers';
 
-export default function TrackerCard() {
+export default function TrackerCard({
+  date,
+  name,
+  shortName,
+  buyRate,
+  sellRate,
+  nbpRate,
+}: TrackerCardProps) {
   return (
     <View style={styles.card}>
       <View style={styles.textWrapper}>
         <View style={styles.firstBlock}>
           <Text style={styles.priceName}>
-            buy: <Text style={styles.price}>4.6500</Text>
+            buy: {!isToday(date) ? '(old) ' : null}
+            <Text style={styles.price}>{buyRate}</Text>
           </Text>
           <View style={styles.namesBlock}>
-            <Text style={styles.name}>Polish Zloty</Text>
-            <Text style={styles.shortName}>PLN</Text>
+            <Text style={styles.name}>{name}</Text>
+            <Text style={styles.shortName}>{shortName}</Text>
           </View>
         </View>
 
         <View style={styles.secondBlock}>
           <Text style={styles.priceName}>
-            sell: <Text style={styles.price}>4.6500</Text>
+            sell: {!isToday(date) ? '(old) ' : null}
+            <Text style={styles.price}>{sellRate}</Text>
           </Text>
           <Text style={styles.priceName}>
-            NBP: <Text style={styles.price}>4.6500</Text>
+            NBP: {!isToday(date) ? ' (old) ' : null}
+            <Text style={styles.price}>{nbpRate}</Text>
           </Text>
         </View>
       </View>
       <View>
-        <MoneyLogo shortName={'EUR'} />
+        <MoneyLogo shortName={shortName} />
       </View>
     </View>
   );
@@ -37,7 +49,7 @@ const styles = StyleSheet.create({
   card: {
     marginHorizontal: 25,
     flexDirection: 'row',
-    marginVertical: 10,
+    marginVertical: 15,
     padding: 15,
     borderRadius: Radius.radius20,
     backgroundColor: Colors.violetDark,
@@ -51,7 +63,7 @@ const styles = StyleSheet.create({
 
   namesBlock: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     gap: Gaps.gap10,
   },
 

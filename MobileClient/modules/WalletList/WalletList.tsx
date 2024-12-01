@@ -1,11 +1,13 @@
 import { ScrollView } from 'react-native-gesture-handler';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { currencyState, getAllCurrenciesAtom } from '../../store/currency/currency.state';
 import { getUserWalletsAtom, walletState } from '../../store/wallet/wallet.state';
 import { useAtomValue, useSetAtom } from 'jotai';
 import WalletCard from './components/WalletCard/WalletCard';
 import { WalletResponse } from '../../store/wallet/wallet.models';
 import Loading from '../../UI/Loading/Loading';
+import { CurrencyParams } from '../../store/currency/currency.models';
+import { useFocusEffect } from 'expo-router';
 
 export default function WalletList() {
   const { isLoading: currenciesLoading, currencies } = useAtomValue(currencyState);
@@ -13,16 +15,18 @@ export default function WalletList() {
   const loadCurrencies = useSetAtom(getAllCurrenciesAtom);
   const loadWallets = useSetAtom(getUserWalletsAtom);
 
-  useEffect(() => {
-    if (currencies.length === 0) {
-      loadCurrencies();
-    }
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      const params: CurrencyParams = {
+        withRate: false,
+        currencyDate: null,
+      };
+      loadCurrencies(params);
+    }, []),
+  );
 
   useEffect(() => {
-    if (wallets.length === 0) {
-      loadWallets();
-    }
+    loadWallets();
   }, []);
 
   const walletMap: Record<string, WalletResponse | undefined> = {};
@@ -31,6 +35,9 @@ export default function WalletList() {
   });
 
   const sortedCurrencies = currencies.sort((a, b) => {
+    if (a.shortName === 'PLN') return -1;
+    if (b.shortName === 'PLN') return 1;
+
     const hasWalletA = walletMap[a.shortName] !== undefined;
     const hasWalletB = walletMap[b.shortName] !== undefined;
 

@@ -1,11 +1,11 @@
 import { StyleSheet, View } from 'react-native';
 import { Colors } from '../../UI/styles';
-import TrackerList from '../../modules/TrackerList/TrackerList';
+import BuyCurrency from '../../modules/BuyCurrency/BuyCurrency';
 
-export default function TrackerPage() {
+export default function BuyPage() {
   return (
     <View style={styles.container}>
-      <TrackerList />
+      <BuyCurrency />
     </View>
   );
 }

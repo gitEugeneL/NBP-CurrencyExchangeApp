@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, { Path } from 'react-native-svg';
 
-export const SuccessIcon = () => (
+export const WarningIcon = () => (
   <Svg width={350} height={350} fill="none">
     <Path
       fill="#8EDFEB"

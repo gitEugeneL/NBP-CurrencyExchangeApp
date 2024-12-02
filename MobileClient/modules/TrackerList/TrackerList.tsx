@@ -3,7 +3,7 @@ import { currencyState, getAllCurrenciesAtom } from '../../store/currency/curren
 import React, { useCallback, useState } from 'react';
 import { CurrencyParams } from '../../store/currency/currency.models';
 import Loading from '../../UI/Loading/Loading';
-import TrackerCard from './components/TrackerCard/TrackerCard';
+import CurrencyCard from '../../components/CurrencyCard/CurrencyCard';
 import { useFocusEffect } from 'expo-router';
 import DatePicker from './components/DatePicker/DatePicker';
 import { View } from 'react-native';
@@ -43,7 +43,7 @@ export default function TrackerList() {
       <View>
         {!isLoading &&
           currencies.map((currency) => (
-            <TrackerCard
+            <CurrencyCard
               key={currency.currencyId}
               shortName={currency.shortName}
               name={currency.name}

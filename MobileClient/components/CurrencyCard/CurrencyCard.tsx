@@ -1,24 +1,30 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { Colors, Fonts, FontSize, Gaps, Radius } from '../../../../UI/styles';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Colors, Fonts, FontSize, Gaps, Radius } from '../../UI/styles';
 import React from 'react';
-import MoneyLogo from '../../../../UI/MoneyLogo/MoneyLogo';
-import { TrackerCardProps } from './TrackerCard.props';
-import { isToday } from '../../../../helpers/dateHelpers';
+import MoneyLogo from '../../UI/MoneyLogo/MoneyLogo';
+import { CurrencyCardProps } from './CurrencyCard.props';
+import { isToday } from '../../helpers/dateHelpers';
 
-export default function TrackerCard({
+export default function CurrencyCard({
   date,
   name,
   shortName,
   buyRate,
   sellRate,
   nbpRate,
-}: TrackerCardProps) {
+  walletId,
+  appearance = 'default',
+}: CurrencyCardProps) {
+  const handleClick = () => {
+    console.log(walletId);
+  };
+
   return (
-    <View style={styles.card}>
+    <Pressable style={styles.card} onPressOut={handleClick}>
       <View style={styles.textWrapper}>
         <View style={styles.firstBlock}>
-          <Text style={styles.priceName}>
-            buy: {!isToday(date) ? '(old) ' : null}
+          <Text style={[styles.value, appearance === 'buy' ? styles.disabled : null]}>
+            sel: {!isToday(date) ? '(old) ' : null}
             <Text style={styles.price}>{buyRate}</Text>
           </Text>
           <View style={styles.namesBlock}>
@@ -28,11 +34,11 @@ export default function TrackerCard({
         </View>
 
         <View style={styles.secondBlock}>
-          <Text style={styles.priceName}>
-            sell: {!isToday(date) ? '(old) ' : null}
+          <Text style={[styles.value, appearance === 'sell' ? styles.disabled : null]}>
+            buy: {!isToday(date) ? '(old) ' : null}
             <Text style={styles.price}>{sellRate}</Text>
           </Text>
-          <Text style={styles.priceName}>
+          <Text style={[styles.value, appearance !== 'default' ? styles.disabled : null]}>
             NBP: {!isToday(date) ? ' (old) ' : null}
             <Text style={styles.price}>{nbpRate}</Text>
           </Text>
@@ -41,7 +47,7 @@ export default function TrackerCard({
       <View>
         <MoneyLogo shortName={shortName} />
       </View>
-    </View>
+    </Pressable>
   );
 }
 
@@ -56,6 +62,20 @@ const styles = StyleSheet.create({
     gap: Gaps.gap16,
   },
 
+  value: {
+    color: Colors.white,
+    fontFamily: Fonts.regular,
+    fontSize: FontSize.size14,
+  },
+
+  disabled: {
+    color: Colors.blackGray,
+  },
+
+  price: {
+    fontFamily: Fonts.semiBold,
+  },
+
   textWrapper: {
     flex: 1,
     justifyContent: 'center',
@@ -65,16 +85,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     gap: Gaps.gap10,
-  },
-
-  priceName: {
-    color: Colors.white,
-    fontFamily: Fonts.regular,
-    fontSize: FontSize.size14,
-  },
-
-  price: {
-    fontFamily: Fonts.semiBold,
   },
 
   name: {

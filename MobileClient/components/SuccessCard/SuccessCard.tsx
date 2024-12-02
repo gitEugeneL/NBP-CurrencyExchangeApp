@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { SuccessIcon } from '../../assets/icons/SuccessIcon';
+import { WarningIcon } from '../../assets/icons/WarningIcon';
 import Button from '../../UI/Button/Button';
 import { router } from 'expo-router';
 import { Colors, Fonts, FontSize, Gaps } from '../../UI/styles';
@@ -10,7 +10,7 @@ export default function SuccessCard() {
   };
   return (
     <View>
-      <SuccessIcon />
+      <WarningIcon />
 
       <View style={styles.container}>
         <Text style={styles.title}>You have been successfully registered!</Text>

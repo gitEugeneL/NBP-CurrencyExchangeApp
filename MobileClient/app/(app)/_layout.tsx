@@ -11,12 +11,14 @@ import { Colors, Fonts, FontSize } from '../../UI/styles';
 import HeaderButton from '../../modules/CustomDrawer/components/HeaderButton/HeaderButton';
 import { WalletIcon } from '../../assets/icons/WalletIcon';
 import { TrackerIcon } from '../../assets/icons/TrackerIcon';
+import { ArrowIcon } from '../../assets/icons/ArrowIcon';
 
 SplashScreen.preventAutoHideAsync();
 
 const routes = {
   wallets: { name: 'My Wallets', path: 'index', icon: <WalletIcon /> },
   tracker: { name: 'Tracker', path: 'tracker', icon: <TrackerIcon /> },
+  buy: { name: 'Buy currency', path: 'buy', icon: <ArrowIcon /> },
 };
 
 export default function MainLayout() {
@@ -72,6 +74,13 @@ export default function MainLayout() {
           name={routes.tracker.path}
           options={{
             headerTitle: () => <Text style={styles.headerTitle}>{routes.tracker.name}</Text>,
+          }}
+        />
+
+        <Drawer.Screen
+          name={routes.buy.path}
+          options={{
+            headerTitle: () => <Text style={styles.headerTitle}>{routes.buy.name}</Text>,
           }}
         />
       </Drawer>

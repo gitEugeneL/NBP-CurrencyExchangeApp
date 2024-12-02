@@ -3,7 +3,7 @@ import { Colors, Fonts, FontSize, Gaps, Radius } from '../../../../UI/styles';
 import React from 'react';
 import Button from '../../../../UI/Button/Button';
 import { DateErrorProps } from './DateError.props';
-import { SuccessIcon } from '../../../../assets/icons/SuccessIcon';
+import { WarningIcon } from '../../../../assets/icons/WarningIcon';
 
 export default function DateError({ loadData }: DateErrorProps): JSX.Element {
   const handleReset = () => {
@@ -12,7 +12,7 @@ export default function DateError({ loadData }: DateErrorProps): JSX.Element {
 
   return (
     <View style={styles.container}>
-      <SuccessIcon />
+      <WarningIcon />
       <Text style={styles.error}>
         There is no data available on this day. It's probably a weekend or a holiday!
       </Text>

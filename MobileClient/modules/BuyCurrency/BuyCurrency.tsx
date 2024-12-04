@@ -1,57 +1,44 @@
-import { View } from 'react-native';
-import { useAtomValue, useSetAtom } from 'jotai/index';
-import { currencyState, getAllCurrenciesAtom } from '../../store/currency/currency.state';
-import { getUserWalletsAtom, walletState } from '../../store/wallet/wallet.state';
 import React, { useCallback } from 'react';
-import { CurrencyParams } from '../../store/currency/currency.models';
-import { dateToFormat } from '../../helpers/dateHelpers';
-import { useFocusEffect } from 'expo-router';
-import Loading from '../../UI/Loading/Loading';
 import CurrencyCard from '../../components/CurrencyCard/CurrencyCard';
-import MainWallet from './components/MainWallet/MainWallet';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { currencyState, getAllCurrenciesAtom } from '../../store/currency/currency.state';
+import { walletState } from '../../store/wallet/wallet.state';
+import { useFocusEffect } from 'expo-router';
+import { CurrencyParams } from '../../store/currency/currency.models';
+import BaseWalletCard from '../../components/BaseWalletCard/BaseWalletCard';
+import Loading from '../../UI/Loading/Loading';
 
 export default function BuyCurrency() {
-  const { isLoading: currenciesLoading, currencies } = useAtomValue(currencyState);
-  const { isLoading: walletLoading, wallets } = useAtomValue(walletState);
+  const { wallets } = useAtomValue(walletState);
+  const { isLoading, currencies } = useAtomValue(currencyState);
   const loadCurrencies = useSetAtom(getAllCurrenciesAtom);
-  const loadWallets = useSetAtom(getUserWalletsAtom);
 
   useFocusEffect(
     useCallback(() => {
       const params: CurrencyParams = {
         withRate: true,
-        currencyDate: dateToFormat(new Date()),
+        currencyDate: null,
       };
       loadCurrencies(params);
     }, []),
   );
 
-  useFocusEffect(
-    useCallback(() => {
-      loadWallets();
-    }, []),
-  );
-
-  if (currenciesLoading || walletLoading) {
-    return <Loading />;
-  }
+  const baseWallet = wallets.find((wallet) => wallet.currencyShortName === 'PLN');
 
   return (
-    <View>
-      {!walletLoading &&
-        wallets.map(
-          (wallet) =>
-            wallet.currencyShortName === 'PLN' && (
-              <MainWallet
-                key={wallet.currencyId}
-                name={wallet.currencyName}
-                shortName={wallet.currencyShortName}
-                value={wallet.value}
-              />
-            ),
-        )}
+    <>
+      {baseWallet && (
+        <BaseWalletCard
+          name={baseWallet.currencyName}
+          shortName={baseWallet.currencyShortName}
+          symbol={baseWallet.currencySymbol}
+          value={baseWallet.value}
+        />
+      )}
 
-      {!walletLoading &&
+      {isLoading && <Loading />}
+
+      {!isLoading &&
         wallets.map((wallet) =>
           currencies.map(
             (currency) =>
@@ -70,6 +57,6 @@ export default function BuyCurrency() {
               ),
           ),
         )}
-    </View>
+    </>
   );
 }

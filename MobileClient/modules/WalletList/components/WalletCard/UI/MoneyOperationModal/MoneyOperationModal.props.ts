@@ -1,6 +1,6 @@
 export interface MoneyOperationModalProps {
   isWithdraw: boolean;
-  value: string;
+  value: number;
   symbol: string;
   shortName: string;
   isVisible: boolean;

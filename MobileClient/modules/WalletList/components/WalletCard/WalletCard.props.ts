@@ -4,7 +4,7 @@ export interface WalletCardProps {
   shortName: string;
   country: string;
   symbol: string;
-  value: string;
+  value: number;
   currencyId: string;
   walletId: string;
 }

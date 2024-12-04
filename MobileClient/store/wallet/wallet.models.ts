@@ -3,6 +3,8 @@ export interface WalletResponse {
   value: number;
   currencyId: string;
   currencyName: string;
+  currencySymbol: string;
+  currencyCountry: string;
   currencyShortName: string;
 }
 

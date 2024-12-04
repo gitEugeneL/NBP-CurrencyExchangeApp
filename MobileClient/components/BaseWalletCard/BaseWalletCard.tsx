@@ -1,13 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { Colors, Fonts, FontSize, Gaps, Radius } from '../../../../UI/styles';
+import { Colors, Fonts, FontSize, Gaps, Radius } from '../../UI/styles';
 import React from 'react';
-import MoneyLogo from '../../../../UI/MoneyLogo/MoneyLogo';
-import { MainWalletProps } from './MainWallet.props';
+import MoneyLogo from '../../UI/MoneyLogo/MoneyLogo';
+import { BaseWalletCardProps } from './BaseWalletCard.props';
+import { formatMoney } from '../../helpers/moneyHelpers';
 
-export default function MainWallet({ name, shortName, value }: MainWalletProps) {
-  const formatValue = (number: number) =>
-    number.toString().includes('.') ? number.toString() : `${number}.00`;
-
+export default function BaseWalletCard({ name, shortName, symbol, value }: BaseWalletCardProps) {
   return (
     <View style={styles.card}>
       <MoneyLogo shortName="PLN" width={38} height={38} />
@@ -16,7 +14,9 @@ export default function MainWallet({ name, shortName, value }: MainWalletProps) 
           <Text style={styles.shortName}>{shortName}</Text>
           <Text style={styles.name}>{name}</Text>
         </View>
-        <Text style={styles.value}>zł {formatValue(value)}</Text>
+        <Text style={styles.value}>
+          {symbol} {formatMoney(value)}
+        </Text>
       </View>
     </View>
   );

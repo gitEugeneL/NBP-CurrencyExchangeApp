@@ -38,6 +38,7 @@ public class GetAllCurrencies : ICarterModule
         {
             var currencies = await dbContext
                 .Currencies
+                .Where(c => c.ShortName != "PLN")
                 .AsNoTracking()
                 .ToListAsync(ct);
     

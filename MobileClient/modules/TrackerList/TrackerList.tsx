@@ -4,11 +4,11 @@ import React, { useCallback, useState } from 'react';
 import { CurrencyParams } from '../../store/currency/currency.models';
 import Loading from '../../UI/Loading/Loading';
 import CurrencyCard from '../../components/CurrencyCard/CurrencyCard';
-import { useFocusEffect } from 'expo-router';
 import DatePicker from './components/DatePicker/DatePicker';
 import { View } from 'react-native';
 import { dateToFormat, isToday } from '../../helpers/dateHelpers';
 import DateError from './components/DateError/DateError';
+import { useFocusEffect } from 'expo-router';
 
 export default function TrackerList() {
   const { isLoading, currencies } = useAtomValue(currencyState);
@@ -18,7 +18,10 @@ export default function TrackerList() {
   const loadData = (value: Date | null = null) => {
     if (!value) {
       setDate(new Date());
+    } else {
+      setDate(value);
     }
+
     const params: CurrencyParams = {
       withRate: true,
       currencyDate: isToday(value) ? null : dateToFormat(value),

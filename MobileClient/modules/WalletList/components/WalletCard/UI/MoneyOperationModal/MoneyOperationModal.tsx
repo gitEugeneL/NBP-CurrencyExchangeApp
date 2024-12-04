@@ -26,7 +26,7 @@ export default function MoneyOperationModal({
     handleSubmit,
     formState: { errors },
   } = useForm<MoneyOperationSchema>({
-    resolver: yupResolver(MoneyOperationValidationSchema(isWithdraw ? value : null)),
+    resolver: yupResolver(MoneyOperationValidationSchema(isWithdraw ? value.toString() : null)),
   });
 
   const formSubmit = (data: MoneyOperationSchema) => {
@@ -47,7 +47,7 @@ export default function MoneyOperationModal({
               control={control}
               keyboardType="numeric"
               errors={errors}
-              placeholder={isWithdraw ? value : '0.00'}
+              placeholder={isWithdraw ? value.toString() : '0.00'}
             />
           </View>
 

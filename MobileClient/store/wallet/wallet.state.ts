@@ -116,7 +116,9 @@ export const walletOperationAtom = atom(
       );
       set(walletState, (prevState) => ({
         ...prevState,
-        wallets: [...prevState.wallets, data],
+        wallets: prevState.wallets.map((wallet) =>
+          wallet.walletId === data.walletId ? data : wallet,
+        ),
         isLoading: false,
         error: null,
       }));

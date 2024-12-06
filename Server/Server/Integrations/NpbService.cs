@@ -7,6 +7,8 @@ namespace Server.Integrations;
 public interface INpbService
 {
     Task<GetAllNbpCurrenciesResponse<NbpCurrency>> GetAllCurrencies(DateOnly? date = null);
+    
+    Task<NbpCurrency?> GetOneCurrency(string shortName);
 } 
 
 public class NpbService(INbpEndpoints nbpEndpoints) : INpbService
@@ -34,7 +36,7 @@ public class NpbService(INbpEndpoints nbpEndpoints) : INpbService
                     {
                         Currency = a.Currency,
                         Code = a.Code,
-                        Mid = a.Mid,
+                        Mid = (decimal)a.Mid,
                         Bid = c?.Bid ?? 0,
                         Ask = c?.Ask ?? 0
                     })
@@ -49,6 +51,25 @@ public class NpbService(INbpEndpoints nbpEndpoints) : INpbService
         catch (ApiException e)
         {
             return new GetAllNbpCurrenciesResponse<NbpCurrency>();
+        }
+    }
+
+    public async Task<NbpCurrency?> GetOneCurrency(string shortName)
+    {
+        try
+        {
+            var response = await nbpEndpoints.GetOneTableA(shortName);
+
+            return new NbpCurrency
+            {
+                Currency = response.Currency,
+                Code = response.Code,
+                Mid = (decimal)response.Rates.First().Mid
+            };
+        }
+        catch (ApiException e)
+        {
+            return null;
         }
     }
 }

@@ -18,4 +18,7 @@ public interface INbpEndpoints
 
     [Get("/api/exchangerates/tables/c/{date}")]
     Task<List<GetAllNbpCurrenciesResponse<NbpCurrencyTableC>>> GetAllTableC(string date);
+    
+    [Get("/api/exchangerates/rates/a/{shortName}")]
+    Task<NbpCurrencySingle> GetOneTableA(string shortName);
 }    

@@ -1,4 +1,4 @@
-export interface MoneyOperationModalProps {
+export interface WalletOperationModalProps {
   isWithdraw: boolean;
   value: number;
   symbol: string;

@@ -19,6 +19,7 @@ const routes = {
   wallets: { name: 'My Wallets', path: 'index', icon: <WalletIcon /> },
   tracker: { name: 'Tracker', path: 'tracker', icon: <TrackerIcon /> },
   buy: { name: 'Buy currency', path: 'buy', icon: <ArrowIcon /> },
+  sell: { name: 'Sell currency', path: 'sell', icon: <ArrowIcon /> },
 };
 
 export default function MainLayout() {
@@ -81,6 +82,13 @@ export default function MainLayout() {
           name={routes.buy.path}
           options={{
             headerTitle: () => <Text style={styles.headerTitle}>{routes.buy.name}</Text>,
+          }}
+        />
+
+        <Drawer.Screen
+          name={routes.sell.path}
+          options={{
+            headerTitle: () => <Text style={styles.headerTitle}>{routes.sell.name}</Text>,
           }}
         />
       </Drawer>

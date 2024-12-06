@@ -11,8 +11,7 @@ import {
 import { useSetAtom } from 'jotai';
 import { createUserWalletAtom, walletOperationAtom } from '../../../../store/wallet/wallet.state';
 import MoneyLogo from '../../../../UI/MoneyLogo/MoneyLogo';
-import MoneyOperationModal from './UI/MoneyOperationModal/MoneyOperationModal';
-import { formatMoney } from '../../../../helpers/moneyHelpers';
+import MoneyOperationModal from './UI/WalletOperationModal/WalletOperationModal';
 
 export default function WalletCard({
   isCreated,
@@ -77,7 +76,7 @@ export default function WalletCard({
             <Text style={styles.name}>{name}</Text>
             <Text style={styles.price}>
               {symbol}&nbsp;
-              {isCreated ? formatMoney(value) : '-'}
+              {isCreated ? value.toFixed(2) : '-'}
             </Text>
           </View>
         </View>

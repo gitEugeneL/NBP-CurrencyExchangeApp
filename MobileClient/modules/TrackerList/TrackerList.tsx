@@ -47,6 +47,7 @@ export default function TrackerList() {
         {!isLoading &&
           currencies.map((currency) => (
             <CurrencyCard
+              symbol={currency.symbol}
               key={currency.currencyId}
               shortName={currency.shortName}
               name={currency.name}

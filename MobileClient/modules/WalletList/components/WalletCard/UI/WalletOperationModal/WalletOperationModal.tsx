@@ -1,18 +1,18 @@
-import {
-  MoneyOperationSchema,
-  MoneyOperationValidationSchema,
-} from './MoneyOperationModal.schemes';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { MoneyOperationModalProps } from './MoneyOperationModal.props';
+import { WalletOperationModalProps } from './WalletOperationModal.props';
 import { Modal, StyleSheet, Text, View } from 'react-native';
 import { BlurView } from 'expo-blur';
 import MoneyInput from '../../../../../../components/MoneyInput/MoneyInput';
 import Button from '../../../../../../UI/Button/Button';
 import React from 'react';
 import { Colors, Fonts, FontSize, Gaps, Radius } from '../../../../../../UI/styles';
+import {
+  WalletOperationSchema,
+  WalletOperationValidationSchema,
+} from './WalletOperationModal.schemes';
 
-export default function MoneyOperationModal({
+export default function WalletOperationModal({
   isWithdraw,
   value,
   shortName,
@@ -20,16 +20,16 @@ export default function MoneyOperationModal({
   isVisible,
   onClose,
   operation,
-}: MoneyOperationModalProps) {
+}: WalletOperationModalProps) {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<MoneyOperationSchema>({
-    resolver: yupResolver(MoneyOperationValidationSchema(isWithdraw ? value.toString() : null)),
+  } = useForm<WalletOperationSchema>({
+    resolver: yupResolver(WalletOperationValidationSchema(isWithdraw ? value.toString() : null)),
   });
 
-  const formSubmit = (data: MoneyOperationSchema) => {
+  const formSubmit = (data: WalletOperationSchema) => {
     operation(data.amount, isWithdraw);
   };
 

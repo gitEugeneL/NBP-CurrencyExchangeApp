@@ -1,10 +1,10 @@
 import * as yup from 'yup';
 
-export interface MoneyOperationSchema {
+export interface WalletOperationSchema {
   amount: number;
 }
 
-export const MoneyOperationValidationSchema = (value: string | null) => {
+export const WalletOperationValidationSchema = (value: string | null) => {
   const max = !value ? 10000 : Number(value);
 
   return yup.object({

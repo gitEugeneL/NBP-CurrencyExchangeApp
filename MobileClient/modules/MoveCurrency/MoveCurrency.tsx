@@ -7,8 +7,9 @@ import { useFocusEffect } from 'expo-router';
 import { CurrencyParams } from '../../store/currency/currency.models';
 import BaseWalletCard from '../../components/BaseWalletCard/BaseWalletCard';
 import Loading from '../../UI/Loading/Loading';
+import { MoveCurrencyProps } from './MoveCurrency.props';
 
-export default function BuyCurrency() {
+export default function MoveCurrency({ appearance }: MoveCurrencyProps) {
   const { wallets } = useAtomValue(walletState);
   const { isLoading, currencies } = useAtomValue(currencyState);
   const loadCurrencies = useSetAtom(getAllCurrenciesAtom);
@@ -28,12 +29,14 @@ export default function BuyCurrency() {
   return (
     <>
       {baseWallet && (
-        <BaseWalletCard
-          name={baseWallet.currencyName}
-          shortName={baseWallet.currencyShortName}
-          symbol={baseWallet.currencySymbol}
-          value={baseWallet.value}
-        />
+        <>
+          <BaseWalletCard
+            name={baseWallet.currencyName}
+            shortName={baseWallet.currencyShortName}
+            symbol={baseWallet.currencySymbol}
+            value={baseWallet.value}
+          />
+        </>
       )}
 
       {isLoading && <Loading />}
@@ -44,7 +47,10 @@ export default function BuyCurrency() {
             (currency) =>
               currency.currencyId === wallet.currencyId && (
                 <CurrencyCard
-                  appearance="buy"
+                  appearance={appearance}
+                  symbol={wallet.currencySymbol}
+                  baseValue={baseWallet!.value}
+                  walletValue={wallet.value}
                   walletId={wallet.walletId}
                   shortName={wallet.currencyShortName}
                   nbpRate={currency.nbpRate}

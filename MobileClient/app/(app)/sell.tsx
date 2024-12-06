@@ -2,10 +2,10 @@ import { StyleSheet, View } from 'react-native';
 import { Colors } from '../../UI/styles';
 import MoveCurrency from '../../modules/MoveCurrency/MoveCurrency';
 
-export default function BuyPage() {
+export default function SellPage() {
   return (
     <View style={styles.container}>
-      <MoveCurrency appearance="buy" />
+      <MoveCurrency appearance="sell" />
     </View>
   );
 }

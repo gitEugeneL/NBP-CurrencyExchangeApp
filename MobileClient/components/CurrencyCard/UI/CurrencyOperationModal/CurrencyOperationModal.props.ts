@@ -7,5 +7,5 @@ export interface CurrencyOperationModalProps {
   isVisible: boolean;
   operationType: 'buy' | 'sell';
   onClose: () => void;
-  operation: () => void;
+  operation: (amount: number) => void;
 }

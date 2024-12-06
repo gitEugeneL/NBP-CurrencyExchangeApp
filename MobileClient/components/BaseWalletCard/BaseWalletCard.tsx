@@ -14,7 +14,7 @@ export default function BaseWalletCard({ name, shortName, symbol, value }: BaseW
           <Text style={styles.name}>{name}</Text>
         </View>
         <Text style={styles.value}>
-          {symbol} {value.toFixed(2)}
+          {symbol} {value.toFixed(3)}
         </Text>
       </View>
     </View>

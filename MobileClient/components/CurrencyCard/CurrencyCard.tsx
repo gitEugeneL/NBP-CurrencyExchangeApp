@@ -5,6 +5,9 @@ import MoneyLogo from '../../UI/MoneyLogo/MoneyLogo';
 import { CurrencyCardProps } from './CurrencyCard.props';
 import { isToday } from '../../helpers/dateHelpers';
 import CurrencyOperationModal from './UI/CurrencyOperationModal/CurrencyOperationModal';
+import { MoveMoneyRequest } from '../../store/wallet/wallet.models';
+import { useSetAtom } from 'jotai';
+import { buyMoneyAtom } from '../../store/wallet/wallet.state';
 
 export default function CurrencyCard({
   date,
@@ -19,13 +22,22 @@ export default function CurrencyCard({
   baseValue = null,
   appearance = 'default',
 }: CurrencyCardProps) {
+  const buyMoney = useSetAtom(buyMoneyAtom);
+
   const [isOperationModalVisible, setOperationModalVisible] = useState<boolean>(false);
 
   const handleCardClick = () => setOperationModalVisible(true);
   const handleCloseBtnOperationModal = () => setOperationModalVisible(false);
 
-  const handleOperation = () => {
-    console.log('operation');
+  const handleOperation = (amount: number) => {
+    console.log('buy money');
+
+    const request: MoveMoneyRequest = {
+      walletId: walletId!,
+      amount: amount,
+    };
+    buyMoney(request);
+    setOperationModalVisible(false);
   };
 
   return (
@@ -40,7 +52,7 @@ export default function CurrencyCard({
             <View style={styles.namesBlock}>
               {appearance !== 'default' && (
                 <Text style={styles.valueBlock}>
-                  {symbol} {walletValue!.toFixed(2)}
+                  {symbol} {walletValue!.toFixed(3)}
                 </Text>
               )}
               <Text style={styles.shortName}>{shortName}</Text>
@@ -72,7 +84,7 @@ export default function CurrencyCard({
           name={name}
           shortName={shortName}
           symbol={symbol}
-          maxValue={appearance === 'buy' ? baseValue! / sellRate! : walletValue!} // что-то посчитать во время продажи валюты
+          maxValue={appearance === 'buy' ? baseValue! / sellRate! : walletValue!}
           rate={appearance === 'buy' ? sellRate! : buyRate!}
         />
       )}

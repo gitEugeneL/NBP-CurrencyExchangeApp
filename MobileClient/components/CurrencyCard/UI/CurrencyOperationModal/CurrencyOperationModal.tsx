@@ -21,6 +21,7 @@ export default function CurrencyOperationModal({
   onClose,
   name,
   shortName,
+  operation,
 }: CurrencyOperationModalProps) {
   const {
     control,
@@ -30,7 +31,9 @@ export default function CurrencyOperationModal({
     resolver: yupResolver(CurrencyOperationValidationSchema(maxValue)),
   });
 
-  const formSubmit = (data: CurrencyOperationSchema) => {};
+  const formSubmit = (data: CurrencyOperationSchema) => {
+    operation(data.amount);
+  };
 
   return (
     <Modal transparent={true} animationType="fade" visible={isVisible} onRequestClose={onClose}>
@@ -43,12 +46,12 @@ export default function CurrencyOperationModal({
 
           <View>
             <MoneyInput
-              label={`1${symbol} = ${rate}zł (Max: ${maxValue.toFixed(2)}${symbol})`}
+              label={`1${symbol} = ${rate}zł (Max: ${maxValue.toFixed(4)}${symbol})`}
               name="amount"
               keyboardType="numeric"
               shortName={shortName}
               control={control}
-              placeholder={maxValue.toFixed(2)}
+              placeholder={maxValue.toFixed(4)}
               errors={errors}
             />
           </View>

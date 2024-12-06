@@ -76,7 +76,7 @@ export default function WalletCard({
             <Text style={styles.name}>{name}</Text>
             <Text style={styles.price}>
               {symbol}&nbsp;
-              {isCreated ? value.toFixed(2) : '-'}
+              {isCreated ? value.toFixed(3) : '-'}
             </Text>
           </View>
         </View>

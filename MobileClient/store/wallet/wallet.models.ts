@@ -17,3 +17,8 @@ export interface WalletOperationsRequest {
   amount: number;
   isWithdraw: boolean;
 }
+
+export interface MoveMoneyRequest {
+  walletId: string;
+  amount: number;
+}

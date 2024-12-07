@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Server.Contracts.Wallets;
 using Server.Data.Persistence;
+using Server.Domain.Entities;
 using Server.Helpers;
 using Server.Integrations;
 using Server.Security.Interfaces;
@@ -68,6 +69,10 @@ public class MoveMoney : ICarterModule
             if (!validationResult.IsValid)
                 return TypedResults.ValidationProblem(validationResult.GetValidationProblems());
 
+            var user = await dbContext
+                .Users
+                .SingleAsync(u => u.Id == command.CurrentUserId, ct);
+            
             // Retrieve user wallets with related currency data
             var userWallets = await dbContext
                 .Wallets
@@ -155,8 +160,19 @@ public class MoveMoney : ICarterModule
                     }
                 }
                 
+                // // create user transaction
+                var userTransaction = new Transaction
+                {
+                    User = user,
+                    InputCurrency = command.Operation == "buy" ? baseWallet.Currency : targetWallet.Currency,
+                    OutputCurrency = command.Operation == "buy" ? targetWallet.Currency : baseWallet.Currency,
+                    InputAmount = command.Operation == "buy" ? convertedValue : command.Amount,
+                    OutputAmount = command.Operation == "buy" ? command.Amount : convertedValue,
+                    ExchangeRate = rate
+                };
+                
                 // Save changes
-                dbContext.UpdateRange(baseWallet, targetWallet, baseVault, targetVault);
+                dbContext.UpdateRange(baseWallet, targetWallet, baseVault, targetVault, userTransaction);
                 await dbContext.SaveChangesAsync(ct);
 
                 // Commit transaction
@@ -177,3 +193,4 @@ public class MoveMoney : ICarterModule
         }
     }
 }
+

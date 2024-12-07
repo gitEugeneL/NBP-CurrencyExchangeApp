@@ -12,4 +12,6 @@ public class Wallet : BaseEntity
     
     public Guid CurrencyId { get; init; }
     public required Currency Currency { get; init; }
+
+    public List<Transaction> Transactions { get; init; } = [];
 }

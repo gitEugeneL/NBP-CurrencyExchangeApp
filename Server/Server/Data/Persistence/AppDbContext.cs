@@ -9,6 +9,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public required DbSet<User> Users { get; init; }
     public required DbSet<Currency> Currencies { get; init; }
     public required DbSet<Wallet> Wallets { get; init; }
+    public required DbSet<Vault> Vaults { get; init; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

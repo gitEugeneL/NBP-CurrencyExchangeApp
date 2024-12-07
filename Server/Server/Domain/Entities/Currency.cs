@@ -12,4 +12,5 @@ public class Currency : BaseEntity
     
     /*** Relations ***/
     public List<Wallet> Wallets { get; init; } = [];
+    public List<Vault> Vaults { get; init; } = [];
 }

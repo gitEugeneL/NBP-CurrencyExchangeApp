@@ -68,55 +68,95 @@ public class MoveMoney : ICarterModule
             if (!validationResult.IsValid)
                 return TypedResults.ValidationProblem(validationResult.GetValidationProblems());
 
+            // Retrieve user wallets with related currency data
             var userWallets = await dbContext
                 .Wallets
                 .Include(w => w.Currency)
                 .Where(w => w.UserId == command.CurrentUserId)
                 .ToListAsync(ct);
 
-            var baseWallet = userWallets
-                .Single(w => w.Currency.ShortName == "PLN");
-            
-            var wallet = userWallets
-                .SingleOrDefault(w => w.Id == command.WalletId);
+            // Get the main user wallet (PLN) and the target wallet
+            var baseWallet = userWallets.SingleOrDefault(w => w.Currency.ShortName == "PLN");
+            var targetWallet = userWallets.SingleOrDefault(w => w.Id == command.WalletId);
 
-            if (wallet is null)
+            if (targetWallet is null || baseWallet is null)
                 return TypedResults.NotFound("Wallet not found");
             
-            var nbpResponse = await nbpService.GetOneCurrency(wallet.Currency.ShortName);
+            // Get NBP rate for the currency
+            var nbpResponse = await nbpService.GetOneCurrency(targetWallet.Currency.ShortName);
             if (nbpResponse is null)
                 return TypedResults.NotFound("Currency not found");
             
-            // var rate = nbpResponse.Mid + wallet.Currency.Ratio;
+            // Calculate exchange rate
             var rate = command.Operation == "buy"
-                ? nbpResponse.Mid + wallet.Currency.Ratio
-                : nbpResponse.Mid - wallet.Currency.Ratio;
+                ? nbpResponse.Mid + targetWallet.Currency.Ratio
+                : nbpResponse.Mid - targetWallet.Currency.Ratio;
             
-            // calculate baseWallet value
-            var baseWalletValueAmount = command.Operation == "buy"
-                ? Math.Round(baseWallet.Value - command.Amount * rate, 4)
-                : Math.Round(baseWallet.Value + command.Amount * rate, 4);
-
-            if ((command.Operation == "buy" && baseWalletValueAmount < 0) 
-                || (command.Operation == "sell" && wallet.Value < command.Amount))
+            // Calculate conversion value
+            var convertedValue = decimal.Round(command.Amount * rate, 4);
+            
+            if ((command.Operation == "buy" &&  (baseWallet.Value - convertedValue) < 0) 
+                || (command.Operation == "sell" && targetWallet.Value < command.Amount))
             {
                 return TypedResults.Conflict("Insufficient funds");
             }
+            
+            // Retrieve bank vaults for PLN
+            var baseVault = await dbContext
+                .Vaults
+                .Include(v => v.Currency)
+                .SingleOrDefaultAsync(v => v.Currency.ShortName == "PLN", ct);
+            
+            // Retrieve bank vaults for target currency
+            var targetVault = await dbContext
+                .Vaults
+                .SingleOrDefaultAsync(v => v.CurrencyId == targetWallet.CurrencyId, ct);
+
+            if (baseVault is null || targetVault is null)
+                return TypedResults.NotFound("Wallet or currency not found");
             
             // Start transaction
             await using var transaction = await dbContext.Database.BeginTransactionAsync(ct);
             try
             {
-                // Change base wallet value
-                baseWallet.Value = baseWalletValueAmount;
+                switch (command.Operation)
+                {
+                    case "buy":
+                    {
+                        // Take destination amount from bank vault
+                        targetVault.Value -= command.Amount;
+                        
+                        // Put destination currency to bank vault
+                        baseVault.Value += convertedValue;
+                        
+                        // Change base user wallet value
+                        baseWallet.Value -= convertedValue;
+                        
+                        // Change target user wallet
+                        targetWallet.Value += command.Amount;
+                        
+                        break;
+                    }
+                    case "sell":
+                    {
+                        // Put destination amount to bank vault
+                        targetVault.Value += command.Amount;
 
-                // Change destination wallet value
-                wallet.Value = command.Operation == "buy"
-                    ? wallet.Value + command.Amount
-                    : wallet.Value - command.Amount;
-
+                        // Take base currency amount from bank vault
+                        baseVault.Value -= convertedValue;
+                        
+                        // Change base user wallet value
+                        baseWallet.Value += convertedValue;
+                        
+                        // Change target user wallet
+                        targetWallet.Value -= command.Amount;
+                        
+                        break;
+                    }
+                }
+                
                 // Save changes
-                dbContext.UpdateRange(baseWallet, wallet);
+                dbContext.UpdateRange(baseWallet, targetWallet, baseVault, targetVault);
                 await dbContext.SaveChangesAsync(ct);
 
                 // Commit transaction
@@ -128,7 +168,7 @@ public class MoveMoney : ICarterModule
 
                 return TypedResults.Ok(response);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 // Rollback transaction in case of an error
                 await transaction.RollbackAsync(ct);

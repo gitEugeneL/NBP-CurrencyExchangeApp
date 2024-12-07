@@ -3,6 +3,7 @@ import { Colors, Fonts, FontSize, Gaps, Radius } from '../../UI/styles';
 import React from 'react';
 import MoneyLogo from '../../UI/MoneyLogo/MoneyLogo';
 import { BaseWalletCardProps } from './BaseWalletCard.props';
+import { roundMoney } from '../../helpers/moneyHelpers';
 
 export default function BaseWalletCard({ name, shortName, symbol, value }: BaseWalletCardProps) {
   return (
@@ -14,7 +15,7 @@ export default function BaseWalletCard({ name, shortName, symbol, value }: BaseW
           <Text style={styles.name}>{name}</Text>
         </View>
         <Text style={styles.value}>
-          {symbol} {value.toFixed(3)}
+          {symbol} {roundMoney(value)}
         </Text>
       </View>
     </View>

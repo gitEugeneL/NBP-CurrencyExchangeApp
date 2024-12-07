@@ -11,6 +11,7 @@ import {
   CurrencyOperationSchema,
   CurrencyOperationValidationSchema,
 } from './CurrencyOperationModal.schemes';
+import { roundMoney } from '../../../../helpers/moneyHelpers';
 
 export default function CurrencyOperationModal({
   rate,
@@ -46,12 +47,12 @@ export default function CurrencyOperationModal({
 
           <View>
             <MoneyInput
-              label={`1${symbol} = ${rate}zł (Max: ${maxValue.toFixed(4)}${symbol})`}
+              label={`1${symbol} = ${rate}zł (Max: ${roundMoney(maxValue, 4)}${symbol})`}
               name="amount"
               keyboardType="numeric"
               shortName={shortName}
               control={control}
-              placeholder={maxValue.toFixed(4)}
+              placeholder={roundMoney(maxValue, 4).toString()}
               errors={errors}
             />
           </View>

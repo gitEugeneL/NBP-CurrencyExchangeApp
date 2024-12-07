@@ -8,6 +8,7 @@ import CurrencyOperationModal from './UI/CurrencyOperationModal/CurrencyOperatio
 import { MoveMoneyRequest } from '../../store/wallet/wallet.models';
 import { useSetAtom } from 'jotai';
 import { buyMoneyAtom } from '../../store/wallet/wallet.state';
+import { roundMoney } from '../../helpers/moneyHelpers';
 
 export default function CurrencyCard({
   date,
@@ -46,13 +47,13 @@ export default function CurrencyCard({
         <View style={styles.textWrapper}>
           <View style={styles.firstBlock}>
             <Text style={[styles.valueBlock, appearance === 'buy' ? styles.disabled : null]}>
-              sel: {!isToday(date) ? '(old) ' : null}
+              sell: {!isToday(date) ? '(old) ' : null}
               <Text style={styles.price}>{buyRate}</Text>
             </Text>
             <View style={styles.namesBlock}>
               {appearance !== 'default' && (
                 <Text style={styles.valueBlock}>
-                  {symbol} {walletValue!.toFixed(3)}
+                  {symbol} {roundMoney(walletValue!)}
                 </Text>
               )}
               <Text style={styles.shortName}>{shortName}</Text>

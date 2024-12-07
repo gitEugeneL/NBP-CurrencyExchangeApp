@@ -21,4 +21,5 @@ export interface WalletOperationsRequest {
 export interface MoveMoneyRequest {
   walletId: string;
   amount: number;
+  operation: 'buy' | 'sell';
 }

@@ -1,11 +1,12 @@
 import * as yup from 'yup';
+import { roundMoney } from '../../../../../../helpers/moneyHelpers';
 
 export interface WalletOperationSchema {
   amount: number;
 }
 
-export const WalletOperationValidationSchema = (value: string | null) => {
-  const max = !value ? 10000 : Number(value);
+export const WalletOperationValidationSchema = (value: number | null) => {
+  const maxValue = !value ? 100000 : roundMoney(value, 4);
 
   return yup.object({
     amount: yup
@@ -13,6 +14,6 @@ export const WalletOperationValidationSchema = (value: string | null) => {
       .typeError('Amount must be a number')
       .required('Amount is required')
       .min(1, 'Minimum amount is 1')
-      .max(max, `Maximum amount is ${max}`),
+      .max(maxValue, `Maximum amount is ${maxValue}`),
   });
 };

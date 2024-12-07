@@ -31,11 +31,10 @@ export default function CurrencyCard({
   const handleCloseBtnOperationModal = () => setOperationModalVisible(false);
 
   const handleOperation = (amount: number) => {
-    console.log('buy money');
-
     const request: MoveMoneyRequest = {
       walletId: walletId!,
       amount: amount,
+      operation: appearance === 'buy' ? 'buy' : 'sell',
     };
     buyMoney(request);
     setOperationModalVisible(false);

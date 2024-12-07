@@ -26,7 +26,7 @@ export default function WalletOperationModal({
     handleSubmit,
     formState: { errors },
   } = useForm<WalletOperationSchema>({
-    resolver: yupResolver(WalletOperationValidationSchema(isWithdraw ? value.toString() : null)),
+    resolver: yupResolver(WalletOperationValidationSchema(isWithdraw ? value : null)),
   });
 
   const formSubmit = (data: WalletOperationSchema) => {

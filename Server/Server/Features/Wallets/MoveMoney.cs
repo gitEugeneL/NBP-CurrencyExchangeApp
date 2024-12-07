@@ -11,17 +11,18 @@ using Server.Security.Interfaces;
 
 namespace Server.Features.Wallets;
 
-public class BuyMoney : ICarterModule
+public class MoveMoney : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("api/wallets/buy", 
+        app.MapPost("api/wallets/move", 
                 async (MoveMoneyRequest request, HttpContext httpContext, IUserService userService, ISender sender) =>
                 {
                     var command = new Command(
                         CurrentUserId: userService.ReadUserIdFromToken(httpContext),
                         WalletId: request.WalletId,
-                        Amount: request.Amount
+                        Amount: request.Amount,
+                        Operation: request.Operation
                     );
                     return await sender.Send(command);
                 })
@@ -34,7 +35,8 @@ public class BuyMoney : ICarterModule
     public sealed record Command(
         Guid CurrentUserId,
         Guid WalletId,
-        decimal Amount) : IRequest<IResult>;
+        decimal Amount,
+        string Operation) : IRequest<IResult>;
     
     public sealed class Validator : AbstractValidator<Command>
     {
@@ -42,10 +44,16 @@ public class BuyMoney : ICarterModule
         {
             RuleFor(command => command.WalletId)
                 .NotEmpty();
-            
+
             RuleFor(command => command.Amount)
                 .NotEmpty()
-                .GreaterThan(0);
+                .GreaterThan(0)
+                .LessThanOrEqualTo(100000);
+            
+            RuleFor(command => command.Operation)
+                .NotEmpty()
+                .Must(operation => operation is "buy" or "sell")
+                .WithMessage("Operation must be: 'buy' or 'sell'");
         }
     }
 
@@ -79,29 +87,53 @@ public class BuyMoney : ICarterModule
             if (nbpResponse is null)
                 return TypedResults.NotFound("Currency not found");
             
-            // calculate local application ratio
-            var rate = nbpResponse.Mid + wallet.Currency.Ratio;
+            // var rate = nbpResponse.Mid + wallet.Currency.Ratio;
+            var rate = command.Operation == "buy"
+                ? nbpResponse.Mid + wallet.Currency.Ratio
+                : nbpResponse.Mid - wallet.Currency.Ratio;
             
             // calculate baseWallet value
-            var baseWalletValueAmount = Math.Round(baseWallet.Value - command.Amount * rate, 4);
+            var baseWalletValueAmount = command.Operation == "buy"
+                ? Math.Round(baseWallet.Value - command.Amount * rate, 4)
+                : Math.Round(baseWallet.Value + command.Amount * rate, 4);
 
-            if (baseWalletValueAmount < 0)
+            if ((command.Operation == "buy" && baseWalletValueAmount < 0) 
+                || (command.Operation == "sell" && wallet.Value < command.Amount))
+            {
                 return TypedResults.Conflict("Insufficient funds");
+            }
             
-            // change base wallet value
-            baseWallet.Value = baseWalletValueAmount;
-            // add money to destination wallet
-            wallet.Value += command.Amount;
-            
-            // todo add money to bank account
-            
-            dbContext.UpdateRange(baseWallet, wallet);
-            await dbContext.SaveChangesAsync(ct);
-            
-            var response = userWallets
-                .Select(w => new WalletResponse(w));
+            // Start transaction
+            await using var transaction = await dbContext.Database.BeginTransactionAsync(ct);
+            try
+            {
+                // Change base wallet value
+                baseWallet.Value = baseWalletValueAmount;
 
-            return TypedResults.Ok(response);
+                // Change destination wallet value
+                wallet.Value = command.Operation == "buy"
+                    ? wallet.Value + command.Amount
+                    : wallet.Value - command.Amount;
+
+                // Save changes
+                dbContext.UpdateRange(baseWallet, wallet);
+                await dbContext.SaveChangesAsync(ct);
+
+                // Commit transaction
+                await transaction.CommitAsync(ct);
+
+                // Prepare response
+                var response = userWallets
+                    .Select(w => new WalletResponse(w));
+
+                return TypedResults.Ok(response);
+            }
+            catch (Exception)
+            {
+                // Rollback transaction in case of an error
+                await transaction.RollbackAsync(ct);
+                return TypedResults.NotFound("Transaction failed");
+            }
         }
     }
 }

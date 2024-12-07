@@ -5,5 +5,5 @@ export const walletApi = {
   getBaseUserWallet: `${PREFIX}/wallets/base`,
   createUserWallet: `${PREFIX}/wallets`,
   walletOperations: `${PREFIX}/wallets/money`,
-  buyMoney: `${PREFIX}/wallets/buy`,
+  buyMoney: `${PREFIX}/wallets/move`,
 };

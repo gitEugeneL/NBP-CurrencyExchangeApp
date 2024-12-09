@@ -1,20 +1,29 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { ExchangeIcon } from './icons/ExchangeIcon';
 import { Colors, Fonts, FontSize, Gaps, Radius } from '../../../../UI/styles';
+import { TransactionCardProps } from './TransactionCard.props';
+import { roundMoney } from '../../../../helpers/moneyHelpers';
+import { dateToString } from '../../../../helpers/dateHelpers';
 
-export default function HistoryCard() {
+export default function TransactionCard({ ...props }: TransactionCardProps) {
+  const date = dateToString(new Date(props.transactionDate));
+  const inputMoney = `-${roundMoney(props.inputAmount)} ${props.inputCurrencySymbol}`;
+  const outputMoney = `+${roundMoney(props.outputAmount)} ${props.outputCurrencySymbol}`;
+
   return (
     <View style={styles.card}>
       <ExchangeIcon />
       <View style={styles.container}>
         <View>
-          <Text style={styles.name}>EUR to PLN</Text>
-          <Text style={styles.date}>2024-12-01 13:45</Text>
+          <Text style={styles.name}>
+            {props.inputCurrencyShortName} to {props.outputCurrencyShortName}
+          </Text>
+          <Text style={styles.date}>{date}</Text>
         </View>
 
         <View style={styles.moneyWrapper}>
-          <Text style={styles.money}>-250.00 EUR</Text>
-          <Text style={styles.money}>+1000.00 PLN</Text>
+          <Text style={styles.money}>{inputMoney}</Text>
+          <Text style={styles.money}>{outputMoney}</Text>
         </View>
       </View>
     </View>
@@ -57,7 +66,7 @@ const styles = StyleSheet.create({
 
   money: {
     fontFamily: Fonts.regular,
-    fontSize: FontSize.size12,
+    fontSize: FontSize.size14,
     color: Colors.white,
   },
 });

@@ -21,7 +21,11 @@ const routes = {
   tracker: { name: 'Tracker', path: 'tracker', icon: <TrackerIcon /> },
   buy: { name: 'Buy currency', path: 'buy', icon: <ArrowIcon /> },
   sell: { name: 'Sell currency', path: 'sell', icon: <ArrowIcon /> },
-  history: { name: 'Transactions', path: 'history', icon: <HistoryIcon /> },
+  transactions: {
+    name: 'Transactions',
+    path: 'transactions',
+    icon: <HistoryIcon />,
+  },
 };
 
 export default function MainLayout() {
@@ -95,9 +99,9 @@ export default function MainLayout() {
         />
 
         <Drawer.Screen
-          name={routes.history.path}
+          name={routes.transactions.path}
           options={{
-            headerTitle: () => <Text style={styles.headerTitle}>{routes.history.name}</Text>,
+            headerTitle: () => <Text style={styles.headerTitle}>{routes.transactions.name}</Text>,
           }}
         />
       </Drawer>

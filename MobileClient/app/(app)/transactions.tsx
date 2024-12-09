@@ -1,11 +1,11 @@
 import { StyleSheet, View } from 'react-native';
 import { Colors } from '../../UI/styles';
-import HistoryList from '../../modules/HistoryList/HistoryList';
+import TransactionList from '../../modules/TransactionList/TransactionList';
 
-export default function HistoryPage() {
+export default function TransactionsPage() {
   return (
     <View style={styles.container}>
-      <HistoryList />
+      <TransactionList />
     </View>
   );
 }

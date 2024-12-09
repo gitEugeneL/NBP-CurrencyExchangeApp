@@ -7,8 +7,8 @@ import CurrencyCard from '../../components/CurrencyCard/CurrencyCard';
 import DatePicker from './components/DatePicker/DatePicker';
 import { View } from 'react-native';
 import { dateToFormat, isToday } from '../../helpers/dateHelpers';
-import DateError from './components/DateError/DateError';
 import { useFocusEffect } from 'expo-router';
+import WarningCard from '../../components/WarningCard/WarningCard';
 
 export default function TrackerList() {
   const { isLoading, currencies } = useAtomValue(currencyState);
@@ -41,7 +41,14 @@ export default function TrackerList() {
 
       {isLoading && <Loading />}
 
-      {!isLoading && currencies.length === 0 && <DateError loadData={loadData} />}
+      {!isLoading && currencies.length === 0 && (
+        <WarningCard
+          appearance="speed"
+          title="There is no data available on this day. It is probably a weekend or a holiday!"
+          buttonName="Check the current rate"
+          action={loadData}
+        />
+      )}
 
       <View>
         {!isLoading &&

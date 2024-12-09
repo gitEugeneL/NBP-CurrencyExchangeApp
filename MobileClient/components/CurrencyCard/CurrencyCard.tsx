@@ -9,6 +9,7 @@ import { MoveMoneyRequest } from '../../store/wallet/wallet.models';
 import { useSetAtom } from 'jotai';
 import { buyMoneyAtom } from '../../store/wallet/wallet.state';
 import { roundMoney } from '../../helpers/moneyHelpers';
+import { getAllTransactionsAtom } from '../../store/transactions/transaction.state';
 
 export default function CurrencyCard({
   date,
@@ -24,6 +25,7 @@ export default function CurrencyCard({
   appearance = 'default',
 }: CurrencyCardProps) {
   const buyMoney = useSetAtom(buyMoneyAtom);
+  const loadTransactions = useSetAtom(getAllTransactionsAtom);
 
   const [isOperationModalVisible, setOperationModalVisible] = useState<boolean>(false);
 
@@ -36,7 +38,7 @@ export default function CurrencyCard({
       amount: amount,
       operation: appearance === 'buy' ? 'buy' : 'sell',
     };
-    buyMoney(request);
+    buyMoney(request).then(() => loadTransactions());
     setOperationModalVisible(false);
   };
 

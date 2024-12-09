@@ -1,21 +1,16 @@
-import SuccessCard from '../../components/SuccessCard/SuccessCard';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Gaps } from '../../UI/styles';
+import { View } from 'react-native';
+import WarningCard from '../../components/WarningCard/WarningCard';
 
 export default function SuccessPage() {
   return (
-    <View style={styles.container}>
-      <SuccessCard />
+    <View>
+      <WarningCard
+        appearance="speed"
+        title="You have been successfully registered!"
+        buttonName="Login"
+        redirectRoute="/auth/login"
+      />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 40,
-    gap: Gaps.gap20,
-  },
-});

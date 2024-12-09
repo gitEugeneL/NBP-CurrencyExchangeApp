@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     padding: 15,
     borderRadius: Radius.radius20,
-    backgroundColor: Colors.violetDark,
+    backgroundColor: Colors.blackBlue,
     gap: Gaps.gap16,
   },
 

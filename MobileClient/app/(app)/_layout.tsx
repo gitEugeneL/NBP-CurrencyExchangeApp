@@ -12,6 +12,7 @@ import HeaderButton from '../../modules/CustomDrawer/components/HeaderButton/Hea
 import { WalletIcon } from '../../assets/icons/WalletIcon';
 import { TrackerIcon } from '../../assets/icons/TrackerIcon';
 import { ArrowIcon } from '../../assets/icons/ArrowIcon';
+import { HistoryIcon } from '../../assets/icons/HistoryIcon';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -20,6 +21,7 @@ const routes = {
   tracker: { name: 'Tracker', path: 'tracker', icon: <TrackerIcon /> },
   buy: { name: 'Buy currency', path: 'buy', icon: <ArrowIcon /> },
   sell: { name: 'Sell currency', path: 'sell', icon: <ArrowIcon /> },
+  history: { name: 'Transactions', path: 'history', icon: <HistoryIcon /> },
 };
 
 export default function MainLayout() {
@@ -89,6 +91,13 @@ export default function MainLayout() {
           name={routes.sell.path}
           options={{
             headerTitle: () => <Text style={styles.headerTitle}>{routes.sell.name}</Text>,
+          }}
+        />
+
+        <Drawer.Screen
+          name={routes.history.path}
+          options={{
+            headerTitle: () => <Text style={styles.headerTitle}>{routes.history.name}</Text>,
           }}
         />
       </Drawer>

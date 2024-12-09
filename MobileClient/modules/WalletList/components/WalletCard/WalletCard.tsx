@@ -14,16 +14,7 @@ import MoneyLogo from '../../../../UI/MoneyLogo/MoneyLogo';
 import MoneyOperationModal from './UI/WalletOperationModal/WalletOperationModal';
 import { roundMoney } from '../../../../helpers/moneyHelpers';
 
-export default function WalletCard({
-  isCreated,
-  name,
-  shortName,
-  country,
-  value,
-  symbol,
-  currencyId,
-  walletId,
-}: WalletCardProps) {
+export default function WalletCard({ ...props }: WalletCardProps) {
   const createUserWallet = useSetAtom(createUserWalletAtom);
   const walletOperation = useSetAtom(walletOperationAtom);
 
@@ -47,7 +38,7 @@ export default function WalletCard({
 
   const handleConfirmModal = () => {
     const request: CreateWalletRequest = {
-      currencyId: currencyId,
+      currencyId: props.currencyId,
     };
     createUserWallet(request);
     setConfirmModalVisible(false);
@@ -55,7 +46,7 @@ export default function WalletCard({
 
   const handleMoneyOperation = (amount: number, isWithdraw: boolean) => {
     const request: WalletOperationsRequest = {
-      walletId: walletId,
+      walletId: props.walletId,
       amount: amount,
       isWithdraw: isWithdraw,
     };
@@ -64,26 +55,26 @@ export default function WalletCard({
   };
 
   return (
-    <View style={[styles.card, isCreated ? styles.withWallet : styles.withoutWallet]}>
+    <View style={[styles.card, props.isCreated ? styles.withWallet : styles.withoutWallet]}>
       <View style={styles.container}>
-        <MoneyLogo shortName={shortName} />
+        <MoneyLogo shortName={props.shortName} />
 
         <View style={styles.wrapper}>
           <View style={styles.fistBlock}>
-            <Text style={styles.shortName}>{shortName}</Text>
-            <Text style={styles.country}>{country}</Text>
+            <Text style={styles.shortName}>{props.shortName}</Text>
+            <Text style={styles.country}>{props.country}</Text>
           </View>
           <View style={styles.secondBlock}>
-            <Text style={styles.name}>{name}</Text>
+            <Text style={styles.name}>{props.name}</Text>
             <Text style={styles.price}>
-              {symbol}&nbsp;
-              {isCreated ? roundMoney(value) : '-'}
+              {props.symbol}&nbsp;
+              {props.isCreated ? roundMoney(props.value) : '-'}
             </Text>
           </View>
         </View>
       </View>
       <View style={styles.buttonBlock}>
-        {isCreated && (
+        {props.isCreated && (
           <>
             <Button
               style={styles.btn}
@@ -101,16 +92,16 @@ export default function WalletCard({
 
             <MoneyOperationModal
               isWithdraw={isWithdraw}
-              value={value}
-              symbol={symbol}
-              shortName={shortName}
+              value={props.value}
+              symbol={props.symbol}
+              shortName={props.shortName}
               isVisible={isMoneyModalVisible}
               onClose={handleCloseBtnMoneyModal}
               operation={handleMoneyOperation}
             />
           </>
         )}
-        {!isCreated && (
+        {!props.isCreated && (
           <>
             <Button
               style={styles.btn}
@@ -121,7 +112,7 @@ export default function WalletCard({
             />
 
             <ConfirmCreate
-              name={shortName}
+              name={props.shortName}
               isVisible={isConfirmModalVisible}
               onClose={handleCloseBtnConfirmModal}
               onConfirm={handleConfirmModal}

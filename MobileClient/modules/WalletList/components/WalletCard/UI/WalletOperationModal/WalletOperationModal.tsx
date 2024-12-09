@@ -12,42 +12,39 @@ import {
   WalletOperationValidationSchema,
 } from './WalletOperationModal.schemes';
 
-export default function WalletOperationModal({
-  isWithdraw,
-  value,
-  shortName,
-  symbol,
-  isVisible,
-  onClose,
-  operation,
-}: WalletOperationModalProps) {
+export default function WalletOperationModal({ ...props }: WalletOperationModalProps) {
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<WalletOperationSchema>({
-    resolver: yupResolver(WalletOperationValidationSchema(isWithdraw ? value : null)),
+    resolver: yupResolver(WalletOperationValidationSchema(props.isWithdraw ? props.value : null)),
   });
 
   const formSubmit = (data: WalletOperationSchema) => {
-    operation(data.amount, isWithdraw);
+    props.operation(data.amount, props.isWithdraw);
   };
 
   return (
-    <Modal transparent={true} animationType="fade" visible={isVisible} onRequestClose={onClose}>
+    <Modal
+      transparent={true}
+      animationType="fade"
+      visible={props.isVisible}
+      onRequestClose={props.onClose}
+    >
       <BlurView intensity={10} style={styles.blurContainer}>
         <View style={styles.modalContainer}>
-          <Text style={styles.title}>{isWithdraw ? 'Withdraw' : 'Add money'}</Text>
+          <Text style={styles.title}>{props.isWithdraw ? 'Withdraw' : 'Add money'}</Text>
 
           <View>
             <MoneyInput
-              label={`Personal: ${symbol} ${value}`}
+              label={`Personal: ${props.symbol} ${props.value}`}
               name="amount"
-              shortName={shortName}
+              shortName={props.shortName}
               control={control}
               keyboardType="numeric"
               errors={errors}
-              placeholder={isWithdraw ? value.toString() : '0.00'}
+              placeholder={props.isWithdraw ? props.value.toString() : '0.00'}
             />
           </View>
 
@@ -57,11 +54,11 @@ export default function WalletOperationModal({
               name="Close"
               size="small"
               appearance="secondary"
-              onPress={onClose}
+              onPress={props.onClose}
             />
             <Button
               style={styles.button}
-              name={isWithdraw ? 'Withdraw' : 'Add money'}
+              name={props.isWithdraw ? 'Withdraw' : 'Add money'}
               size="small"
               onPress={handleSubmit(formSubmit)}
             />

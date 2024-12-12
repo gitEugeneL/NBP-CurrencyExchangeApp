@@ -6,12 +6,14 @@ using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Refit;
 using Server.Data.Persistence;
 using Server.Helpers;
 using Server.Integrations;
 using Server.Security;
 using Server.Security.Interfaces;
+using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +39,19 @@ builder.Services.AddMediatR(config =>
 /*** FluentValidation files register ***/
 builder.Services
     .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+/*** Swagger configuration ***/
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
+        Description = "JWT Bearer Authorization",
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+    });
+    c.OperationFilter<SecurityRequirementsOperationFilter>();
+});
 
 /*** Carter configuration ***/
 builder.Services.AddCarter();

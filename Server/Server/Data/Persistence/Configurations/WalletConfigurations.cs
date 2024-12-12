@@ -10,7 +10,7 @@ public class WalletConfigurations : IEntityTypeConfiguration<Wallet>
     {
         builder.Property(wallet => wallet.Value)
             .IsRequired()
-            .HasPrecision(2);
+            .HasColumnType("NUMERIC(15, 4)");
         
         /*** Restrictions ***/
         builder.HasIndex(wallet => new { wallet.UserId, wallet.CurrencyId })

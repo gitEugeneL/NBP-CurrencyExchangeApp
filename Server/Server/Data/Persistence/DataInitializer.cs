@@ -9,97 +9,34 @@ public static class DataInitializer
         context.Database.EnsureCreated();
         Seed(context);
     }
-    
     private static void Seed(AppDbContext context)
     {
         if (context.Vaults.Any()) 
             return;
 
         const int value = 1000000;
-        
-        var vaults = new[]
+
+        var currencies = new[]
         {
-            new Vault
-            {
-                Value = value,
-                Currency = new Currency
-                {
-                    Name = "Zloty",
-                    ShortName = "PLN",
-                    Country = "Poland",
-                    Symbol = "zł",
-                    Ratio = 0
-                }
-            },
-
-            new Vault
-            {
-                Value = value,
-                Currency = new Currency
-                {
-                    Name = "Euro",
-                    ShortName = "EUR",
-                    Country = "European Union",
-                    Symbol = "€",
-                    Ratio = (decimal)0.02
-                }
-            },
-
-            new Vault
-            {
-                Value = value,
-                Currency = new Currency
-                {
-                    Name = "Dollar USA",
-                    ShortName = "USD",
-                    Country = "USA",
-                    Symbol = "$",
-                    Ratio = (decimal)0.02
-                }
-
-            },
-
-            new Vault
-            {
-                Value = value,
-                Currency = new Currency
-                {
-                    Name = "Pound Sterling",
-                    ShortName = "GBP",
-                    Country = "United Kingdom",
-                    Symbol = "\u00a3",
-                    Ratio = (decimal)0.03
-                }
-            },
-
-            new Vault
-            {
-                Value = value,
-                Currency = new Currency
-                {
-                    Name = "Franc",
-                    ShortName = "CHF",
-                    Country = "Switzerland",
-                    Symbol = "\u20a3",
-                    Ratio = (decimal)0.03
-                }
-            },
-
-            new Vault
-            {
-                Value = value,
-                Currency = new Currency
-                {
-                    Name = "Dollar",
-                    ShortName = "CAD",
-                    Country = "Canada",
-                    Symbol = "$",
-                    Ratio = (decimal)0.03
-                }
-            }
+            new Currency { Name = "Zloty", ShortName = "PLN", Country = "Poland", Symbol = "zł", Ratio = 0 },
+            new Currency { Name = "Euro", ShortName = "EUR", Country = "European Union", Symbol = "€", Ratio = 0.02m },
+            new Currency { Name = "Dollar USA", ShortName = "USD", Country = "USA", Symbol = "$", Ratio = 0.02m },
+            new Currency { Name = "Pound Sterling", ShortName = "GBP", Country = "United Kingdom", Symbol = "\u00a3", Ratio = 0.03m },
+            new Currency { Name = "Franc", ShortName = "CHF", Country = "Switzerland", Symbol = "\u20a3", Ratio = 0.03m },
+            new Currency { Name = "Dollar", ShortName = "CAD", Country = "Canada", Symbol = "$", Ratio = 0.03m }
         };
-        
+
+        context.Currencies.AddRange(currencies);
+        context.SaveChanges();
+
+        var vaults = currencies.Select(currency => new Vault
+        {
+            Value = value,
+            Currency = currency
+        }).ToArray();
+    
         context.Vaults.AddRange(vaults);
         context.SaveChanges();
     }
+
 }

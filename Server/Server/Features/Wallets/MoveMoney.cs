@@ -98,7 +98,7 @@ public class MoveMoney : ICarterModule
                 : nbpResponse.Mid - targetWallet.Currency.Ratio;
             
             // Calculate conversion value
-            var convertedValue = decimal.Round(command.Amount * rate, 4);
+            var convertedValue = decimal.Round(command.Amount * rate, 2, MidpointRounding.AwayFromZero);
             
             if ((command.Operation == "buy" &&  (baseWallet.Value - convertedValue) < 0) 
                 || (command.Operation == "sell" && targetWallet.Value < command.Amount))
@@ -130,32 +130,24 @@ public class MoveMoney : ICarterModule
                     {
                         // Take destination amount from bank vault
                         targetVault.Value -= command.Amount;
-                        
                         // Put destination currency to bank vault
                         baseVault.Value += convertedValue;
-                        
                         // Change base user wallet value
                         baseWallet.Value -= convertedValue;
-                        
                         // Change target user wallet
                         targetWallet.Value += command.Amount;
-                        
                         break;
                     }
                     case "sell":
                     {
                         // Put destination amount to bank vault
                         targetVault.Value += command.Amount;
-
                         // Take base currency amount from bank vault
                         baseVault.Value -= convertedValue;
-                        
                         // Change base user wallet value
                         baseWallet.Value += convertedValue;
-                        
                         // Change target user wallet
                         targetWallet.Value -= command.Amount;
-                        
                         break;
                     }
                 }

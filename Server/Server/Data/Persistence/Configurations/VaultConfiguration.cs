@@ -10,7 +10,7 @@ public class VaultConfiguration : IEntityTypeConfiguration<Vault>
     {
         builder.Property(vault => vault.Value)
             .IsRequired()
-            .HasPrecision(2);
+            .HasColumnType("NUMERIC(15, 4)");
         
         /*** Restrictions ***/
         builder.HasOne(vault => vault.Currency)

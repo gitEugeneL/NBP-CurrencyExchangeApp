@@ -35,6 +35,6 @@ public class CurrencyConfiguration : IEntityTypeConfiguration<Currency>
         
         builder.Property(currency => currency.Ratio)
             .IsRequired()
-            .HasPrecision(2);
+            .HasColumnType("NUMERIC(15, 4)");
     }
 }

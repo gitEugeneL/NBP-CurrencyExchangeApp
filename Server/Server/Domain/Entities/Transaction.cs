@@ -7,7 +7,7 @@ public class Transaction : BaseEntity
     public decimal InputAmount { get; init; }
     public decimal OutputAmount { get; init; }
     public decimal ExchangeRate { get; init; }
-    public DateTime Date { get; init; } = DateTime.Now;
+    public DateTime Date { get; init; } = DateTime.UtcNow;
     
     /** Relations **/
     public Guid UserId { get; init; }

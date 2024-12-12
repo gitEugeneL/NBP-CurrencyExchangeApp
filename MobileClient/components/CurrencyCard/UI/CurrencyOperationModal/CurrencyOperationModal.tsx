@@ -47,12 +47,12 @@ export default function CurrencyOperationModal({
 
           <View>
             <MoneyInput
-              label={`1${symbol} = ${rate}zł (Max: ${roundMoney(maxValue, 4)}${symbol})`}
+              label={`1${symbol} = ${rate}zł (Max: ${roundMoney(maxValue, 3)}${symbol})`}
               name="amount"
               keyboardType="numeric"
               shortName={shortName}
               control={control}
-              placeholder={roundMoney(maxValue, 4).toString()}
+              placeholder={roundMoney(maxValue, 3).toString()}
               errors={errors}
             />
           </View>

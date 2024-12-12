@@ -10,15 +10,15 @@ public class TransactionConfiguration : IEntityTypeConfiguration<Transaction>
     {
         builder.Property(transaction => transaction.InputAmount)
             .IsRequired()
-            .HasPrecision(2);
+            .HasColumnType("NUMERIC(15, 4)");
         
         builder.Property(transaction => transaction.OutputAmount)
             .IsRequired()
-            .HasPrecision(2);
+            .HasColumnType("NUMERIC(15, 4)");
 
         builder.Property(transaction => transaction.ExchangeRate)
             .IsRequired()
-            .HasPrecision(2);
+            .HasColumnType("NUMERIC(15, 4)");
 
         /*** Restrictions ***/
         builder.HasOne(transaction => transaction.User)

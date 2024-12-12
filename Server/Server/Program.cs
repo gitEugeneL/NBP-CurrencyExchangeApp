@@ -26,7 +26,9 @@ builder.Services.AddSwaggerGen();
 
 /*** Database connection ***/
 builder.Services.AddDbContext<AppDbContext>(options => 
-    options.UseSqlite(builder.Configuration.GetConnectionString("SQLite")));
+    // options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")!));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("PSQL")));    
+    // options.UseSqlite(builder.Configuration.GetConnectionString("SQLite")));
 
 /*** MediatR configuration ***/
 builder.Services.AddMediatR(config =>
@@ -44,11 +46,9 @@ builder.Services.AddCors(options =>
 {
      options.AddPolicy("mobileApp", policyBuilder =>
      {
-
          policyBuilder.AllowAnyOrigin();
          policyBuilder.AllowAnyHeader();
          policyBuilder.AllowAnyMethod();
-         // policyBuilder.AllowCredentials();
      });
 });
 

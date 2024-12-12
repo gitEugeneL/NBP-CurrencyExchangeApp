@@ -6,7 +6,7 @@ export interface CurrencyOperationSchema {
 }
 
 export const CurrencyOperationValidationSchema = (maxValue: number) => {
-  const value = roundMoney(maxValue, 4);
+  const value = roundMoney(maxValue, 3);
 
   return yup.object({
     amount: yup

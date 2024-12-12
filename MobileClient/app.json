@@ -4,7 +4,7 @@
     "slug": "MobileClient",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/splash.png",
     "userInterfaceStyle": "light",
     "backgroundColor": "#18181E",
     "newArchEnabled": true,

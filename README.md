@@ -102,51 +102,51 @@ The project includes ASP.NET server and React Native mobile app, providing real-
 ## 🎡️ Mobile client screenshots
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 10px">
-   <img src="Demonstration/screenshots/login.png" alt="login" width="300" />
-   <img src="Demonstration/screenshots/registration.png" alt="registration" width="300"/>
-   <img src="Demonstration/screenshots/registrationConfirm.png" alt="registration confirm" width="300" />
+   <img src="Demonstration/screenshots/login.png" alt="login" width="240" />
+   <img src="Demonstration/screenshots/registration.png" alt="registration" width="240"/>
+   <img src="Demonstration/screenshots/registrationConfirm.png" alt="registration confirm" width="240" />
 </div>
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 10px">
-   <img src="Demonstration/screenshots/drawer.png" alt="drawer" width="300" />
-   <img src="Demonstration/screenshots/wallets.png" alt="wallets list" width="300"/>
-   <img src="Demonstration/screenshots/walletList.png" alt="your wallets" width="300" />
+   <img src="Demonstration/screenshots/drawer.png" alt="drawer" width="240" />
+   <img src="Demonstration/screenshots/wallets.png" alt="wallets list" width="240"/>
+   <img src="Demonstration/screenshots/walletList.png" alt="your wallets" width="240" />
 </div>
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 10px">
-   <img src="Demonstration/screenshots/createWallet.png" alt="create a wallet" width="300" />
-   <img src="Demonstration/screenshots/addMoney.png" alt="add money" width="300"/>
-   <img src="Demonstration/screenshots/withdraw.png" alt="withdraw" width="300" />
+   <img src="Demonstration/screenshots/createWallet.png" alt="create a wallet" width="240" />
+   <img src="Demonstration/screenshots/addMoney.png" alt="add money" width="240" />
+   <img src="Demonstration/screenshots/withdraw.png" alt="withdraw" width="240" />
 </div>
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 10px">
-   <img src="Demonstration/screenshots/tracker.png" alt="tracker" width="300"/>
-   <img src="Demonstration/screenshots/tracker2.png" alt="tracker" width="300" />
-   <img src="Demonstration/screenshots/tracker3.png" alt="tracker" width="300" />
+   <img src="Demonstration/screenshots/tracker.png" alt="tracker" width="240" />
+   <img src="Demonstration/screenshots/tracker2.png" alt="tracker" width="240" />
+   <img src="Demonstration/screenshots/tracker3.png" alt="tracker" width="240" />
 </div>
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 10px">
-   <img src="Demonstration/screenshots/buyCurrency.png" alt="buy currency" width="300"/>
-   <img src="Demonstration/screenshots/sellCurrency.png" alt="tracker" width="300" />
-   <img src="Demonstration/screenshots/buyEuro.png" alt="buy euro" width="300" />
+   <img src="Demonstration/screenshots/buyCurrency.png" alt="buy currency" width="240"/>
+   <img src="Demonstration/screenshots/sellCurrency.png" alt="tracker" width="240" />
+   <img src="Demonstration/screenshots/buyEuro.png" alt="buy euro" width="240" />
 </div>
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 10px">
-   <img src="Demonstration/screenshots/sellGBR.png" alt="sell GBR" width="300"/>
-   <img src="Demonstration/screenshots/transactionList.png" alt="transaction list" width="300"/>
-   <img src="Demonstration/screenshots/transactions.png" alt="transactions" width="300"/>
+   <img src="Demonstration/screenshots/sellGBR.png" alt="sell GBR" width="240"/>
+   <img src="Demonstration/screenshots/transactionList.png" alt="transaction list" width="240"/>
+   <img src="Demonstration/screenshots/transactions.png" alt="transactions" width="240"/>
 </div>
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 10px">
-   <img src="Demonstration/screenshots/loginValidator.png" alt="login validator" width="300"/>
-   <img src="Demonstration/screenshots/registrationValidator.png" alt="registration validator" width="300"/>
-   <img src="Demonstration/screenshots/addMoneyValidator.png" alt="add money validator" width="300"/>
+   <img src="Demonstration/screenshots/loginValidator.png" alt="login validator" width="240"/>
+   <img src="Demonstration/screenshots/registrationValidator.png" alt="registration validator" width="240"/>
+   <img src="Demonstration/screenshots/addMoneyValidator.png" alt="add money validator" width="240"/>
 </div>
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 10px">
-   <img src="Demonstration/screenshots/withdrawValidator.png" alt="withdraw validator" width="300"/>
-   <img src="Demonstration/screenshots/buyCurrencyValidator.png" alt="buy currency validator" width="300"/>
-   <img src="Demonstration/screenshots/sellCurrencyValidator.png" alt="sell currency validator" width="300"/>
+   <img src="Demonstration/screenshots/withdrawValidator.png" alt="withdraw validator" width="240"/>
+   <img src="Demonstration/screenshots/buyCurrencyValidator.png" alt="buy currency validator" width="240"/>
+   <img src="Demonstration/screenshots/sellCurrencyValidator.png" alt="sell currency validator" width="240"/>
 </div>
 
 ## 💾 Database diagram

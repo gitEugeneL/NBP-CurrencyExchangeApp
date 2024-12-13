@@ -6,8 +6,6 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 
-Migrations
-
 *.db
 *.db-shm
 *.db-wal

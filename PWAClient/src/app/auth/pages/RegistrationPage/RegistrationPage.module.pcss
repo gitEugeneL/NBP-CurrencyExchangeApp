@@ -1,0 +1,24 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap20);
+}
+
+.titleBlock {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap40);
+}
+
+.logoBlock {
+  display: none;
+}
+
+@media (--breakpoint-tablet) {
+  .logoBlock {
+    display: block;
+  }
+}

@@ -24,7 +24,11 @@ export default function LoginForm() {
     handleSubmit,
     formState: { errors }
   } = useForm<LoginFormSchema>({
-    resolver: yupResolver(LoginFormValidationSchema)
+    resolver: yupResolver(LoginFormValidationSchema),
+    defaultValues: {
+      email: '',
+      password: ''
+    }
   });
 
   const formSubmit = async (data: LoginFormSchema) => {

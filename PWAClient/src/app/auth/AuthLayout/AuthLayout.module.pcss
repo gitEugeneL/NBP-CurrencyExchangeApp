@@ -4,8 +4,22 @@
   align-items: center;
   height: 100vh;
   flex-direction: column;
-  gap: var(--gap20);
   padding-left: 40px;
   padding-right: 40px;
   position: relative;
+}
+
+.wrapper {
+  width: 100%;
+}
+
+@media (--breakpoint-tablet) {
+  .wrapper {
+    position: relative;
+    max-width: 600px;
+    background-color: var(--black-blue-color);
+    padding: 60px;
+    border-radius: var(--radius20);
+    box-shadow: var(--shadow-4);
+  }
 }

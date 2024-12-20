@@ -17,7 +17,7 @@ export default function LoginPage() {
   };
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <div className={styles.titleBlock}>
         <Logo />
         <Title title='Log in' />
@@ -30,6 +30,6 @@ export default function LoginPage() {
           onClick={handleRedirect}
         />
       </div>
-    </>
+    </div>
   );
 }

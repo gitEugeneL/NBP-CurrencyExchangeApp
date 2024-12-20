@@ -9,13 +9,13 @@ const manifest: Partial<ManifestOptions> | false = {
     {
       purpose: 'maskable',
       sizes: '512x512',
-      src: 'icon512_maskable.png',
+      src: 'icons/icon512_maskable.png',
       type: 'image/png'
     },
     {
       purpose: 'any',
       sizes: '512x512',
-      src: 'icon512_rounded.png',
+      src: 'icons/icon512_rounded.png',
       type: 'image/png'
     }
   ],
@@ -24,8 +24,7 @@ const manifest: Partial<ManifestOptions> | false = {
   lang: 'en-US',
   name: 'pwaclient',
   short_name: 'pwa',
-  start_url: '/',
-  scope: '/'
+  start_url: '/'
 };
 
 export default defineConfig({

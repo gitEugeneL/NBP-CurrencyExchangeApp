@@ -8,15 +8,17 @@ import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import Button from '../../UI/Button/Button.tsx';
 import CustomInput from '../../UI/CustomInput/CustomInput.tsx';
-import { loginAtom } from '../../store/auth/auth.state.ts';
-import { useAtom } from 'jotai';
+import { authState, loginAtom } from '../../store/auth/auth.state.ts';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useNavigate } from 'react-router';
 import PasswordInput from '../../components/PasswordInput/PasswordInput.tsx';
 import Notification from '../../UI/Notification/Notification.tsx';
 import styles from './LoginForm.module.pcss';
 
 export default function LoginForm() {
-  const [state, login] = useAtom(loginAtom);
+  const state = useAtomValue(authState);
+  const login = useSetAtom(loginAtom);
+
   const navigate = useNavigate();
 
   const {

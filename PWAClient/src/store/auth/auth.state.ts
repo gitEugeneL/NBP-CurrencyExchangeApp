@@ -67,3 +67,10 @@ export const logoutAtom = atom(null, async (_get, set) => {
     error: null
   });
 });
+
+export const resetErrorAtom = atom(null, async (_get, set) => {
+  set(authState, (prev) => ({
+    ...prev,
+    error: null
+  }));
+});

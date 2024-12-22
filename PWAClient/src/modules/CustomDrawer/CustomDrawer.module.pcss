@@ -1,0 +1,30 @@
+.drawer {
+  min-width: 250px;
+  max-width: 450px;
+  position: relative;
+}
+
+.closeButton {
+  cursor: pointer;
+  padding: 15px;
+  width: fit-content;
+  margin-left: auto;
+  transition: background-color 0.15s ease;
+
+  &:focus,
+  &:hover {
+    background-color: var(--violet-dark-color);
+  }
+}
+
+.logout {
+  position: absolute;
+  bottom: 50px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn {
+  width: 30%;
+}

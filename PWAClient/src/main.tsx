@@ -11,12 +11,26 @@ import AuthLayout from './app/auth/AuthLayout/AuthLayout.tsx';
 import LoginPage from './app/auth/pages/LoginPage/LoginPage.tsx';
 import RegistrationPage from './app/auth/pages/RegistrationPage/RegistrationPage.tsx';
 import SuccessPage from './app/auth/pages/SuccessPage/SuccessPage.tsx';
+import BaseLayout from './app/base/BaseLayout/BaseLayout.tsx';
+import WalletPage from './app/base/pages/WalletPage/WalletPage.tsx';
+import TrackerPage from './app/base/pages/TrackerPage/TrackerPage.tsx';
 
 const router = createBrowserRouter(
   [
-    // todo
-    //  add custom guards
-
+    {
+      path: '/',
+      element: <BaseLayout />, // todo added auth guard here
+      children: [
+        {
+          path: '/',
+          element: <WalletPage />
+        },
+        {
+          path: 'tracker',
+          element: <TrackerPage />
+        }
+      ]
+    },
     {
       path: '/auth',
       element: <AuthLayout />,

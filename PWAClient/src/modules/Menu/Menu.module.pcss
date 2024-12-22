@@ -1,0 +1,44 @@
+.menu {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: var(--black-blue-color);
+  height: 60px;
+  gap: var(--gap16);
+}
+
+.title {
+  font-size: var(--font-size16);
+  color: var(--white-color);
+}
+
+.routes {
+  display: none;
+}
+
+.user {
+  display: none;
+}
+
+@media (--breakpoint-tablet) {
+  .menu {
+    justify-content: center;
+  }
+
+  .button {
+    display: none;
+  }
+
+  .title {
+    display: none;
+  }
+
+  .routes {
+    display: flex;
+  }
+
+  .user {
+    display: block;
+    margin-top: 10px;
+  }
+}

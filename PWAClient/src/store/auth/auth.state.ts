@@ -11,17 +11,22 @@ export interface StateScheme {
   error: string | null;
 }
 
-const storage = createJSONStorage<StateScheme>(() => localStorage);
+function getInitialState(): StateScheme {
+  const state = localStorage.getItem('auth');
+  return state
+    ? JSON.parse(state)
+    : {
+        accessToken: null,
+        expiresDate: null,
+        isLoading: false,
+        error: null
+      };
+}
 
 export const authState = atomWithStorage<StateScheme>(
   'auth',
-  {
-    accessToken: null,
-    expiresDate: null,
-    isLoading: false,
-    error: null
-  },
-  storage
+  getInitialState(),
+  createJSONStorage<StateScheme>(() => localStorage)
 );
 
 export const loginAtom = atom(

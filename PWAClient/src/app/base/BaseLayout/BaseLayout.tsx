@@ -43,7 +43,7 @@ export default function BaseLayout() {
   }, []);
 
   return (
-    <>
+    <div>
       <Menu
         toggleDrawer={toggleDrawer}
         routeName={currentRouteName}
@@ -64,6 +64,6 @@ export default function BaseLayout() {
       <div className={styles.container}>
         <Outlet />
       </div>
-    </>
+    </div>
   );
 }

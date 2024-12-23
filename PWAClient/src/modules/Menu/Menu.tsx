@@ -2,7 +2,7 @@ import styles from './Menu.module.pcss';
 import MenuButton from './components/MenuButton/MenuButton.tsx';
 import { MenuProps } from './Menu.props.ts';
 import MenuItem from '../../components/MenuItem/MenuItem.tsx';
-import UserBlock from '../CustomDrawer/UserBlock/UserBlock.tsx';
+import UserBlock from '../../components/UserBlock/UserBlock.tsx';
 
 export default function Menu({ ...props }: MenuProps) {
   return (

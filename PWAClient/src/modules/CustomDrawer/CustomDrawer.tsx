@@ -3,7 +3,7 @@ import styles from './CustomDrawer.module.pcss';
 import { CustomDrawerProps } from './CustomDrawer.props.ts';
 import Drawer from 'react-modern-drawer';
 import { CloseIcon } from './icons/CloseIcon.tsx';
-import UserBlock from './UserBlock/UserBlock.tsx';
+import UserBlock from '../../components/UserBlock/UserBlock.tsx';
 import MenuItem from '../../components/MenuItem/MenuItem.tsx';
 import Button from '../../UI/Button/Button.tsx';
 

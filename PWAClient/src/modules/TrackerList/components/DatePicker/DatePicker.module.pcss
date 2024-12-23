@@ -1,0 +1,62 @@
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap30);
+  background-color: var(--black-blue-color);
+  width: 100%;
+  height: 70px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border-radius: var(--radius20);
+  padding: 15px;
+  min-width: 350px;
+}
+
+.date {
+  width: 100%;
+  text-align: center;
+}
+
+.dateText {
+  font-weight: var(--font-weight-semi-bold);
+  font-size: var(--font-size18);
+  color: var(--white-color);
+}
+
+.button {
+  width: 300px;
+}
+
+.dayPicker {
+  color: var(--white-color);
+}
+
+.modalBackdrop {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: var(--modal-color);
+  backdrop-filter: blur(15px);
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.modal {
+  padding: 20px;
+  border-radius: var(--radius20);
+  box-sizing: var(--shadow-3);
+  background-color: var(--violet-dark-color);
+}
+
+.modalWrapper {
+  display: flex;
+  margin-top: 20px;
+  gap: var(--gap20);
+}
+
+.modalBackdropActive {
+  display: flex;
+}

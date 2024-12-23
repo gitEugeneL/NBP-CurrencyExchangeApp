@@ -7,6 +7,7 @@
   border-radius: var(--radius20);
   background-color: var(--violet-dark-color);
   gap: var(--gap20);
+  min-width: 350px;
 }
 
 .icon {
@@ -20,4 +21,10 @@
   font-weight: var(--font-weight-semi-bold);
   font-size: var(--font-size16);
   color: var(--white-color);
+}
+
+@media (--breakpoint-tablet) {
+  .title {
+    font-size: var(--font-size20);
+  }
 }

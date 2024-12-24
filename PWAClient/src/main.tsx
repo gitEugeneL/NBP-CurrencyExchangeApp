@@ -27,7 +27,11 @@ const router = createBrowserRouter(
       ),
       children: [
         {
-          path: '/',
+          path: '',
+          element: <Navigate to='/wallets' replace />
+        },
+        {
+          path: '/wallets',
           element: <WalletPage />
         },
         {

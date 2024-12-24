@@ -13,7 +13,7 @@ import { logoutAtom } from '../../../store/auth/auth.state.ts';
 
 export default function BaseLayout() {
   const routes = [
-    { name: 'My Wallets', path: 'index', icon: <WalletIcon /> },
+    { name: 'My Wallets', path: 'wallets', icon: <WalletIcon /> },
     { name: 'Tracker', path: 'tracker', icon: <TrackerIcon /> },
     { name: 'Buy currency', path: 'buy', icon: <ArrowIcon /> },
     { name: 'Sell currency', path: 'sell', icon: <ArrowIcon /> },

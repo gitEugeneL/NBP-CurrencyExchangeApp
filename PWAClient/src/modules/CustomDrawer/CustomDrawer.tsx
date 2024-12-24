@@ -31,6 +31,7 @@ export default function CustomDrawer({ ...props }: CustomDrawerProps) {
             name={route.name}
             path={route.path}
             icon={route.icon}
+            toggleDrawer={props.toggleDrawer}
           />
         ))}
 

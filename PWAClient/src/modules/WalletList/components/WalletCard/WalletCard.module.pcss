@@ -1,0 +1,76 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--violet-dark-color);
+  border-radius: var(--radius20);
+  gap: var(--gap10);
+  padding: 16px;
+  width: 100%;
+  margin: 10px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: var(--gap10);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.firstBlock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.secondBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.withWallet {
+  background-color: var(--violet-dark-color);
+  box-shadow: var(--shadow-4);
+
+  &:focus,
+  &:hover {
+    outline: 4px solid var(--primary-hover-color);
+  }
+}
+
+.withoutWallet {
+  background-color: var(--black-blue-color);
+}
+
+.shortName,
+.price {
+  color: var(--white-color);
+  font-size: var(--font-size18);
+}
+
+.country,
+.name {
+  color: var(--white-color);
+  font-size: var(--font-size14);
+}
+
+.btnBlock {
+  display: flex;
+  width: 100%;
+  gap: var(--gap16);
+}
+
+.createButton {
+  margin-left: auto;
+  width: 35%;
+}

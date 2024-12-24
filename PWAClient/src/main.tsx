@@ -14,12 +14,17 @@ import SuccessPage from './app/auth/pages/SuccessPage/SuccessPage.tsx';
 import BaseLayout from './app/base/BaseLayout/BaseLayout.tsx';
 import WalletPage from './app/base/pages/WalletPage/WalletPage.tsx';
 import TrackerPage from './app/base/pages/TrackerPage/TrackerPage.tsx';
+import RequireAuth from './app/RequireAuth.tsx';
 
 const router = createBrowserRouter(
   [
     {
       path: '/',
-      element: <BaseLayout />, // todo added auth guard here
+      element: (
+        <RequireAuth>
+          <BaseLayout />
+        </RequireAuth>
+      ),
       children: [
         {
           path: '/',

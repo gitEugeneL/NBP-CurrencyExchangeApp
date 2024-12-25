@@ -15,7 +15,8 @@ import BaseLayout from './app/base/BaseLayout/BaseLayout.tsx';
 import WalletPage from './app/base/pages/WalletPage/WalletPage.tsx';
 import TrackerPage from './app/base/pages/TrackerPage/TrackerPage.tsx';
 import RequireAuth from './app/RequireAuth.tsx';
-import BuyPage from './app/base/pages/BuyPage/BuePage.tsx';
+import BuyPage from './app/base/pages/BuyPage/BuyPage.tsx';
+import SellPage from './app/base/pages/SellPage/SellPage.tsx';
 
 const router = createBrowserRouter(
   [
@@ -42,6 +43,10 @@ const router = createBrowserRouter(
         {
           path: 'buy',
           element: <BuyPage />
+        },
+        {
+          path: 'sell',
+          element: <SellPage />
         }
       ]
     },

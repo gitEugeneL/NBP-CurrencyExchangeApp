@@ -9,6 +9,7 @@ import { isToday } from '../../helpers/dateHelpers.ts';
 import cn from 'classnames';
 import { roundMoney } from '../../helpers/moneyHelpers.ts';
 import MoneyLogo from '../../UI/MoneyLogo/MoneyLogo.tsx';
+import CurrencyOperationModal from './UI/CurrencyOperationModal/CurrencyOperationModal.tsx';
 
 export default function CurrencyCard({
   date,
@@ -61,9 +62,9 @@ export default function CurrencyCard({
               <span className={styles.price}>{buyRate}</span>
             </p>
 
-            <div>
+            <div className={styles.namesBlock}>
               {appearance !== 'default' && (
-                <p>
+                <p className={styles.value}>
                   {symbol} {roundMoney(walletValue!)}
                 </p>
               )}
@@ -98,6 +99,22 @@ export default function CurrencyCard({
           <MoneyLogo shortName={shortName} />
         </div>
       </div>
+
+      {appearance !== 'default' && (
+        <CurrencyOperationModal
+          isVisible={isOperationModalVisible}
+          onClose={handleCloseBtnOperationModal}
+          operationType={appearance}
+          operation={handleOperation}
+          name={name}
+          shortName={shortName}
+          symbol={symbol}
+          maxValue={
+            appearance === 'buy' ? baseValue! / sellRate! : walletValue!
+          }
+          rate={appearance === 'buy' ? sellRate! : buyRate!}
+        />
+      )}
     </>
   );
 }

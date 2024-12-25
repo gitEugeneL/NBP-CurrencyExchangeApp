@@ -15,6 +15,7 @@ import BaseLayout from './app/base/BaseLayout/BaseLayout.tsx';
 import WalletPage from './app/base/pages/WalletPage/WalletPage.tsx';
 import TrackerPage from './app/base/pages/TrackerPage/TrackerPage.tsx';
 import RequireAuth from './app/RequireAuth.tsx';
+import BuyPage from './app/base/pages/BuyPage/BuePage.tsx';
 
 const router = createBrowserRouter(
   [
@@ -31,12 +32,16 @@ const router = createBrowserRouter(
           element: <Navigate to='/wallets' replace />
         },
         {
-          path: '/wallets',
+          path: 'wallets',
           element: <WalletPage />
         },
         {
           path: 'tracker',
           element: <TrackerPage />
+        },
+        {
+          path: 'buy',
+          element: <BuyPage />
         }
       ]
     },

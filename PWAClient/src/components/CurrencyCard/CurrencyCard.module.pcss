@@ -6,7 +6,7 @@
   border-radius: var(--radius20);
   gap: var(--gap16);
   width: 100%;
-  min-width: max-content;
+  min-width: 380px;
   margin: 13px;
   padding: 15px;
 }
@@ -31,11 +31,21 @@
   &:hover {
     outline: 3px solid var(--primary-hover-color);
   }
-
 }
 
 .nameWrapper {
   align-items: flex-end;
+}
+
+.namesBlock {
+  display: flex;
+  gap: var(--gap10);
+  align-items: center;
+}
+
+.value {
+  color: var(--white-color);
+  font-size: var(--font-size14);
 }
 
 .price {

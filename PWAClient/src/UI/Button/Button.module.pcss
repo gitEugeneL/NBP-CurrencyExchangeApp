@@ -15,6 +15,19 @@
   width: 100%;
 }
 
+button:disabled {
+  background-color: var(--black-gray-color);
+  color: var(--gray-color);
+  cursor: not-allowed;
+  opacity: 0.2;
+
+  &:focus,
+  &:hover {
+    background-color: var(--black-gray-color);
+    color: var(--gray-color);
+  }
+}
+
 .small {
   height: 40px;
   font-size: var(--font-size16);

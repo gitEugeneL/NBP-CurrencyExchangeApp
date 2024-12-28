@@ -6,10 +6,13 @@ import { DayPicker } from 'react-day-picker';
 import { DatePickerProps } from './DatePicker.props.ts';
 import cn from 'classnames';
 import { dateToFormat } from '../../../../helpers/dateHelpers.ts';
+import useNetworkStatus from '../../../../helpers/useNetworkSatus.ts';
 
 export default function DatePicker({ ...props }: DatePickerProps) {
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<Date>();
+
+  const isOnline = useNetworkStatus();
 
   const toggleModal = () => setIsShowModal(!isShowModal);
 
@@ -27,7 +30,12 @@ export default function DatePicker({ ...props }: DatePickerProps) {
           <span className={styles.dateText}>{dateToFormat(props.date)}</span>
         </div>
         <div className={styles.button}>
-          <Button name='Change' size='small' onClick={toggleModal} />
+          <Button
+            disabled={!isOnline}
+            name='Change'
+            size='small'
+            onClick={toggleModal}
+          />
         </div>
       </div>
 

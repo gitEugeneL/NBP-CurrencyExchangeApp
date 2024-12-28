@@ -10,6 +10,7 @@ import cn from 'classnames';
 import { roundMoney } from '../../helpers/moneyHelpers.ts';
 import MoneyLogo from '../../UI/MoneyLogo/MoneyLogo.tsx';
 import CurrencyOperationModal from './UI/CurrencyOperationModal/CurrencyOperationModal.tsx';
+import useNetworkStatus from '../../helpers/useNetworkSatus.ts';
 
 export default function CurrencyCard({
   date,
@@ -30,6 +31,8 @@ export default function CurrencyCard({
   const [isOperationModalVisible, setOperationModalVisible] =
     useState<boolean>(false);
 
+  const isOnline = useNetworkStatus();
+
   const handleCardClick = () => setOperationModalVisible(true);
   const handleCloseBtnOperationModal = () => setOperationModalVisible(false);
 
@@ -47,7 +50,8 @@ export default function CurrencyCard({
     <>
       <div
         className={cn(styles.card, {
-          [styles.activeCard]: appearance !== 'default'
+          [styles.activeCard]: appearance !== 'default',
+          [styles.disabledCard]: !isOnline
         })}
         onClick={handleCardClick}
       >

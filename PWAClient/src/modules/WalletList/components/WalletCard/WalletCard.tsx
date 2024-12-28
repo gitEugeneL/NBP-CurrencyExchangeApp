@@ -16,10 +16,13 @@ import { roundMoney } from '../../../../helpers/moneyHelpers.ts';
 import Button from '../../../../UI/Button/Button.tsx';
 import ConfirmModal from './ConfirmModal/ConfirmModal.tsx';
 import OperationModal from './OperationModal/OperationModal.tsx';
+import useNetworkStatus from '../../../../helpers/useNetworkSatus.ts';
 
 export default function WalletCard({ ...props }: WalletCardProps) {
   const createUserWallet = useSetAtom(createUserWalletAtom);
   const walletOperation = useSetAtom(walletOperationAtom);
+
+  const isOnline = useNetworkStatus();
 
   const [isConfirmModalVisible, setConfirmModalVisible] =
     useState<boolean>(false);
@@ -87,11 +90,17 @@ export default function WalletCard({ ...props }: WalletCardProps) {
       {props.isCreated && (
         <div className={styles.btnBlock}>
           <Button
+            disabled={!isOnline}
             name='Add money'
             size='small'
             onClick={handleAddMoneyButton}
           />
-          <Button name='Withdraw' size='small' onClick={handleWithdrawButton} />
+          <Button
+            disabled={!isOnline}
+            name='Withdraw'
+            size='small'
+            onClick={handleWithdrawButton}
+          />
 
           <OperationModal
             isWithdraw={isWithdraw}

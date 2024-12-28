@@ -10,6 +10,8 @@ import { useEffect, useState } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai/index';
 import { getUserInfoAtom, userState } from '../../../store/user/user.state.ts';
 import { logoutAtom } from '../../../store/auth/auth.state.ts';
+import useNetworkStatus from '../../../helpers/useNetworkSatus.ts';
+import OfflineNotification from '../../../UI/OfflineNotification/OfflineNotification.tsx';
 
 export default function BaseLayout() {
   const routes = [
@@ -24,6 +26,17 @@ export default function BaseLayout() {
     }
   ];
 
+  const isOnline = useNetworkStatus();
+  const onlineRoutes = isOnline
+    ? routes
+    : routes.filter(
+        (route) => !['tracker', 'buy', 'sell'].includes(route.path)
+      );
+
+  const user = useAtomValue(userState);
+  const userInfo = useSetAtom(getUserInfoAtom);
+  const logout = useSetAtom(logoutAtom);
+
   const location = useLocation();
   const currentRouteName =
     location.pathname.slice(1).charAt(0).toUpperCase() +
@@ -31,10 +44,6 @@ export default function BaseLayout() {
 
   const [isDrawerOpened, setIsDrawerOpened] = useState<boolean>(false);
   const toggleDrawer = () => setIsDrawerOpened(!isDrawerOpened);
-
-  const user = useAtomValue(userState);
-  const userInfo = useSetAtom(getUserInfoAtom);
-  const logout = useSetAtom(logoutAtom);
 
   useEffect(() => {
     if (!user.userId) {
@@ -44,18 +53,20 @@ export default function BaseLayout() {
 
   return (
     <div>
+      {!isOnline && <OfflineNotification />}
+
       <Menu
         toggleDrawer={toggleDrawer}
         routeName={currentRouteName}
         logout={logout}
         user={user}
-        routes={routes}
+        routes={onlineRoutes}
       />
       <div className={styles.drawer}>
         <CustomDrawer
           logout={logout}
           user={user}
-          routes={routes}
+          routes={onlineRoutes}
           isDrawerOpened={isDrawerOpened}
           toggleDrawer={toggleDrawer}
         />

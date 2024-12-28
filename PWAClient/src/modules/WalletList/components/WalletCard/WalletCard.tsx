@@ -16,7 +16,7 @@ import { roundMoney } from '../../../../helpers/moneyHelpers.ts';
 import Button from '../../../../UI/Button/Button.tsx';
 import ConfirmModal from './ConfirmModal/ConfirmModal.tsx';
 import OperationModal from './OperationModal/OperationModal.tsx';
-import useNetworkStatus from '../../../../helpers/useNetworkSatus.ts';
+import useNetworkStatus from '../../../../hoc/useNetworkSatus.ts';
 
 export default function WalletCard({ ...props }: WalletCardProps) {
   const createUserWallet = useSetAtom(createUserWalletAtom);

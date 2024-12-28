@@ -6,7 +6,7 @@ import { DayPicker } from 'react-day-picker';
 import { DatePickerProps } from './DatePicker.props.ts';
 import cn from 'classnames';
 import { dateToFormat } from '../../../../helpers/dateHelpers.ts';
-import useNetworkStatus from '../../../../helpers/useNetworkSatus.ts';
+import useNetworkStatus from '../../../../hoc/useNetworkSatus.ts';
 
 export default function DatePicker({ ...props }: DatePickerProps) {
   const [isShowModal, setIsShowModal] = useState<boolean>(false);

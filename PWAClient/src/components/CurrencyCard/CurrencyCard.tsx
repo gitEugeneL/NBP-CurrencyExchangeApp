@@ -10,7 +10,8 @@ import cn from 'classnames';
 import { roundMoney } from '../../helpers/moneyHelpers.ts';
 import MoneyLogo from '../../UI/MoneyLogo/MoneyLogo.tsx';
 import CurrencyOperationModal from './UI/CurrencyOperationModal/CurrencyOperationModal.tsx';
-import useNetworkStatus from '../../helpers/useNetworkSatus.ts';
+import useNetworkStatus from '../../hoc/useNetworkSatus.ts';
+import useNotifications from '../../hoc/useNotifications.ts';
 
 export default function CurrencyCard({
   date,
@@ -32,6 +33,7 @@ export default function CurrencyCard({
     useState<boolean>(false);
 
   const isOnline = useNetworkStatus();
+  const push = useNotifications();
 
   const handleCardClick = () => setOperationModalVisible(true);
   const handleCloseBtnOperationModal = () => setOperationModalVisible(false);
@@ -42,7 +44,12 @@ export default function CurrencyCard({
       amount: amount,
       operation: appearance === 'buy' ? 'buy' : 'sell'
     };
-    buyMoney(request).then(() => loadTransactions());
+    buyMoney(request)
+      .then(() => loadTransactions())
+      .then(() => {
+        push('Transaction successful!');
+      });
+
     setOperationModalVisible(false);
   };
 

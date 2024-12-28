@@ -3,8 +3,8 @@ import react from '@vitejs/plugin-react-swc';
 import { ManifestOptions, VitePWA } from 'vite-plugin-pwa';
 
 const manifest: Partial<ManifestOptions> | false = {
-  theme_color: '#6533c0',
-  background_color: '#18181e',
+  theme_color: '#2B2A3AFF',
+  background_color: '#2B2A3AFF',
   icons: [
     {
       purpose: 'maskable',
@@ -32,6 +32,9 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true
+      },
       workbox: {
         globPatterns: ['**/*.{html,css,js,ico,png,svg}']
       },

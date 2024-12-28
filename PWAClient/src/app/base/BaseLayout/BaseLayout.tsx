@@ -10,8 +10,9 @@ import { useEffect, useState } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai/index';
 import { getUserInfoAtom, userState } from '../../../store/user/user.state.ts';
 import { logoutAtom } from '../../../store/auth/auth.state.ts';
-import useNetworkStatus from '../../../helpers/useNetworkSatus.ts';
+import useNetworkStatus from '../../../hoc/useNetworkSatus.ts';
 import OfflineNotification from '../../../UI/OfflineNotification/OfflineNotification.tsx';
+import useNotifications from '../../../hoc/useNotifications.ts';
 
 export default function BaseLayout() {
   const routes = [
@@ -26,6 +27,7 @@ export default function BaseLayout() {
     }
   ];
 
+  const push = useNotifications();
   const isOnline = useNetworkStatus();
   const onlineRoutes = isOnline
     ? routes
@@ -50,6 +52,12 @@ export default function BaseLayout() {
       userInfo();
     }
   }, []);
+
+  useEffect(() => {
+    if (isOnline) {
+      push('App is ready!');
+    }
+  }, [isOnline]);
 
   return (
     <div>

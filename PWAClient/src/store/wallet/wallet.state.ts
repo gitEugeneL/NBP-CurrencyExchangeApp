@@ -8,18 +8,32 @@ import {
 import axios, { AxiosError } from 'axios';
 import { authState } from '../auth/auth.state';
 import { walletApi } from './wallet.api';
+import { atomWithStorage, createJSONStorage } from 'jotai/utils';
 
-export interface StateSchema {
+const STORAGE_NAME = 'wallets';
+
+export interface StateScheme {
   wallets: WalletResponse[];
   isLoading: boolean;
   error: string | null;
 }
 
-export const walletState = atom<StateSchema>({
-  wallets: [],
-  isLoading: false,
-  error: null
-});
+function getInitialState(): StateScheme {
+  const state = localStorage.getItem(STORAGE_NAME);
+  return state
+    ? JSON.parse(state)
+    : {
+        wallets: [],
+        isLoading: false,
+        error: null
+      };
+}
+
+export const walletState = atomWithStorage<StateScheme>(
+  STORAGE_NAME,
+  getInitialState(),
+  createJSONStorage<StateScheme>(() => localStorage)
+);
 
 export const getUserWalletsAtom = atom(
   async (get) => {

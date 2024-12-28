@@ -21,12 +21,14 @@ export default function WalletList() {
   const loadWallets = useSetAtom(getUserWalletsAtom);
 
   useEffect(() => {
-    const params: CurrencyParams = {
-      withRate: false,
-      currencyDate: null
-    };
-    loadCurrencies(params);
-    loadWallets();
+    if (currencies.length === 0) {
+      const params: CurrencyParams = {
+        withRate: false,
+        currencyDate: null
+      };
+      loadCurrencies(params);
+      loadWallets();
+    }
   }, []);
 
   const walletMap: Record<string, WalletResponse | undefined> = {};

@@ -3,18 +3,32 @@ import { CurrencyParams, CurrencyResponse } from './currency.models';
 import axios, { AxiosError } from 'axios';
 import { authState } from '../auth/auth.state';
 import { currencyApi } from './currency.api';
+import { atomWithStorage, createJSONStorage } from 'jotai/utils';
 
-export interface StateSchema {
+const STORAGE_NAME = 'currencies';
+
+export interface StateScheme {
   currencies: CurrencyResponse[];
   isLoading: boolean;
   error: string | null;
 }
 
-export const currencyState = atom<StateSchema>({
-  currencies: [],
-  isLoading: false,
-  error: null
-});
+function getInitialState(): StateScheme {
+  const state = localStorage.getItem(STORAGE_NAME);
+  return state
+    ? JSON.parse(state)
+    : {
+        currencies: [],
+        isLoading: false,
+        error: null
+      };
+}
+
+export const currencyState = atomWithStorage<StateScheme>(
+  STORAGE_NAME,
+  getInitialState(),
+  createJSONStorage<StateScheme>(() => localStorage)
+);
 
 export const getAllCurrenciesAtom = atom(
   async (get) => {

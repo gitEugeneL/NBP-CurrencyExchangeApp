@@ -1,20 +1,32 @@
 import { TransactionResponse } from './transaction.models';
 import { atom } from 'jotai';
 import axios, { AxiosError } from 'axios';
-import { authState } from '../auth/auth.state';
 import { transactionApi } from './transactions.api';
+import { atomWithStorage, createJSONStorage } from 'jotai/utils';
+import { authState } from '../auth/auth.state.ts';
 
-export interface StateSchema {
+export interface StateScheme {
   transactions: TransactionResponse[];
   isLoading: boolean;
   error: string | null;
 }
 
-export const transactionState = atom<StateSchema>({
-  transactions: [],
-  isLoading: false,
-  error: null
-});
+function getInitialState(): StateScheme {
+  const state = localStorage.getItem('transactions');
+  return state
+    ? JSON.parse(state)
+    : {
+        transactions: [],
+        isLoading: false,
+        error: null
+      };
+}
+
+export const transactionState = atomWithStorage<StateScheme>(
+  'transactions',
+  getInitialState(),
+  createJSONStorage<StateScheme>(() => localStorage)
+);
 
 export const getAllTransactionsAtom = atom(
   async (get) => {

@@ -3,6 +3,7 @@ import { authState } from '../auth/auth.state';
 import axios, { AxiosError } from 'axios';
 import { UserResponse } from './user.models';
 import { userApi } from './user.api';
+import { atomWithStorage, createJSONStorage } from 'jotai/utils';
 
 export interface StateScheme {
   userId: string | null;
@@ -12,13 +13,24 @@ export interface StateScheme {
   error: string | null;
 }
 
-export const userState = atom<StateScheme>({
-  userId: null,
-  username: null,
-  email: null,
-  isLoading: false,
-  error: null
-});
+function getInitialState(): StateScheme {
+  const state = localStorage.getItem('user');
+  return state
+    ? JSON.parse(state)
+    : {
+        userId: null,
+        username: null,
+        email: null,
+        isLoading: false,
+        error: null
+      };
+}
+
+export const userState = atomWithStorage<StateScheme>(
+  'user',
+  getInitialState(),
+  createJSONStorage<StateScheme>(() => localStorage)
+);
 
 export const getUserInfoAtom = atom(
   async (get) => {

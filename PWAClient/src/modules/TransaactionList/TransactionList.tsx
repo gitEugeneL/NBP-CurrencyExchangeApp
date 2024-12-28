@@ -13,7 +13,9 @@ export default function TransactionList() {
   const loadTransactions = useSetAtom(getAllTransactionsAtom);
 
   useEffect(() => {
-    loadTransactions();
+    if (transactions.length === 0) {
+      loadTransactions();
+    }
   }, []);
 
   return (

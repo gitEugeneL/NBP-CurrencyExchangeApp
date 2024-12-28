@@ -75,6 +75,10 @@ const router = createBrowserRouter(
           element: <SuccessPage />
         }
       ]
+    },
+    {
+      path: '*',
+      element: <Navigate to='/auth' replace />
     }
   ],
   {

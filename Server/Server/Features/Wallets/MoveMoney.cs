@@ -8,6 +8,7 @@ using Server.Data.Persistence;
 using Server.Domain.Entities;
 using Server.Helpers;
 using Server.Integrations;
+using Server.Integrations.NbpApi;
 using Server.Security.Interfaces;
 
 namespace Server.Features.Wallets;

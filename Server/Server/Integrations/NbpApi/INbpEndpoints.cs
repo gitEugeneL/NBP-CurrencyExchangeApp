@@ -2,7 +2,7 @@ using Refit;
 using Server.Integrations.NbpApi.Contracts;
 using Server.Integrations.NbpApi.Models;
 
-namespace Server.Integrations;
+namespace Server.Integrations.NbpApi;
 
 public interface INbpEndpoints
 {

@@ -11,6 +11,8 @@ using Refit;
 using Server.Data.Persistence;
 using Server.Helpers;
 using Server.Integrations;
+using Server.Integrations.NbpApi;
+using Server.Integrations.OpenCageApi;
 using Server.Security;
 using Server.Security.Interfaces;
 using Swashbuckle.AspNetCore.Filters;
@@ -18,6 +20,7 @@ using Swashbuckle.AspNetCore.Filters;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
+    .AddScoped<IOpenCageService, OpenCageService>()
     .AddScoped<ITokenService, TokenService>()
     .AddScoped<IUserService, UserService>()
     .AddScoped<INpbService, NpbService>()
@@ -92,6 +95,10 @@ builder.Services.AddAuthorizationBuilder()
 /*** Nbp integration ***/
 builder.Services.AddRefitClient<INbpEndpoints>().ConfigureHttpClient((sp, httpClient) =>
     httpClient.BaseAddress = new Uri(builder.Configuration.GetSection("NBPIntegration").Value!));
+
+/*** OpenCargoData integration ***/
+builder.Services.AddRefitClient<IOpenCageEndpoints>().ConfigureHttpClient((sp, httpClient) =>
+    httpClient.BaseAddress = new Uri(builder.Configuration.GetSection("OpenCageDataIntegration:Url").Value!));
 
 var app = builder.Build();
 

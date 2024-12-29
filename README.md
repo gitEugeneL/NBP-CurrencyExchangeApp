@@ -1,7 +1,11 @@
 # NBP-CurrencyExchangeApp
 
-This is a currency exchange application using the NBP API.
-The project includes ASP.NET server and React Native mobile app, providing real-time exchange rates and a user-friendly experience.
+This is a currency exchange application utilizing the NBP API.  
+
+The project comprises:
+- ASP.NET server for backend functionalities,
+- React Native mobile application,
+- React PWA application.
 
 ## 👷 Frameworks, Libraries and Technologies
 
@@ -29,6 +33,16 @@ The project includes ASP.NET server and React Native mobile app, providing real-
 - [Jotai state management](https://github.com/pmndrs/jotai)
 - [Async-storage](https://github.com/react-native-async-storage/async-storage)
 
+### PWA Client
+
+- [TypeScript](https://github.com/microsoft/TypeScript)
+- [React](https://github.com/facebook/react)
+- [React router](https://github.com/remix-run/react-router)
+- [Vite](https://github.com/vitejs/vite)
+- [Vite PWA](https://github.com/vite-pwa/vite-plugin-pwa)
+- [Yup validation](https://github.com/jquense/yup)
+- [Netlify](https://app.netlify.com/)
+- [Jotai state management](https://github.com/pmndrs/jotai)
 
 
 ## 🐳 List of docker containers
@@ -80,6 +94,20 @@ The project includes ASP.NET server and React Native mobile app, providing real-
 
    ```sh
     a  # the application will automatically be launched in the virtual device
+   ```
+
+## ⛵ How to run PWA client (dev environment)
+
+1. Install the necessary dependencies in the project
+
+   ```sh
+    npm i
+   ```
+
+2. Start the Vite server
+
+   ```sh
+    npm run dev
    ```
 
 ## 🔐 Local access (backend)

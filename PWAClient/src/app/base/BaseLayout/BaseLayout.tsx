@@ -13,6 +13,8 @@ import { logoutAtom } from '../../../store/auth/auth.state.ts';
 import useNetworkStatus from '../../../hoc/useNetworkSatus.ts';
 import OfflineNotification from '../../../UI/OfflineNotification/OfflineNotification.tsx';
 import useNotifications from '../../../hoc/useNotifications.ts';
+import useUserGeolocation from '../../../hoc/useUserGeolocation.ts';
+import { GetUserParams } from '../../../store/user/user.models.ts';
 
 export default function BaseLayout() {
   const routes = [
@@ -39,6 +41,8 @@ export default function BaseLayout() {
   const userInfo = useSetAtom(getUserInfoAtom);
   const logout = useSetAtom(logoutAtom);
 
+  const { position } = useUserGeolocation();
+
   const location = useLocation();
   const currentRouteName =
     location.pathname.slice(1).charAt(0).toUpperCase() +
@@ -48,10 +52,14 @@ export default function BaseLayout() {
   const toggleDrawer = () => setIsDrawerOpened(!isDrawerOpened);
 
   useEffect(() => {
-    if (!user.userId) {
-      userInfo();
+    if (user.geoData === '' || user.geoData === null) {
+      const params: GetUserParams = {
+        userLatitude: position?.coords.latitude.toString(),
+        userLongitude: position?.coords.longitude.toString()
+      };
+      userInfo(params);
     }
-  }, []);
+  }, [position]);
 
   useEffect(() => {
     if (isOnline) {

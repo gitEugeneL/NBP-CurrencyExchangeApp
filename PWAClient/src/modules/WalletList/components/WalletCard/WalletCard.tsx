@@ -117,6 +117,7 @@ export default function WalletCard({ ...props }: WalletCardProps) {
       {!props.isCreated && (
         <>
           <Button
+            disabled={!isOnline}
             name='Create wallet'
             appearance='secondary'
             size='small'

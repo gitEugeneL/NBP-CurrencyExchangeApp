@@ -1,3 +1,7 @@
+/* local */
+// const localPort = 5044;
+// export const PREFIX = `http://localhost:${localPort}/api`;
+
 /* local docker */
 const dockerPort = 8000;
 export const PREFIX = `http://localhost:${dockerPort}/api`;

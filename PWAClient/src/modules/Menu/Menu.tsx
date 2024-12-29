@@ -26,6 +26,7 @@ export default function Menu({ ...props }: MenuProps) {
       <div className={styles.user}>
         <UserBlock
           username={props.user.username!}
+          geoData={props.user.geoData!}
           email={props.user.email!}
           logout={props.logout}
         />

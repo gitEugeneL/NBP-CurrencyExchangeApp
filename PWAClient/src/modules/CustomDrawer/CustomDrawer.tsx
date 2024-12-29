@@ -23,7 +23,11 @@ export default function CustomDrawer({ ...props }: CustomDrawerProps) {
         <div className={styles.closeButton} onClick={props.toggleDrawer}>
           <CloseIcon />
         </div>
-        <UserBlock username={props.user.username!} email={props.user.email!} />
+        <UserBlock
+          username={props.user.username!}
+          email={props.user.email!}
+          geoData={props.user.geoData!}
+        />
 
         {props.routes.map((route) => (
           <MenuItem

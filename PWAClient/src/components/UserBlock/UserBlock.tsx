@@ -5,7 +5,7 @@ import Button from '../../UI/Button/Button.tsx';
 import { useState } from 'react';
 import cn from 'classnames';
 
-export default function UserBlock({ username, email, logout }: UserBlockProps) {
+export default function UserBlock({ ...props }: UserBlockProps) {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   const toggleModal = () => {
@@ -21,8 +21,9 @@ export default function UserBlock({ username, email, logout }: UserBlockProps) {
     >
       <img className={styles.image} src={profileImage} alt='user image' />
       <div className={styles.wrapper}>
-        <p className={styles.name}>{username}</p>
-        <p className={styles.email}>{email}</p>
+        <p className={styles.name}>{props.username}</p>
+        <p className={styles.email}>{props.email}</p>
+        <p className={styles.geoData}>{props.geoData}</p>
       </div>
 
       <div
@@ -32,15 +33,16 @@ export default function UserBlock({ username, email, logout }: UserBlockProps) {
       >
         <div className={styles.modal}>
           <div className={styles.modalWrapper}>
-            <p className={styles.name}>{username}</p>
-            <p className={styles.email}>{email}</p>
+            <p className={styles.name}>{props.username}</p>
+            <p className={styles.email}>{props.email}</p>
+            <p className={styles.geoData}>{props.geoData}</p>
           </div>
           <div className={styles.button}>
             <Button
               name='Logout'
               appearance='secondary'
               size='small'
-              onClick={logout}
+              onClick={props.logout}
             />
           </div>
         </div>

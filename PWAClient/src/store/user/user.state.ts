@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
 import { authState } from '../auth/auth.state';
 import axios, { AxiosError } from 'axios';
-import { UserResponse } from './user.models';
+import { GetUserParams, UserResponse } from './user.models';
 import { userApi } from './user.api';
 import { atomWithStorage, createJSONStorage } from 'jotai/utils';
 
@@ -9,6 +9,7 @@ export interface StateScheme {
   userId: string | null;
   username: string | null;
   email: string | null;
+  geoData: string | null;
   isLoading: boolean;
   error: string | null;
 }
@@ -21,6 +22,7 @@ function getInitialState(): StateScheme {
         userId: null,
         username: null,
         email: null,
+        geoData: null,
         isLoading: false,
         error: null
       };
@@ -37,11 +39,12 @@ export const getUserInfoAtom = atom(
     return get(userState);
   },
 
-  async (get, set) => {
+  async (get, set, requestParams: GetUserParams) => {
     set(userState, {
       userId: null,
       username: null,
       email: null,
+      geoData: null,
       isLoading: true,
       error: null
     });
@@ -49,6 +52,9 @@ export const getUserInfoAtom = atom(
     try {
       const { accessToken } = await get(authState);
       const { data } = await axios.get<UserResponse>(userApi.getUserInfo, {
+        params: {
+          ...requestParams
+        },
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
@@ -57,6 +63,7 @@ export const getUserInfoAtom = atom(
         userId: data.userId,
         username: data.username,
         email: data.email,
+        geoData: data.geoData,
         isLoading: false,
         error: null
       });
@@ -67,6 +74,7 @@ export const getUserInfoAtom = atom(
           userId: null,
           username: null,
           email: null,
+          geoData: null,
           isLoading: false,
           error: error.response?.data
         });

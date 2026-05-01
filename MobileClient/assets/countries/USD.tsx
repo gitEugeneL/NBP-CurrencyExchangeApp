@@ -11,9 +11,9 @@ export const USD = ({ width = 57, height = 57 }: { width?: number; height?: numb
         x={0}
         y={0}
         maskUnits="userSpaceOnUse"
-        style={{
-          maskType: 'luminance',
-        }}
+        // style={{
+        //   maskType: 'luminance',
+        // }}
       >
         <Path fill="#fff" d="M0 0h57v57H0V0Z" />
       </Mask>

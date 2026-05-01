@@ -1,13 +1,6 @@
 {
-  "plugins": [
-    "prettier",
-    "react",
-    "react-native"
-  ],
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
-  ],
+  "plugins": ["prettier", "react", "react-native"],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   "rules": {
     "react-native/no-unused-styles": 2,
     "react-native/split-platform-components": 2,
@@ -28,9 +21,7 @@
         "endOfLine": "auto"
       }
     ],
-    "@typescript-eslint/no-empty-function": [
-      "off"
-    ],
+    "@typescript-eslint/no-empty-function": ["off"],
     "@typescript-eslint/interface-name-prefix": "off",
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",

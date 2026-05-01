@@ -4,7 +4,7 @@ import TransactionCard from './components/TransactionCard/TransactionCard';
 import { useAtomValue, useSetAtom } from 'jotai';
 import {
   getAllTransactionsAtom,
-  transactionState,
+  transactionState
 } from '../../store/transactions/transaction.state';
 import { useEffect } from 'react';
 import Loading from '../../UI/Loading/Loading';
@@ -24,10 +24,10 @@ export default function TransactionList() {
 
       {!isLoading && transactions.length === 0 && (
         <WarningCard
-          title="There are no transactions yet!"
-          appearance="money"
-          buttonName="Show tracker"
-          redirectRoute="tracker"
+          title='There are no transactions yet!'
+          appearance='money'
+          buttonName='Show tracker'
+          redirectRoute='tracker'
         />
       )}
 
@@ -53,6 +53,6 @@ export default function TransactionList() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20,
-  },
+    paddingTop: 20
+  }
 });

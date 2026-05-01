@@ -21,10 +21,14 @@ export default function LoginPage() {
     <View style={styles.container}>
       <View style={styles.titleBlock}>
         <Logo />
-        <Title title="Log in" />
+        <Title title='Log in' />
       </View>
       <LoginForm />
-      <Button name="Create account" appearance="secondary" onPress={handleRedirect} />
+      <Button
+        name='Create account'
+        appearance='secondary'
+        onPress={handleRedirect}
+      />
     </View>
   );
 }
@@ -34,11 +38,11 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 40,
     justifyContent: 'center',
-    gap: Gaps.gap20,
+    gap: Gaps.gap20
   },
 
   titleBlock: {
     alignItems: 'center',
-    gap: Gaps.gap40,
-  },
+    gap: Gaps.gap40
+  }
 });

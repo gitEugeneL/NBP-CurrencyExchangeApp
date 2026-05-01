@@ -18,6 +18,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute',
     top: 15,
-    right: 15,
-  },
+    right: 15
+  }
 });

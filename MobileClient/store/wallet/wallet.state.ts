@@ -3,7 +3,7 @@ import {
   CreateWalletRequest,
   MoveMoneyRequest,
   WalletOperationsRequest,
-  WalletResponse,
+  WalletResponse
 } from './wallet.models';
 import axios, { AxiosError } from 'axios';
 import { authState } from '../auth/auth.state';
@@ -18,7 +18,7 @@ export interface StateSchema {
 export const walletState = atom<StateSchema>({
   wallets: [],
   isLoading: false,
-  error: null,
+  error: null
 });
 
 export const getUserWalletsAtom = atom(
@@ -29,19 +29,22 @@ export const getUserWalletsAtom = atom(
     set(walletState, {
       wallets: [],
       isLoading: true,
-      error: null,
+      error: null
     });
     try {
       const { accessToken } = await get(authState);
-      const { data } = await axios.get<WalletResponse[]>(walletApi.getUserWallets, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const { data } = await axios.get<WalletResponse[]>(
+        walletApi.getUserWallets,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        }
+      );
       set(walletState, {
         wallets: data,
         isLoading: false,
-        error: null,
+        error: null
       });
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -49,11 +52,11 @@ export const getUserWalletsAtom = atom(
         set(walletState, {
           wallets: [],
           isLoading: false,
-          error: error.response?.data,
+          error: error.response?.data
         });
       }
     }
-  },
+  }
 );
 
 export const createUserWalletAtom = atom(
@@ -65,7 +68,7 @@ export const createUserWalletAtom = atom(
     set(walletState, (prevState) => ({
       ...prevState,
       isLoading: true,
-      error: null,
+      error: null
     }));
     try {
       const { accessToken } = await get(authState);
@@ -74,15 +77,15 @@ export const createUserWalletAtom = atom(
         createWalletRequest,
         {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        },
+            Authorization: `Bearer ${accessToken}`
+          }
+        }
       );
       set(walletState, (prevState) => ({
         ...prevState,
         wallets: [...prevState.wallets, data],
         isLoading: false,
-        error: null,
+        error: null
       }));
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -90,11 +93,11 @@ export const createUserWalletAtom = atom(
         set(walletState, (prevState) => ({
           ...prevState,
           isLoading: false,
-          error: error.response?.data,
+          error: error.response?.data
         }));
       }
     }
-  },
+  }
 );
 
 export const walletOperationAtom = atom(
@@ -106,7 +109,7 @@ export const walletOperationAtom = atom(
     set(walletState, (prevState) => ({
       ...prevState,
       isLoading: true,
-      error: null,
+      error: null
     }));
     try {
       const { accessToken } = await get(authState);
@@ -115,17 +118,17 @@ export const walletOperationAtom = atom(
         walletOperationsRequest,
         {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        },
+            Authorization: `Bearer ${accessToken}`
+          }
+        }
       );
       set(walletState, (prevState) => ({
         ...prevState,
         wallets: prevState.wallets.map((wallet) =>
-          wallet.walletId === data.walletId ? data : wallet,
+          wallet.walletId === data.walletId ? data : wallet
         ),
         isLoading: false,
-        error: null,
+        error: null
       }));
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -133,11 +136,11 @@ export const walletOperationAtom = atom(
         set(walletState, (prevState) => ({
           ...prevState,
           isLoading: false,
-          error: error.response?.data,
+          error: error.response?.data
         }));
       }
     }
-  },
+  }
 );
 
 export const buyMoneyAtom = atom(
@@ -149,19 +152,23 @@ export const buyMoneyAtom = atom(
     set(walletState, (prevState) => ({
       ...prevState,
       isLoading: true,
-      error: null,
+      error: null
     }));
     try {
       const { accessToken } = await get(authState);
-      const { data } = await axios.post<WalletResponse[]>(walletApi.buyMoney, moveMoneyRequest, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const { data } = await axios.post<WalletResponse[]>(
+        walletApi.buyMoney,
+        moveMoneyRequest,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        }
+      );
       set(walletState, {
         wallets: data,
         isLoading: false,
-        error: null,
+        error: null
       });
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -169,9 +176,9 @@ export const buyMoneyAtom = atom(
         set(walletState, (prevState) => ({
           ...prevState,
           isLoading: false,
-          error: error.response?.data,
+          error: error.response?.data
         }));
       }
     }
-  },
+  }
 );

@@ -13,7 +13,7 @@ export interface StateSchema {
 export const transactionState = atom<StateSchema>({
   transactions: [],
   isLoading: false,
-  error: null,
+  error: null
 });
 
 export const getAllTransactionsAtom = atom(
@@ -24,19 +24,22 @@ export const getAllTransactionsAtom = atom(
     set(transactionState, {
       transactions: [],
       isLoading: true,
-      error: null,
+      error: null
     });
     try {
       const { accessToken } = await get(authState);
-      const { data } = await axios.get<TransactionResponse[]>(transactionApi.getAll, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const { data } = await axios.get<TransactionResponse[]>(
+        transactionApi.getAll,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        }
+      );
       set(transactionState, {
         transactions: data,
         isLoading: false,
-        error: null,
+        error: null
       });
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -44,9 +47,9 @@ export const getAllTransactionsAtom = atom(
         set(transactionState, {
           transactions: [],
           isLoading: false,
-          error: error.response?.data,
+          error: error.response?.data
         });
       }
     }
-  },
+  }
 );

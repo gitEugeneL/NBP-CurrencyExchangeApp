@@ -14,7 +14,13 @@ export default function MoneyInput({
 }: MoneyInputProps) {
   return (
     <View style={styles.input}>
-      <CustomInput label={label} name={name} control={control} errors={errors} {...props} />
+      <CustomInput
+        label={label}
+        name={name}
+        control={control}
+        errors={errors}
+        {...props}
+      />
       <View style={styles.logo}>
         <MoneyLogo shortName={shortName} width={30} height={30} />
       </View>
@@ -25,13 +31,13 @@ export default function MoneyInput({
 
 const styles = StyleSheet.create({
   input: {
-    width: '100%',
+    width: '100%'
   },
 
   logo: {
     position: 'absolute',
     top: 40,
-    right: 55,
+    right: 55
   },
 
   shortName: {
@@ -40,6 +46,6 @@ const styles = StyleSheet.create({
     right: 15,
     fontSize: FontSize.size16,
     fontFamily: Fonts.semiBold,
-    color: Colors.white,
-  },
+    color: Colors.white
+  }
 });

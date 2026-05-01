@@ -14,6 +14,6 @@ export const LoginFormValidationSchema = yup.object({
     .max(20, 'Over 20 characters')
     .matches(
       /(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-      'Password must be strong',
-    ),
+      'Password must be strong'
+    )
 });

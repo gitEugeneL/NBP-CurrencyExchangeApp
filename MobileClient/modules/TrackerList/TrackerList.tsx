@@ -1,5 +1,8 @@
 import { useAtomValue, useSetAtom } from 'jotai/index';
-import { currencyState, getAllCurrenciesAtom } from '../../store/currency/currency.state';
+import {
+  currencyState,
+  getAllCurrenciesAtom
+} from '../../store/currency/currency.state';
 import React, { useCallback, useState } from 'react';
 import { CurrencyParams } from '../../store/currency/currency.models';
 import Loading from '../../UI/Loading/Loading';
@@ -24,7 +27,7 @@ export default function TrackerList() {
 
     const params: CurrencyParams = {
       withRate: true,
-      currencyDate: isToday(value) ? null : dateToFormat(value),
+      currencyDate: isToday(value) ? null : dateToFormat(value)
     };
     loadCurrencies(params);
   };
@@ -32,7 +35,7 @@ export default function TrackerList() {
   useFocusEffect(
     useCallback(() => {
       loadData();
-    }, []),
+    }, [])
   );
 
   return (
@@ -43,9 +46,9 @@ export default function TrackerList() {
 
       {!isLoading && currencies.length === 0 && (
         <WarningCard
-          appearance="speed"
-          title="There is no data available on this day. It is probably a weekend or a holiday!"
-          buttonName="Check the current rate"
+          appearance='speed'
+          title='There is no data available on this day. It is probably a weekend or a holiday!'
+          buttonName='Check the current rate'
           action={loadData}
         />
       )}

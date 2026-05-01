@@ -3,7 +3,13 @@ import { CustomInputProps } from './CustomInput.props';
 import { Colors, Fonts, FontSize, Radius } from '../styles';
 import { Controller } from 'react-hook-form';
 
-export default function CustomInput({ label, name, control, errors, ...props }: CustomInputProps) {
+export default function CustomInput({
+  label,
+  name,
+  control,
+  errors,
+  ...props
+}: CustomInputProps) {
   return (
     <View>
       <View>
@@ -15,7 +21,10 @@ export default function CustomInput({ label, name, control, errors, ...props }: 
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
-            style={[styles.input, errors[name]?.message ? styles.inputError : null]}
+            style={[
+              styles.input,
+              errors[name]?.message ? styles.inputError : null
+            ]}
             placeholderTextColor={Colors.gray}
             {...props}
             value={value}
@@ -26,7 +35,9 @@ export default function CustomInput({ label, name, control, errors, ...props }: 
       />
       <View style={styles.errorBlock}>
         {errors[name]?.message && (
-          <Text style={styles.errorText}>{(errors[name] as { message?: string }).message}</Text>
+          <Text style={styles.errorText}>
+            {(errors[name] as { message?: string }).message}
+          </Text>
         )}
       </View>
     </View>
@@ -38,7 +49,7 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size14,
     color: Colors.gray,
     marginBottom: 5,
-    marginLeft: 10,
+    marginLeft: 10
   },
 
   input: {
@@ -48,24 +59,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     fontSize: FontSize.size16,
     borderRadius: Radius.radius10,
-    fontFamily: Fonts.regular,
+    fontFamily: Fonts.regular
   },
 
   inputError: {
     borderWidth: 2,
     borderColor: Colors.red,
-    paddingHorizontal: 23,
+    paddingHorizontal: 23
   },
 
   errorBlock: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 30,
+    height: 30
   },
 
   errorText: {
     fontSize: FontSize.size12,
     fontFamily: Fonts.semiBold,
-    color: Colors.red,
-  },
+    color: Colors.red
+  }
 });

@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   CurrencyOperationSchema,
-  CurrencyOperationValidationSchema,
+  CurrencyOperationValidationSchema
 } from './CurrencyOperationModal.schemes';
 import { roundMoney } from '../../../../helpers/moneyHelpers';
 
@@ -22,14 +22,14 @@ export default function CurrencyOperationModal({
   onClose,
   name,
   shortName,
-  operation,
+  operation
 }: CurrencyOperationModalProps) {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<CurrencyOperationSchema>({
-    resolver: yupResolver(CurrencyOperationValidationSchema(maxValue)),
+    resolver: yupResolver(CurrencyOperationValidationSchema(maxValue))
   });
 
   const formSubmit = (data: CurrencyOperationSchema) => {
@@ -37,7 +37,12 @@ export default function CurrencyOperationModal({
   };
 
   return (
-    <Modal transparent={true} animationType="fade" visible={isVisible} onRequestClose={onClose}>
+    <Modal
+      transparent={true}
+      animationType='fade'
+      visible={isVisible}
+      onRequestClose={onClose}
+    >
       <BlurView intensity={10} style={styles.blurContainer}>
         <View style={styles.modalContainer}>
           <Text style={styles.title}>
@@ -48,8 +53,8 @@ export default function CurrencyOperationModal({
           <View>
             <MoneyInput
               label={`1${symbol} = ${rate}zł (Max: ${roundMoney(maxValue, 3)}${symbol})`}
-              name="amount"
-              keyboardType="numeric"
+              name='amount'
+              keyboardType='numeric'
               shortName={shortName}
               control={control}
               placeholder={roundMoney(maxValue, 3).toString()}
@@ -59,15 +64,19 @@ export default function CurrencyOperationModal({
           <View style={styles.buttonContainer}>
             <Button
               style={styles.button}
-              name="Close"
-              size="small"
-              appearance="secondary"
+              name='Close'
+              size='small'
+              appearance='secondary'
               onPress={onClose}
             />
             <Button
               style={styles.button}
-              name={operationType === 'buy' ? `Buy ${shortName}` : `Sell ${shortName}`}
-              size="small"
+              name={
+                operationType === 'buy'
+                  ? `Buy ${shortName}`
+                  : `Sell ${shortName}`
+              }
+              size='small'
               onPress={handleSubmit(formSubmit)}
             />
           </View>
@@ -82,7 +91,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.modal,
+    backgroundColor: Colors.modal
   },
 
   modalContainer: {
@@ -90,23 +99,23 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.black,
     borderRadius: Radius.radius20,
     marginHorizontal: 50,
-    padding: 30,
+    padding: 30
   },
 
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    gap: Gaps.gap20,
+    gap: Gaps.gap20
   },
 
   button: {
-    flex: 1,
+    flex: 1
   },
 
   title: {
     fontFamily: Fonts.semiBold,
     color: Colors.white,
     fontSize: FontSize.size20,
-    marginBottom: 20,
-  },
+    marginBottom: 20
+  }
 });

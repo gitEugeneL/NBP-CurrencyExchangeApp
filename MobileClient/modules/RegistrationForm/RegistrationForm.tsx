@@ -2,7 +2,7 @@ import CustomInput from '../../UI/CustomInput/CustomInput';
 import { useForm } from 'react-hook-form';
 import {
   RegistrationFormSchema,
-  RegistrationFormValidationSchema,
+  RegistrationFormValidationSchema
 } from './RegistrationForm.schemes';
 import { yupResolver } from '@hookform/resolvers/yup';
 import PasswordInput from '../../components/PasswordInput/PasswordInput';
@@ -21,16 +21,16 @@ export default function RegistrationForm() {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<RegistrationFormSchema>({
-    resolver: yupResolver(RegistrationFormValidationSchema),
+    resolver: yupResolver(RegistrationFormValidationSchema)
   });
 
   const formSubmit = (data: RegistrationFormSchema) => {
     const request: RegistrationRequest = {
       email: data.email,
       password: data.password,
-      username: data.username,
+      username: data.username
     };
     registration(request);
   };
@@ -47,38 +47,42 @@ export default function RegistrationForm() {
 
       <View>
         <CustomInput
-          label="Username"
-          name="username"
-          placeholder="Enter your name"
+          label='Username'
+          name='username'
+          placeholder='Enter your name'
           control={control}
           errors={errors}
         />
 
         <CustomInput
-          label="Email"
-          name="email"
-          placeholder="Enter your email"
+          label='Email'
+          name='email'
+          placeholder='Enter your email'
           control={control}
           errors={errors}
         />
 
         <PasswordInput
-          label="Password"
-          name="password"
-          placeholder="Your strong password"
+          label='Password'
+          name='password'
+          placeholder='Your strong password'
           control={control}
           errors={errors}
         />
 
         <PasswordInput
-          label="ConfirmCreate password"
-          name="confirmPassword"
-          placeholder="ConfirmCreate your password"
+          label='ConfirmCreate password'
+          name='confirmPassword'
+          placeholder='ConfirmCreate your password'
           control={control}
           errors={errors}
         />
 
-        <Button style={styles.button} name="Registration" onPress={handleSubmit(formSubmit)} />
+        <Button
+          style={styles.button}
+          name='Registration'
+          onPress={handleSubmit(formSubmit)}
+        />
       </View>
     </>
   );
@@ -86,6 +90,6 @@ export default function RegistrationForm() {
 
 const styles = StyleSheet.create({
   button: {
-    marginTop: 20,
-  },
+    marginTop: 20
+  }
 });

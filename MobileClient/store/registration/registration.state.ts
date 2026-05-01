@@ -1,5 +1,8 @@
 import { atom } from 'jotai';
-import { RegistrationRequest, RegistrationResponse } from './registration.models';
+import {
+  RegistrationRequest,
+  RegistrationResponse
+} from './registration.models';
 import axios, { AxiosError } from 'axios';
 import { registrationApi } from './registration.api';
 
@@ -12,7 +15,7 @@ export interface StateScheme {
 export const registrationState = atom<StateScheme>({
   userId: null,
   isLoading: false,
-  error: null,
+  error: null
 });
 
 export const registrationAtom = atom(
@@ -24,18 +27,18 @@ export const registrationAtom = atom(
     set(registrationState, {
       userId: null,
       isLoading: true,
-      error: null,
+      error: null
     });
 
     try {
       const { data } = await axios.post<RegistrationResponse>(
         registrationApi.registration,
-        registrationRequest,
+        registrationRequest
       );
       set(registrationState, {
         userId: data.userId,
         isLoading: false,
-        error: null,
+        error: null
       });
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -43,17 +46,17 @@ export const registrationAtom = atom(
         set(registrationState, {
           userId: null,
           isLoading: false,
-          error: error.response?.data,
+          error: error.response?.data
         });
       }
     }
-  },
+  }
 );
 
 export const resetRegistrationAtom = atom(null, async (_get, set) => {
   set(registrationState, {
     userId: null,
     isLoading: false,
-    error: null,
+    error: null
   });
 });

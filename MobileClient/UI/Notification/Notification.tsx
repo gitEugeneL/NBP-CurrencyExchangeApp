@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Dimensions, StyleSheet, Text } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming
+} from 'react-native-reanimated';
 import { NotificationProps } from './notification.pros';
 import { Colors, Fonts, FontSize } from '../styles';
 
@@ -26,7 +30,7 @@ export default function Notification({ notificationError }: NotificationProps) {
 
   // Стиль для анимации
   const animatedStyle = useAnimatedStyle(() => ({
-    opacity: opacity.value,
+    opacity: opacity.value
   }));
 
   if (!isShown) {
@@ -46,12 +50,12 @@ const styles = StyleSheet.create({
     top: 20,
     width: Dimensions.get('screen').width,
     backgroundColor: Colors.red,
-    padding: 15,
+    padding: 15
   },
   text: {
     fontSize: FontSize.size16,
     color: Colors.white,
     textAlign: 'center',
-    fontFamily: Fonts.regular,
-  },
+    fontFamily: Fonts.regular
+  }
 });

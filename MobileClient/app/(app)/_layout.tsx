@@ -24,8 +24,8 @@ const routes = {
   transactions: {
     name: 'Transactions',
     path: 'transactions',
-    icon: <HistoryIcon />,
-  },
+    icon: <HistoryIcon />
+  }
 };
 
 export default function MainLayout() {
@@ -34,7 +34,7 @@ export default function MainLayout() {
 
   const [loaded, error] = useFonts({
     InterRegular: require('../../assets/fonts/Inter-Regular.ttf'),
-    InterSemiBold: require('../../assets/fonts/Inter-SemiBold.ttf'),
+    InterSemiBold: require('../../assets/fonts/Inter-SemiBold.ttf')
   });
 
   useEffect(() => {
@@ -47,61 +47,77 @@ export default function MainLayout() {
     return null;
   }
 
-  if (accessToken === null || expiresDate === null || new Date() <= expiresDate) {
+  if (
+    accessToken === null ||
+    expiresDate === null ||
+    new Date() <= expiresDate
+  ) {
     if (expiresDate !== null) {
       logout();
     }
-    return <Redirect href="/auth/login" />;
+    return <Redirect href='/auth/login' />;
   }
 
   return (
     <GestureHandlerRootView style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor={Colors.blackBlue} />
+      <StatusBar barStyle='light-content' backgroundColor={Colors.blackBlue} />
 
       <Drawer
-        drawerContent={(props) => <CustomDrawer {...props} routes={Object.values(routes)} />}
+        drawerContent={(props) => (
+          <CustomDrawer {...props} routes={Object.values(routes)} />
+        )}
         screenOptions={({ navigation }) => ({
           headerStyle: {
             backgroundColor: Colors.blackBlue,
             shadowColor: Colors.blackBlue,
-            shadowOpacity: 0,
+            shadowOpacity: 0
           },
 
-          headerLeft: () => <HeaderButton navigation={navigation} />,
+          headerLeft: () => <HeaderButton navigation={navigation} />
         })}
       >
         <Drawer.Screen
           name={routes.wallets.path}
           options={{
-            headerTitle: () => <Text style={styles.headerTitle}>{routes.wallets.name}</Text>,
+            headerTitle: () => (
+              <Text style={styles.headerTitle}>{routes.wallets.name}</Text>
+            )
           }}
         />
 
         <Drawer.Screen
           name={routes.tracker.path}
           options={{
-            headerTitle: () => <Text style={styles.headerTitle}>{routes.tracker.name}</Text>,
+            headerTitle: () => (
+              <Text style={styles.headerTitle}>{routes.tracker.name}</Text>
+            )
           }}
         />
 
         <Drawer.Screen
           name={routes.buy.path}
           options={{
-            headerTitle: () => <Text style={styles.headerTitle}>{routes.buy.name}</Text>,
+            headerTitle: () => (
+              <Text style={styles.headerTitle}>{routes.buy.name}</Text>
+            )
           }}
         />
 
         <Drawer.Screen
           name={routes.sell.path}
           options={{
-            headerTitle: () => <Text style={styles.headerTitle}>{routes.sell.name}</Text>,
+            headerTitle: () => (
+              <Text style={styles.headerTitle}>{routes.sell.name}</Text>
+            )
           }}
         />
 
         <Drawer.Screen
           name={routes.transactions.path}
           options={{
-            headerTitle: () => <Text style={styles.headerTitle}>{routes.transactions.name}</Text>,
+            headerTitle: () => (
+              <Text style={styles.headerTitle}>{routes.transactions.name}</Text>
+            )
           }}
         />
       </Drawer>
@@ -111,12 +127,12 @@ export default function MainLayout() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
 
   headerTitle: {
     color: Colors.white,
     fontFamily: Fonts.regular,
-    fontSize: FontSize.size20,
-  },
+    fontSize: FontSize.size20
+  }
 });

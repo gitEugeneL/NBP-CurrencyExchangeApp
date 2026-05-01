@@ -6,18 +6,18 @@ import { Colors } from '../../UI/styles';
 export default function AuthLayout() {
   return (
     <SafeAreaProvider>
-      <StatusBar style="light" backgroundColor={Colors.black} />
+      <StatusBar style='light' backgroundColor={Colors.black} />
       <Stack
         screenOptions={{
           contentStyle: {
-            backgroundColor: Colors.black,
+            backgroundColor: Colors.black
           },
-          headerShown: false,
+          headerShown: false
         }}
       >
-        <Stack.Screen name="login" options={{ title: 'Login' }} />
-        <Stack.Screen name="registration" options={{ title: 'Register' }} />
-        <Stack.Screen name="success" options={{ title: 'Success' }} />
+        <Stack.Screen name='login' options={{ title: 'Login' }} />
+        <Stack.Screen name='registration' options={{ title: 'Register' }} />
+        <Stack.Screen name='success' options={{ title: 'Success' }} />
       </Stack>
     </SafeAreaProvider>
   );

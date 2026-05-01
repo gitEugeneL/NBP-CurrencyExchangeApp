@@ -20,9 +20,9 @@ export const authState = atomWithStorage<StateScheme>(
     accessToken: null,
     expiresDate: null,
     isLoading: false,
-    error: null,
+    error: null
   },
-  storage,
+  storage
 );
 
 export const loginAtom = atom(
@@ -32,16 +32,19 @@ export const loginAtom = atom(
       accessToken: null,
       expiresDate: null,
       isLoading: true,
-      error: null,
+      error: null
     });
 
     try {
-      const { data } = await axios.post<LoginResponse>(authApi.login, loginRequest);
+      const { data } = await axios.post<LoginResponse>(
+        authApi.login,
+        loginRequest
+      );
       set(authState, {
         accessToken: data.accessToken,
         expiresDate: data.expiredDate,
         isLoading: false,
-        error: null,
+        error: null
       });
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -50,11 +53,11 @@ export const loginAtom = atom(
           accessToken: null,
           expiresDate: null,
           isLoading: false,
-          error: error.response?.data,
+          error: error.response?.data
         });
       }
     }
-  },
+  }
 );
 
 export const logoutAtom = atom(null, async (_get, set) => {
@@ -62,6 +65,6 @@ export const logoutAtom = atom(null, async (_get, set) => {
     accessToken: null,
     expiresDate: null,
     isLoading: false,
-    error: null,
+    error: null
   });
 });

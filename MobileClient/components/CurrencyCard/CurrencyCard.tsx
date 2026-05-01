@@ -22,12 +22,13 @@ export default function CurrencyCard({
   walletId,
   walletValue = null,
   baseValue = null,
-  appearance = 'default',
+  appearance = 'default'
 }: CurrencyCardProps) {
   const buyMoney = useSetAtom(buyMoneyAtom);
   const loadTransactions = useSetAtom(getAllTransactionsAtom);
 
-  const [isOperationModalVisible, setOperationModalVisible] = useState<boolean>(false);
+  const [isOperationModalVisible, setOperationModalVisible] =
+    useState<boolean>(false);
 
   const handleCardClick = () => setOperationModalVisible(true);
   const handleCloseBtnOperationModal = () => setOperationModalVisible(false);
@@ -36,7 +37,7 @@ export default function CurrencyCard({
     const request: MoveMoneyRequest = {
       walletId: walletId!,
       amount: amount,
-      operation: appearance === 'buy' ? 'buy' : 'sell',
+      operation: appearance === 'buy' ? 'buy' : 'sell'
     };
     buyMoney(request).then(() => loadTransactions());
     setOperationModalVisible(false);
@@ -47,7 +48,12 @@ export default function CurrencyCard({
       <Pressable style={styles.card} onPressOut={handleCardClick}>
         <View style={styles.textWrapper}>
           <View style={styles.firstBlock}>
-            <Text style={[styles.valueBlock, appearance === 'buy' ? styles.disabled : null]}>
+            <Text
+              style={[
+                styles.valueBlock,
+                appearance === 'buy' ? styles.disabled : null
+              ]}
+            >
               sell: {!isToday(date) ? '(old) ' : null}
               <Text style={styles.price}>{buyRate}</Text>
             </Text>
@@ -62,11 +68,21 @@ export default function CurrencyCard({
           </View>
 
           <View style={styles.secondBlock}>
-            <Text style={[styles.valueBlock, appearance === 'sell' ? styles.disabled : null]}>
+            <Text
+              style={[
+                styles.valueBlock,
+                appearance === 'sell' ? styles.disabled : null
+              ]}
+            >
               buy: {!isToday(date) ? '(old) ' : null}
               <Text style={styles.price}>{sellRate}</Text>
             </Text>
-            <Text style={[styles.valueBlock, appearance !== 'default' ? styles.disabled : null]}>
+            <Text
+              style={[
+                styles.valueBlock,
+                appearance !== 'default' ? styles.disabled : null
+              ]}
+            >
               NBP: {!isToday(date) ? ' (old) ' : null}
               <Text style={styles.price}>{nbpRate}</Text>
             </Text>
@@ -86,7 +102,9 @@ export default function CurrencyCard({
           name={name}
           shortName={shortName}
           symbol={symbol}
-          maxValue={appearance === 'buy' ? baseValue! / sellRate! : walletValue!}
+          maxValue={
+            appearance === 'buy' ? baseValue! / sellRate! : walletValue!
+          }
           rate={appearance === 'buy' ? sellRate! : buyRate!}
         />
       )}
@@ -102,51 +120,51 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: Radius.radius20,
     backgroundColor: Colors.blackBlue,
-    gap: Gaps.gap16,
+    gap: Gaps.gap16
   },
 
   disabled: {
-    color: Colors.blackGray,
+    color: Colors.blackGray
   },
 
   price: {
-    fontFamily: Fonts.semiBold,
+    fontFamily: Fonts.semiBold
   },
 
   textWrapper: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
 
   namesBlock: {
     flexDirection: 'row',
     alignItems: 'flex-end',
-    gap: Gaps.gap10,
+    gap: Gaps.gap10
   },
 
   valueBlock: {
     fontFamily: Fonts.regular,
     color: Colors.white,
-    fontSize: FontSize.size14,
+    fontSize: FontSize.size14
   },
 
   shortName: {
     fontFamily: Fonts.semiBold,
     color: Colors.white,
-    fontSize: FontSize.size18,
+    fontSize: FontSize.size18
   },
 
   firstBlock: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
 
   secondBlock: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    flexDirection: 'row',
-  },
+    flexDirection: 'row'
+  }
 });

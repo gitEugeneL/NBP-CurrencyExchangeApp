@@ -13,7 +13,7 @@ export interface StateSchema {
 export const currencyState = atom<StateSchema>({
   currencies: [],
   isLoading: false,
-  error: null,
+  error: null
 });
 
 export const getAllCurrenciesAtom = atom(
@@ -24,22 +24,25 @@ export const getAllCurrenciesAtom = atom(
     set(currencyState, {
       currencies: [],
       isLoading: true,
-      error: null,
+      error: null
     });
     try {
       const { accessToken } = await get(authState);
-      const { data } = await axios.get<CurrencyResponse[]>(currencyApi.getAllCurrencies, {
-        params: {
-          ...requestParams,
-        },
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const { data } = await axios.get<CurrencyResponse[]>(
+        currencyApi.getAllCurrencies,
+        {
+          params: {
+            ...requestParams
+          },
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        }
+      );
       set(currencyState, {
         currencies: data,
         isLoading: false,
-        error: null,
+        error: null
       });
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -47,9 +50,9 @@ export const getAllCurrenciesAtom = atom(
         set(currencyState, {
           currencies: [],
           isLoading: false,
-          error: error.response?.data,
+          error: error.response?.data
         });
       }
     }
-  },
+  }
 );

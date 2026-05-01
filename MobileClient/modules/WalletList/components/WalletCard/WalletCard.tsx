@@ -6,10 +6,13 @@ import ConfirmCreate from './UI/ConfirmModal/ConfirmCreate';
 import { useState } from 'react';
 import {
   CreateWalletRequest,
-  WalletOperationsRequest,
+  WalletOperationsRequest
 } from '../../../../store/wallet/wallet.models';
 import { useSetAtom } from 'jotai';
-import { createUserWalletAtom, walletOperationAtom } from '../../../../store/wallet/wallet.state';
+import {
+  createUserWalletAtom,
+  walletOperationAtom
+} from '../../../../store/wallet/wallet.state';
 import MoneyLogo from '../../../../UI/MoneyLogo/MoneyLogo';
 import MoneyOperationModal from './UI/WalletOperationModal/WalletOperationModal';
 import { roundMoney } from '../../../../helpers/moneyHelpers';
@@ -18,7 +21,8 @@ export default function WalletCard({ ...props }: WalletCardProps) {
   const createUserWallet = useSetAtom(createUserWalletAtom);
   const walletOperation = useSetAtom(walletOperationAtom);
 
-  const [isConfirmModalVisible, setConfirmModalVisible] = useState<boolean>(false);
+  const [isConfirmModalVisible, setConfirmModalVisible] =
+    useState<boolean>(false);
   const [isMoneyModalVisible, setMoneyModalVisible] = useState<boolean>(false);
   const [isWithdraw, setWithdraw] = useState<boolean>(false);
 
@@ -38,7 +42,7 @@ export default function WalletCard({ ...props }: WalletCardProps) {
 
   const handleConfirmModal = () => {
     const request: CreateWalletRequest = {
-      currencyId: props.currencyId,
+      currencyId: props.currencyId
     };
     createUserWallet(request);
     setConfirmModalVisible(false);
@@ -48,14 +52,19 @@ export default function WalletCard({ ...props }: WalletCardProps) {
     const request: WalletOperationsRequest = {
       walletId: props.walletId,
       amount: amount,
-      isWithdraw: isWithdraw,
+      isWithdraw: isWithdraw
     };
     walletOperation(request);
     setMoneyModalVisible(false);
   };
 
   return (
-    <View style={[styles.card, props.isCreated ? styles.withWallet : styles.withoutWallet]}>
+    <View
+      style={[
+        styles.card,
+        props.isCreated ? styles.withWallet : styles.withoutWallet
+      ]}
+    >
       <View style={styles.container}>
         <MoneyLogo shortName={props.shortName} />
 
@@ -79,15 +88,15 @@ export default function WalletCard({ ...props }: WalletCardProps) {
             <Button
               style={styles.btn}
               onPressOut={handleAddMoneyButton}
-              name="Add money"
-              size="small"
+              name='Add money'
+              size='small'
             />
 
             <Button
               style={styles.btn}
               onPressOut={handleWithdrawButton}
-              name="Withdraw"
-              size="small"
+              name='Withdraw'
+              size='small'
             />
 
             <MoneyOperationModal
@@ -106,9 +115,9 @@ export default function WalletCard({ ...props }: WalletCardProps) {
             <Button
               style={styles.btn}
               onPressOut={handleCreateButton}
-              name="Create wallet"
-              appearance="secondary"
-              size="small"
+              name='Create wallet'
+              appearance='secondary'
+              size='small'
             />
 
             <ConfirmCreate
@@ -131,70 +140,70 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: Radius.radius20,
     backgroundColor: Colors.violetDark,
-    gap: Gaps.gap16,
+    gap: Gaps.gap16
   },
 
   withWallet: {
-    backgroundColor: Colors.violetDark,
+    backgroundColor: Colors.violetDark
   },
 
   withoutWallet: {
-    backgroundColor: Colors.blackBlue,
+    backgroundColor: Colors.blackBlue
   },
 
   container: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-start'
   },
 
   buttonBlock: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    gap: Gaps.gap16,
+    gap: Gaps.gap16
   },
 
   btn: {
-    flex: 1,
+    flex: 1
   },
 
   wrapper: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
 
   fistBlock: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginLeft: 15,
+    marginLeft: 15
   },
 
   secondBlock: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginLeft: 15,
+    marginLeft: 15
   },
 
   shortName: {
     fontFamily: Fonts.regular,
     color: Colors.white,
-    fontSize: FontSize.size18,
+    fontSize: FontSize.size18
   },
 
   country: {
     color: Colors.white,
     fontFamily: Fonts.regular,
-    fontSize: FontSize.size14,
+    fontSize: FontSize.size14
   },
 
   name: {
     color: Colors.white,
     fontFamily: Fonts.regular,
-    fontSize: FontSize.size14,
+    fontSize: FontSize.size14
   },
 
   price: {
     color: Colors.white,
     fontFamily: Fonts.regular,
-    fontSize: FontSize.size18,
-  },
+    fontSize: FontSize.size18
+  }
 });

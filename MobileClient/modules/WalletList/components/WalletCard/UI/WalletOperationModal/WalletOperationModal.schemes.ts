@@ -14,6 +14,6 @@ export const WalletOperationValidationSchema = (value: number | null) => {
       .typeError('Amount must be a number')
       .required('Amount is required')
       .min(1, 'Minimum amount is 1')
-      .max(maxValue, `Maximum amount is ${maxValue}`),
+      .max(maxValue, `Maximum amount is ${maxValue}`)
   });
 };

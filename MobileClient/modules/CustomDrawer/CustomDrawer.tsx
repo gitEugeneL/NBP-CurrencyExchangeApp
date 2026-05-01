@@ -24,10 +24,15 @@ export default function CustomDrawer({ routes, ...props }: CustomDrawerProps) {
   }, []);
 
   return (
-    <DrawerContentScrollView {...props} contentContainerStyle={styles.container}>
+    <DrawerContentScrollView
+      {...props}
+      contentContainerStyle={styles.container}
+    >
       <View style={styles.wrapper}>
         <CloseButton navigation={props.navigation} />
-        {user.username && user.email && <UserBlock username={user.username} email={user.email} />}
+        {user.username && user.email && (
+          <UserBlock username={user.username} email={user.email} />
+        )}
 
         {routes.map((item) => (
           <MenuItem
@@ -40,7 +45,7 @@ export default function CustomDrawer({ routes, ...props }: CustomDrawerProps) {
         ))}
       </View>
       <View style={styles.footer}>
-        <CustomLink name="Logout" href={'/auth/login'} onPress={handleLogout} />
+        <CustomLink name='Logout' href={'/auth/login'} onPress={handleLogout} />
       </View>
     </DrawerContentScrollView>
   );
@@ -49,17 +54,17 @@ export default function CustomDrawer({ routes, ...props }: CustomDrawerProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.black,
+    backgroundColor: Colors.black
   },
 
   wrapper: {
     flex: 1,
-    gap: Gaps.gap30,
+    gap: Gaps.gap30
   },
 
   footer: {
     gap: Gaps.gap20,
     alignItems: 'center',
-    marginBottom: 20,
-  },
+    marginBottom: 20
+  }
 });

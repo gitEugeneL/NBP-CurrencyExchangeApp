@@ -40,22 +40,22 @@ const styles = StyleSheet.create({
     padding: 25,
     borderRadius: Radius.radius20,
     backgroundColor: Colors.violetDark,
-    gap: Gaps.gap20,
+    gap: Gaps.gap20
   },
 
   button: {
-    width: '100%',
+    width: '100%'
   },
 
   icon: {
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
 
   title: {
     textAlign: 'center',
     fontFamily: Fonts.semiBold,
     fontSize: FontSize.size16,
-    color: Colors.white,
-  },
+    color: Colors.white
+  }
 });

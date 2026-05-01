@@ -7,7 +7,11 @@ import { USD } from '../../assets/countries/USD';
 import { CAD } from '../../assets/countries/CAD';
 import { GBR } from '../../assets/countries/GBR';
 
-export default function MoneyLogo({ shortName, width = 57, height = 57 }: MoneyLogoProps) {
+export default function MoneyLogo({
+  shortName,
+  width = 57,
+  height = 57
+}: MoneyLogoProps) {
   return (
     <>
       {shortName === 'PLN' && <PLN width={width} height={height} />}

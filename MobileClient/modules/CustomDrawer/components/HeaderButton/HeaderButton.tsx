@@ -17,7 +17,7 @@ export default function HeaderButton({ navigation, ...props }: HeaderProps) {
       <View
         style={{
           ...styles.button,
-          backgroundColor: clicked ? Colors.violetDark : Colors.blackBlue,
+          backgroundColor: clicked ? Colors.violetDark : Colors.blackBlue
         }}
       >
         <ItemIcon />
@@ -31,6 +31,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 20,
-  },
+    paddingHorizontal: 20
+  }
 });

@@ -5,7 +5,11 @@ import { Colors, Fonts, FontSize, Radius } from '../styles';
 export default function Input({ ...props }: InputProps) {
   return (
     <View>
-      <TextInput style={styles.input} placeholderTextColor={Colors.gray} {...props} />
+      <TextInput
+        style={styles.input}
+        placeholderTextColor={Colors.gray}
+        {...props}
+      />
     </View>
   );
 }
@@ -18,6 +22,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     fontSize: FontSize.size16,
     borderRadius: Radius.radius10,
-    fontFamily: Fonts.regular,
-  },
+    fontFamily: Fonts.regular
+  }
 });

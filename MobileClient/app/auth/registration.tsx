@@ -13,9 +13,9 @@ export default function RegistrationPage() {
 
   return (
     <View style={styles.container}>
-      <Title title="Registration" />
+      <Title title='Registration' />
       <RegistrationForm />
-      <Button name="Login" appearance="secondary" onPress={handleRedirect} />
+      <Button name='Login' appearance='secondary' onPress={handleRedirect} />
     </View>
   );
 }
@@ -25,6 +25,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 40,
-    gap: Gaps.gap20,
-  },
+    gap: Gaps.gap20
+  }
 });

@@ -10,7 +10,10 @@ export interface RegistrationFormSchema {
 export const RegistrationFormValidationSchema = yup.object({
   email: yup.string().required('Email is required').email('Enter valid email'),
 
-  username: yup.string().required('Field is required').max(150, 'Over 150 characters'),
+  username: yup
+    .string()
+    .required('Field is required')
+    .max(150, 'Over 150 characters'),
 
   password: yup
     .string()
@@ -19,11 +22,11 @@ export const RegistrationFormValidationSchema = yup.object({
     .max(20, 'Over 20 characters')
     .matches(
       /(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-      'Password must be strong',
+      'Password must be strong'
     ),
 
   confirmPassword: yup
     .string()
     .required()
-    .oneOf([yup.ref('password')], 'Password must match'),
+    .oneOf([yup.ref('password')], 'Password must match')
 });

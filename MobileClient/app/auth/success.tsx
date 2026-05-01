@@ -6,10 +6,10 @@ export default function SuccessPage() {
   return (
     <View>
       <WarningCard
-        appearance="speed"
-        title="You have been successfully registered!"
-        buttonName="Login"
-        redirectRoute="/auth/login"
+        appearance='speed'
+        title='You have been successfully registered!'
+        buttonName='Login'
+        redirectRoute='/auth/login'
       />
     </View>
   );

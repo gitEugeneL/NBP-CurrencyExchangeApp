@@ -19,23 +19,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: Gaps.gap10,
     marginTop: 30,
-    marginBottom: 40,
+    marginBottom: 40
   },
 
   wrapper: {
     alignItems: 'center',
-    gap: Gaps.gap5,
+    gap: Gaps.gap5
   },
 
   name: {
     fontSize: FontSize.size18,
     fontFamily: Fonts.regular,
-    color: Colors.white,
+    color: Colors.white
   },
 
   email: {
     fontSize: FontSize.size16,
     fontFamily: Fonts.regular,
-    color: Colors.gray,
-  },
+    color: Colors.gray
+  }
 });

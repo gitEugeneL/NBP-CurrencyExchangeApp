@@ -17,7 +17,7 @@ export const userState = atom<StateScheme>({
   username: null,
   email: null,
   isLoading: false,
-  error: null,
+  error: null
 });
 
 export const getUserInfoAtom = atom(
@@ -31,22 +31,22 @@ export const getUserInfoAtom = atom(
       username: null,
       email: null,
       isLoading: true,
-      error: null,
+      error: null
     });
 
     try {
       const { accessToken } = await get(authState);
       const { data } = await axios.get<UserResponse>(userApi.getUserInfo, {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
       });
       set(userState, {
         userId: data.userId,
         username: data.username,
         email: data.email,
         isLoading: false,
-        error: null,
+        error: null
       });
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -56,9 +56,9 @@ export const getUserInfoAtom = atom(
           username: null,
           email: null,
           isLoading: false,
-          error: error.response?.data,
+          error: error.response?.data
         });
       }
     }
-  },
+  }
 );

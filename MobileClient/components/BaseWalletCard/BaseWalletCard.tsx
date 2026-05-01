@@ -5,10 +5,15 @@ import MoneyLogo from '../../UI/MoneyLogo/MoneyLogo';
 import { BaseWalletCardProps } from './BaseWalletCard.props';
 import { roundMoney } from '../../helpers/moneyHelpers';
 
-export default function BaseWalletCard({ name, shortName, symbol, value }: BaseWalletCardProps) {
+export default function BaseWalletCard({
+  name,
+  shortName,
+  symbol,
+  value
+}: BaseWalletCardProps) {
   return (
     <View style={styles.card}>
-      <MoneyLogo shortName="PLN" width={38} height={38} />
+      <MoneyLogo shortName='PLN' width={38} height={38} />
       <View style={styles.wrapper}>
         <View>
           <Text style={styles.shortName}>{shortName}</Text>
@@ -33,29 +38,29 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: Radius.radius20,
     backgroundColor: Colors.violetDark,
-    gap: Gaps.gap10,
+    gap: Gaps.gap10
   },
 
   wrapper: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'center'
   },
 
   value: {
     color: Colors.white,
     fontFamily: Fonts.semiBold,
-    fontSize: FontSize.size18,
+    fontSize: FontSize.size18
   },
 
   shortName: {
     color: Colors.white,
-    fontFamily: Fonts.regular,
+    fontFamily: Fonts.regular
   },
 
   name: {
     color: Colors.white,
-    fontFamily: Fonts.regular,
-  },
+    fontFamily: Fonts.regular
+  }
 });

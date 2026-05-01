@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react';
-import { currencyState, getAllCurrenciesAtom } from '../../store/currency/currency.state';
-import { getUserWalletsAtom, walletState } from '../../store/wallet/wallet.state';
+import {
+  currencyState,
+  getAllCurrenciesAtom
+} from '../../store/currency/currency.state';
+import {
+  getUserWalletsAtom,
+  walletState
+} from '../../store/wallet/wallet.state';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { WalletResponse } from '../../store/wallet/wallet.models';
 import Loading from '../../UI/Loading/Loading';
@@ -11,7 +17,8 @@ import { View } from 'react-native';
 import { Colors } from '../../UI/styles';
 
 export default function WalletList() {
-  const { isLoading: currenciesLoading, currencies } = useAtomValue(currencyState);
+  const { isLoading: currenciesLoading, currencies } =
+    useAtomValue(currencyState);
   const { isLoading: walletLoading, wallets } = useAtomValue(walletState);
   const loadCurrencies = useSetAtom(getAllCurrenciesAtom);
   const loadWallets = useSetAtom(getUserWalletsAtom);
@@ -19,7 +26,7 @@ export default function WalletList() {
   useEffect(() => {
     const params: CurrencyParams = {
       withRate: false,
-      currencyDate: null,
+      currencyDate: null
     };
     loadCurrencies(params);
     loadWallets();

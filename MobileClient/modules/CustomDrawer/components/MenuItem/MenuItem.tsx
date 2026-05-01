@@ -3,7 +3,13 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useState } from 'react';
 import { Colors, Fonts, FontSize, Gaps } from '../../../../UI/styles';
 
-export default function MenuItem({ drawer, name, path, icon, ...props }: MenuItemProps) {
+export default function MenuItem({
+  drawer,
+  name,
+  path,
+  icon,
+  ...props
+}: MenuItemProps) {
   const [clicked, setClicked] = useState<boolean>(false);
   const isActive = drawer.state.routes[drawer.state.index].name === path;
 
@@ -19,7 +25,8 @@ export default function MenuItem({ drawer, name, path, icon, ...props }: MenuIte
         style={{
           ...styles.menu,
           borderColor: isActive ? Colors.primary : Colors.black,
-          backgroundColor: clicked || isActive ? Colors.violetDark : Colors.black,
+          backgroundColor:
+            clicked || isActive ? Colors.violetDark : Colors.black
         }}
       >
         <View style={styles.icon}>{icon}</View>
@@ -31,7 +38,7 @@ export default function MenuItem({ drawer, name, path, icon, ...props }: MenuIte
 
 const styles = StyleSheet.create({
   container: {
-    margin: -12,
+    margin: -12
   },
 
   menu: {
@@ -39,19 +46,19 @@ const styles = StyleSheet.create({
     gap: Gaps.gap20,
     paddingHorizontal: 20,
     paddingVertical: 18,
-    borderRightWidth: 5,
+    borderRightWidth: 5
   },
 
   icon: {
     position: 'absolute',
     top: 21,
-    left: 60,
+    left: 60
   },
 
   text: {
     marginLeft: 90,
     color: Colors.white,
     fontSize: FontSize.size18,
-    fontFamily: Fonts.regular,
-  },
+    fontFamily: Fonts.regular
+  }
 });

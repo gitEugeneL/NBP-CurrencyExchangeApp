@@ -13,16 +13,16 @@ export default function Title({ title, description = undefined }: TitleProps) {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: '100%'
   },
 
   title: {
     color: Colors.white,
-    fontSize: FontSize.size32,
+    fontSize: FontSize.size32
   },
   description: {
     color: Colors.gray,
     fontSize: FontSize.size16,
-    fontFamily: Fonts.regular,
-  },
+    fontFamily: Fonts.regular
+  }
 });

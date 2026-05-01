@@ -10,7 +10,7 @@ export const Colors = {
   black: '#18181E',
   blackBlue: '#22232F',
   violetDark: '#2B2A3AFF',
-  transparent: 'transparent',
+  transparent: 'transparent'
 };
 
 export const Gaps = {
@@ -21,18 +21,18 @@ export const Gaps = {
   gap30: 30,
   gap40: 40,
   gap60: 60,
-  gap80: 80,
+  gap80: 80
 };
 
 export const Radius = {
   radius10: 10,
   radius16: 16,
-  radius20: 20,
+  radius20: 20
 };
 
 export const Fonts = {
   regular: 'InterRegular',
-  semiBold: 'InterSemiBold',
+  semiBold: 'InterSemiBold'
 };
 
 export const FontSize = {
@@ -42,5 +42,5 @@ export const FontSize = {
   size16: 16,
   size18: 18,
   size20: 20,
-  size32: 32,
+  size32: 32
 };

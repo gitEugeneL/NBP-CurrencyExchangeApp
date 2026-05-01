@@ -1,7 +1,10 @@
 import React, { useCallback } from 'react';
 import CurrencyCard from '../../components/CurrencyCard/CurrencyCard';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { currencyState, getAllCurrenciesAtom } from '../../store/currency/currency.state';
+import {
+  currencyState,
+  getAllCurrenciesAtom
+} from '../../store/currency/currency.state';
 import { walletState } from '../../store/wallet/wallet.state';
 import { useFocusEffect } from 'expo-router';
 import { CurrencyParams } from '../../store/currency/currency.models';
@@ -18,13 +21,15 @@ export default function MoveCurrency({ appearance }: MoveCurrencyProps) {
     useCallback(() => {
       const params: CurrencyParams = {
         withRate: true,
-        currencyDate: null,
+        currencyDate: null
       };
       loadCurrencies(params);
-    }, []),
+    }, [])
   );
 
-  const baseWallet = wallets.find((wallet) => wallet.currencyShortName === 'PLN');
+  const baseWallet = wallets.find(
+    (wallet) => wallet.currencyShortName === 'PLN'
+  );
 
   return (
     <>
@@ -60,8 +65,8 @@ export default function MoveCurrency({ appearance }: MoveCurrencyProps) {
                   name={wallet.currencyName}
                   key={wallet.walletId}
                 />
-              ),
-          ),
+              )
+          )
         )}
     </>
   );

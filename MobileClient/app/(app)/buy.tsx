@@ -5,7 +5,7 @@ import MoveCurrency from '../../modules/MoveCurrency/MoveCurrency';
 export default function BuyPage() {
   return (
     <View style={styles.container}>
-      <MoveCurrency appearance="buy" />
+      <MoveCurrency appearance='buy' />
     </View>
   );
 }
@@ -13,6 +13,6 @@ export default function BuyPage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.black,
-  },
+    backgroundColor: Colors.black
+  }
 });

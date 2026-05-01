@@ -16,6 +16,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: FontSize.size20,
     fontFamily: Fonts.regular,
-    color: Colors.link,
-  },
+    color: Colors.link
+  }
 });

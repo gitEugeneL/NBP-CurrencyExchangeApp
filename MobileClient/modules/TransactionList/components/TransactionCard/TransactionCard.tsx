@@ -38,35 +38,35 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: Radius.radius20,
     backgroundColor: Colors.blackBlue,
-    gap: Gaps.gap16,
+    gap: Gaps.gap16
   },
 
   container: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'center'
   },
 
   moneyWrapper: {
-    alignItems: 'flex-end',
+    alignItems: 'flex-end'
   },
 
   name: {
     fontFamily: Fonts.semiBold,
     fontSize: FontSize.size16,
-    color: Colors.white,
+    color: Colors.white
   },
 
   date: {
     fontFamily: Fonts.regular,
     fontSize: FontSize.size12,
-    color: Colors.blackGray,
+    color: Colors.blackGray
   },
 
   money: {
     fontFamily: Fonts.regular,
     fontSize: FontSize.size14,
-    color: Colors.white,
-  },
+    color: Colors.white
+  }
 });

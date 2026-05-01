@@ -14,6 +14,6 @@ export const CurrencyOperationValidationSchema = (maxValue: number) => {
       .typeError('Must be a number')
       .required('Amount is required')
       .positive()
-      .max(value, `max value is ${value}`),
+      .max(value, `max value is ${value}`)
   });
 };
